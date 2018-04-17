@@ -1,19 +1,75 @@
-%%This is a very basic article template.
-%%There is just one section and two subsections.
-\documentclass{article}
+% ******************************************************************
+% ********************************************
+%
+% **************************************************************************************************************
+\documentclass[ twoside,openright,titlepage,numbers=noenddot,%
+								toc=bibliography,toc=listof,%
+                footinclude=false,headinclude=false,cleardoublepage=empty,%
+								BCOR=5mm,paper=a4,fontsize=11pt,%DIV=14,%
+                ngerman%
+                ]{scrreprt}
+                
+ 
+ 
+%***************************************************************************************************************
+% Note: Make all your adjustments in here
+%***************************************************************************************************************
+\input{document-config}
 
+%********************************************************************
+% Hyphenation
+%*******************************************************
+%\hyphenation{put special hyphenation here}
+
+% ********************************************************************
+% GO!GO!GO! MOVE IT!
+%*******************************************************
 \begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{ngerman} % american ngerman
+\pagenumbering{roman}
+\pagestyle{plain}
+%*******************************************************
+% Frontmatter
+%*******************************************************
+\include{FrontBackmatter/Titlepage}
+%\cleardoublepage\include{FrontBackmatter/Declaration}
+%\cleardoublepage\include{FrontBackmatter/ConfidentialityClause}
+%\cleardoublepage\include{FrontBackmatter/Abstract}
+%\cleardoublepage\include{FrontBackmatter/Acknowledgments}
+\cleardoublepage\include{FrontBackmatter/Contents}
 
+%*******************************************************
+% Mainmatter
+%*******************************************************
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{headings}
+%\pagestyle{scrheadings}
+%TODO eventuell Unterkapitel
+\cleardoublepage\include{Chapters/Versuchsbeschreibung}	
+\cleardoublepage\include{Chapters/Ergebnisse} 
+\cleardoublepage\include{Chapters/Diskussion}
 
-\section{Title}
+%********************************************************************
+% Bibliography/References
+%*******************************************************
+%\cleardoublepage\include{FrontBackmatter/Bibliography}
 
-\subsection{Subtitle}
+%********************************************************************
+% List of Figures etc.
+%*******************************************************
+\cleardoublepage\include{FrontBackmatter/ListOfs}
+\include{FrontBackmatter/Abbreviations}
 
-Plain text.
-
-\subsection{Another subtitle}
-
-More plain text.
-
-
+% ********************************************************************
+% Appendix/Anhang
+%***************************************************************
+\appendix
+\part*{Anhang}
+\cleardoublepage\include{Chapters/Anhang-A}
+%*******************************************************
+%\cleardoublepage\include{FrontBackmatter/Colophon}
 \end{document}
+% ********************************************************************
