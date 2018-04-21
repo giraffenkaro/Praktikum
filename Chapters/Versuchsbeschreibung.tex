@@ -1,15 +1,34 @@
 \chapter{Beschreibung des Versuchs}
 
-% kurze Einführung und Beschreibung der Aufgabenstellung
+Der folgende Versuch beschäftigt sich mit dem ISDN-Basisanschluss. Anhand einer
+Telefonverbindung wird das D-Kanal-Protokoll mitgeschnitten und analysiert.
 
-\section{Versuchsaufbau}
+\section{Versuchsaufbau}\label{Aufbau}
 
-% Bild des Versuchsaufbaus und kurze Beschreibung
+%TODO Bild des versuchsaufbau einfügen (tatsächliche Ports)
 
 \section{Versuchsdurchführung}
 
-% Beschriebung des Telfonats (Richtung, Mitschnitt mit Wireshark etc)
+Nach dem Versuchsaufbau wird die Anwendung EyeSDN gestartet und sichergestellt,
+dass der Mitschnittdienst aktiviert ist. Der Switchmanager wird ebenfalls
+gestartet (Login als Super User).\\Im Anschluss wird durch Starten des ISDN Softswitch
+Liberator S1 eine Verbindung zum ISDN Switch hergestellt.
+Um die Telefone zu aktivieren werden die ISDN BRI Ports 1 und 2 konfiguriert.
+Danach wird das Call Routing eingerichtet. Dies geschieht durch Anlegen eines
+Routingprofils für die Route von Telefon 1 zu Telefon 2 und ein Profil für den
+umgekehrten Fall.\\In den Profilen werden die entsprechenden Ports aktiviert und
+die MSN-Nummer zu den durchgeroutet werden soll, eingetragen.\\Nach den
+beschriebenen Kofigurationen wird ein Anruf getätigt und ein Teilnehmer
+beendet den Anruf durch Auflegen. Der Mitschnitt dieses Telefonats wird im
+Anschluss mittels des Analysetools Wireshark genauer betrachtet und analysiert.
+
+%TODO Softswitch beschreiben
+%TODO EyeSDN beschreiben
 
 \section{Versuchsziel}
 
-% Analyse des Mitschnitts, Verständnis für ISDN etc
+Mit dem beschriebenen Versuchsaufbau soll das Funktionsprinzip
+einer Verbindungsauf- und abbauphase innerhalb des Basisanschlusses
+veranschaulicht und das D-Kanal-Protokoll einer Telefnverbundung interpretiert
+werden. Außerdem sollen in diesem Zusammenhang die Informationslemente näher
+betrachtet werden.
