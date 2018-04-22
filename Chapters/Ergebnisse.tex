@@ -25,6 +25,68 @@ den momentan verwendeten ISDN-Schicht-2-Dienst.%TODO Quelle: siehe oben,s.326
 Bei der TEI-Vergabe ist der Wert des SAPI 63. Dem Protokoll zufolge bedeutet
 dies ``Layer 2 management procedures''. Es handelt sich hier um die Übertragung
 von paketvermittelten Daten.%TODO Qzelle identisch
+
+\begin{lstlisting}
+
+No.     Time                       Source                Destination           Protocol Info
+     56 2018-04-16 16:30:58.999168 User                  Network               TEI      Identity Request
+
+Frame 56 (8 bytes on wire, 8 bytes captured)
+    Arrival Time: Apr 16, 2018 16:30:58.999168000
+    [Time delta from previous captured frame: 2.003968000 seconds]
+    [Time delta from previous displayed frame: 2.003968000 seconds]
+    [Time since reference or first frame: 19639.640168000 seconds]
+    Frame Number: 56
+    Frame Length: 8 bytes
+    Capture Length: 8 bytes
+    [Frame is marked: False]
+    [Protocols in frame: isdn:lapd:tei_management]
+    Point-to-Point Direction: Sent (0)
+ISDN
+    Channel: D (0)
+Link Access Procedure, Channel D (LAPD)
+    [Direction: User->Network (0)]
+    Address Field: 0xfcff
+        1111 11.. .... .... = SAPI: Layer 2 management procedures (63)
+        .... ..0. .... .... = C/R: 0
+        .... ...0 .... .... = EA1: 0
+        .... .... 1111 111. = TEI: 127
+        .... .... .... ...1 = EA2: 1
+    Control field: U, func=UI (0x03)
+        000. 00.. = Command: Unnumbered Information (0x00)
+        .... ..11 = Frame type: Unnumbered frame (0x03)
+TEI Management Procedure, Channel D (LAPD)
+
+No.     Time                       Source                Destination           Protocol Info
+     57 2018-04-16 16:30:59.005200 Network               User                  TEI      Identity Assigned
+
+Frame 57 (8 bytes on wire, 8 bytes captured)
+    Arrival Time: Apr 16, 2018 16:30:59.005200000
+    [Time delta from previous captured frame: 0.006032000 seconds]
+    [Time delta from previous displayed frame: 0.006032000 seconds]
+    [Time since reference or first frame: 19639.646200000 seconds]
+    Frame Number: 57
+    Frame Length: 8 bytes
+    Capture Length: 8 bytes
+    [Frame is marked: False]
+    [Protocols in frame: isdn:lapd:tei_management]
+    Point-to-Point Direction: Received (1)
+ISDN
+    Channel: D (0)
+Link Access Procedure, Channel D (LAPD)
+    [Direction: Network->User (1)]
+    Address Field: 0xfeff
+        1111 11.. .... .... = SAPI: Layer 2 management procedures (63)
+        .... ..1. .... .... = C/R: 1
+        .... ...0 .... .... = EA1: 0
+        .... .... 1111 111. = TEI: 127
+        .... .... .... ...1 = EA2: 1
+    Control field: U, func=UI (0x03)
+        000. 00.. = Command: Unnumbered Information (0x00)
+        .... ..11 = Frame type: Unnumbered frame (0x03)
+TEI Management Procedure, Channel D (LAPD)
+\end{lstlisting}
+
 %TODO Fragen und ANtworten in einem Text erläutern, eventuell passende
 % Unterkapitel wählen
 
