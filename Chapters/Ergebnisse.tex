@@ -6,6 +6,25 @@
 
 \section{Interpretation des Protokolls}
 
+\subsection{Adressierung der Endgeräte}
+Im Adressfeld des HDLC-Protokolls befindet sich der \ac{TEI}. Jedem Endgerät ist
+ein solcher Identifier zugeordnet um eine logische Verbindung zwischen
+Vermittlungsstelle und Endgerät sicherzustellen. Der TEI kennzeichnet die
+Schicht-2-Adresse für das ISDN-Gerät.\\%TODO Quelle: Net_IT, s.325
+Der TEI-Wert kann entweder durch manuelle Einstellung am Gerät hinterlegt werden
+oder von der Vermittlungsstelle zugeteilt werden (TEI-Vergabe). In diesem
+Versuch stellt das Endgerät zuerst eine Identity Request, worauf die Vermittlungsstelle bei Erfolg
+mit Identity Assigned antwortet. Die Vergabe erfolgt mittels U-Frame%TODO: mehr
+Dem Gerät wird der TEI 64 zugeteilt.
+Dies ist der erste von der Vermittlungsstelle zu vergebende Wert. Die Adressen 1-63
+können eingestellt werden, 64-126 werden von der Vermittlungsstelle verteilt.
+TEI 127 stellt die Broadcast-Adresse dar.
+\newline
+\ac{SAPI} bezeichnet ein weiteres Element des HDLC-Adressfeldes und kennzeichnet
+den momentan verwendeten ISDN-Schicht-2-Dienst.%TODO Quelle: siehe oben,s.326
+Bei der TEI-Vergabe ist der Wert des SAPI 63. Dem Protokoll zufolge bedeutet
+dies ``Layer 2 management procedures''. Es handelt sich hier um die Übertragung
+von paketvermittelten Daten.%TODO Qzelle identisch
 %TODO Fragen und ANtworten in einem Text erläutern, eventuell passende
 % Unterkapitel wählen
 
@@ -47,9 +66,10 @@
 \section{SETUP-Nachricht}%blöder Titel, Alternative finden und eventuell
 % andere Nachrichten betrachten?
 
+
 \begin{tabularx}{\textwidth}{ |X|X|X|X| }
   \hline
-  ka & Bit-Nr. & Hex Code & Beschreibung \\
+  & Bit-Nr. & Hex Code & Beschreibung \\
   \hline 
   Schicht-2-Header  & 0111 1110  & 0xFE  & Start-Flag  \\
   \hline
