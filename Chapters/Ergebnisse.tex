@@ -1,9 +1,10 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergbnisdarstellung}
+\section{ISDN-Dienste}%Fragen 3, 10
+\section{Verbindungsauf- und abbau}%Namen überdenken
 
-\section{Verbindungsauf- und abbau}
-
-KOTZe
 %TODO Sequenzdiagramm
+%auf die Schichten eingehen, vlt \subsection{Auf- und Abbau der Schichten}
+%Fragen 2, 6, 11
 
 \section{Adressierung der Endgeräte}\label{tei}
 Im Adressfeld des HDLC-Protokolls befindet sich der \ac{TEI}. Jedem Endgerät ist
@@ -25,6 +26,8 @@ den momentan verwendeten ISDN-Schicht-2-Dienst.%TODO Quelle: siehe oben,s.326
 Bei der TEI-Vergabe ist der Wert des SAPI 63. Dem Protokoll zufolge bedeutet
 dies ``Layer 2 management procedures''. Es handelt sich hier um die Übertragung
 von paketvermittelten Daten.%TODO Qzelle identisch
+
+%TODO Zeilennummerierung
 
 \begin{lstlisting}
 
@@ -87,21 +90,13 @@ Link Access Procedure, Channel D (LAPD)
 TEI Management Procedure, Channel D (LAPD)
 \end{lstlisting}
 
-%TODO Fragen und ANtworten in einem Text erläutern, eventuell passende
-% Unterkapitel wählen
+
+\section{Kanalzuwesiung}%Fragen 4, 7,
+
+\section{Rufnummer und Wahlmöglichkeit}%Frage 5, 8, 9, 12
 
 
-\section{Auf- und Abbau der Schichten}
-%TODO Schichten erläutern(anhand der Fragen und darüber hinaus)
-%es folgen nur unzusammenhängende Textschnipsel, TODO ausformulieren uns
-% Zusammenhang sarstellen
-Nach der in \label{tei} beschriebenen TEI-Vergabeprozdeur ist der Aufbau der
-Schicht 2 abgeschlossen.
-
-Nach der Nutzkanalzuweisung ist der gesicherte Aufbau der Schicht 3
-abgeschlossen.
-
-\section{Nachrichtenelemente}
+\section{Nachrichtenelemente}%Elemente erlätern, zuordnen
 
 \begin{tabularx}{\textwidth}{ |X|X|X|X|X|X|X|X|X|X| }
   \hline
@@ -133,11 +128,7 @@ abgeschlossen.
 \end{tabularx}
 
 
-%TODO Tabelle aus Aufgabenteil c erstellen und ausfüllen, kurzer Text dazu (ist
-% das immer so blablabla)
-
-\section{SETUP-Nachricht}%blöder Titel, Alternative finden und eventuell
-% andere Nachrichten betrachten?
+\section{Inhalt einer SETUP-Nachricht}
 
 
 \begin{tabularx}{\textwidth}{ |X|X|X|X| }
@@ -159,4 +150,4 @@ abgeschlossen.
   Schicht-2-Trailer  & 0111 1110  &  & Ende-Flag  \\
   \hline
 \end{tabularx}
-%TODO Tabelle aus Aufgabenteil d & Text
+
