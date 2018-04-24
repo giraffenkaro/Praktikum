@@ -5,6 +5,8 @@
 
 %\clearpage
 \includegraphics[width=\linewidth]{Graphics/KRAUS2}
+\caption{Sequenzdiagramm zum Verbindungsauf- und abbau}
+\label{seq}
 
 Das Sequenzdiagramm zeigt den Ablauf des Verbindungsauf- und abbaus eines
 Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
@@ -237,8 +239,19 @@ TEI Management Procedure, Channel D (LAPD)
 
  %ITU T I.241.1
 
-\section{Rufnummer und Wahlmöglichkeit}%Frage 5, 8, 9, 12
-
+\section{Wählvorgang und Rufnummerübertragung}%Frage 5, 8, 9, 12
+Es gibt zwei Möglichkeiten beim Anruf die Rufnummer (\ac{MSN}) einzugeben.
+Beim Versuch, der im Diagramm \label{seq} dargestellt ist, wurde zunächst der Hörer
+abgenommen und dann die Zielrufnummer eingegeben.\\Bei der zweiten Variante wird
+zuerst die Rufnummer vollständig eingegeben bevor der Hörer abgenommen wird.
+Dieser Wählvorgang wird Blockwahl genannt.\\
+\newline
+Bei der normalen Wahl werden die Ziffern der Rufnummer in einzelnen
+Info-Nachrichten übertragen:
+%TODO Ausschnitt
+Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
+in der SETUP-Nachricht übertragen:
+%TODO Ausschnitt
 
 \section{Nachrichtenelemente}
 
