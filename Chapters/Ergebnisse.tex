@@ -2,6 +2,7 @@
 \section{ISDN-Dienste}%Fragen 3, 10
 \section{Verbindungsauf- und abbau}%Namen überdenken
 
+<<<<<<< HEAD
 % \begin{figure}[htbp]
 % \centering
 % \includegraphics[keepaspectratio=true,scale=0.7]{Graphics/KRAUS.png}
@@ -10,6 +11,39 @@
 % \end{figure}
 
 %\clearpage
+=======
+\includegraphics[width=\linewidth]{Graphics/KRAUS2}
+\newline
+\newline
+Dieses Schaubild wurde anhand des Wireshark Mitschnittes erstellt und stellt den vollständige Auf 
+und Abbau der getestet Gesprächsverbindung dar. Aus dem Wireshark mitschnitt konnte nur der linke 
+teil der Nachrichten entnommen werden (Tel. 1 zu Vermittlungsstelle (VST) und umgekehrt). Der 
+Rechte Teil der Nachrichten (VST und Tel. 2) hier grün dargestellt wurde zur Gesamtdarstellung
+ hinzugefügt. Zur Vervollständigung wurde das Buch „Die Technik der Netze 1 von Gerd Siegmund“ 
+ (S. 357 -364) betrachtet.
+\newline
+\newline
+Im ersten abschnitt findet der Aufbau einer Schicht 2 Verbindung statt. Dies erfolgt durch das 
+Endgerät, da nur diese den eigene TEI kennt. Der Aufbau findet durch das senden der SABME Nachricht 
+statt und wird durch die VST quittiert mit einer UA Nachricht. Dieser Austausch ist zeitüberwacht 
+und dient dazu, alle Zähler (Sende und Empfangszähler) zurückzusetzten. Wenn dieser Vorgang 
+abgeschlossen ist, wurde die Schicht 2 aufgebaut und es können nummerierte I-Blöcke ausgetauscht 
+werden mit korrekter Zählernummer N(s) und N(R).
+\newline
+\newline
+Nachdem die Schicht 2 aufgebaut wurde beginnt im Folgenden mit der SETUP Nachricht der Aufbau der 
+Schicht 3, sowie die B-Kanal Zuweisung. Der Aufbau endet nach dem senden der Nachricht CONNECT 
+ACKNOWLEDGE, diese dient der Bestätigung, dass der Anruf von Tel. 2 angenommen wurde und der 
+Durchschaltung des B-Kanals im Netz. In unsrem Mitschnitt taucht diese jedoch nicht auf, da wir nur 
+die anrufende Seite mitschneiden konnten und dort (wenn sie gesendet wird) von Tel. 1 zur VST 
+gegangen wäre. In diesem Fall hat sie jedoch keine Bedeutung und kann entfallen. (Quelle Buch S.311)
+\newline
+\newline
+Der Abbau der Schicht 3 wird durch die DISCONNECT Nachricht eingeleitet und ist mit der RELEASE 
+COMPLETE Nachricht beendet. Danach erfolgt noch durch das aussenden der DISC Nachricht der Abbau 
+der Schicht 2 dies wird wieder durch eine UA Nachricht quittiert.
+%TODO Quelle
+>>>>>>> branch 'master' of https://github.com/giraffenkaro/Praktikum.git
 %auf die Schichten eingehen, vlt \subsection{Auf- und Abbau der Schichten}
 %Fragen 2, 6, 11
 
