@@ -1,51 +1,155 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergbnisdarstellung}
-\section{ISDN-Dienste}%Fragen 3, 10
+% \section{ISDN-Dienste}%Fragen 3, 10
 \section{Verbindungsauf- und abbau}%Namen überdenken
 
-<<<<<<< HEAD
-% \begin{figure}[htbp]
-% \centering
-% \includegraphics[keepaspectratio=true,scale=0.7]{Graphics/KRAUS.png}
-% \caption{Verbindungsauf- und abbau}
-% \label{fig:seq}
-% \end{figure}
 
 %\clearpage
-=======
 \includegraphics[width=\linewidth]{Graphics/KRAUS2}
+
+Das Sequenzdiagramm zeigt den Ablauf des Verbindungsauf- und abbaus eines
+Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
+erstellt. Aus dem Mitschnitt konnte der Nachrichtenverlauf zwischen Telefon 1
+und der \ac{VSt} entnommen werden. Um die Kommunikation
+zwischen Telefon 2 und der \acs{VSt} zu visualisieren wurde ``Die Technik der
+Netze 1'' von Gerd Sigmund, als Quelle genutzt.\\%Quelle, S. 357-364
 \newline
+Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
+Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
+quittiert wird:
+\begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    338 2018-04-16 17:44:55.129216 User                  Network               LAPD     U P, func=SABME
+
+Frame 338 (3 bytes on wire, 3 bytes captured)
+    Arrival Time: Apr 16, 2018 17:44:55.129216000
+    [Time delta from previous captured frame: 1561.020000000 seconds]
+    [Time delta from previous displayed frame: 1561.020000000 seconds]
+    [Time since reference or first frame: 24075.770216000 seconds]
+    Frame Number: 338
+    Frame Length: 3 bytes
+    Capture Length: 3 bytes
+    [Frame is marked: False]
+    [Protocols in frame: isdn:lapd:data]
+    Point-to-Point Direction: Sent (0)
+ISDN
+    Channel: D (0)
+Link Access Procedure, Channel D (LAPD)
+    [Direction: User->Network (0)]
+    Address Field: 0x0081
+        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
+        .... ..0. .... .... = C/R: 0
+        .... ...0 .... .... = EA1: 0
+        .... .... 1000 000. = TEI: 64
+        .... .... .... ...1 = EA2: 1
+    Control field: U P, func=SABME (0x7F)
+        ...1 .... = Poll: Set
+        011. 11.. = Command: Set Asynchronous Balanced Mode Extended (0x1b)
+        .... ..11 = Frame type: Unnumbered frame (0x03)
+
+No.     Time                       Source                Destination           Protocol Info
+    339 2018-04-16 17:44:55.133216 Network               User                  LAPD     U F, func=UA
+
+Frame 339 (3 bytes on wire, 3 bytes captured)
+    Arrival Time: Apr 16, 2018 17:44:55.133216000
+    [Time delta from previous captured frame: 0.004000000 seconds]
+    [Time delta from previous displayed frame: 0.004000000 seconds]
+    [Time since reference or first frame: 24075.774216000 seconds]
+    Frame Number: 339
+    Frame Length: 3 bytes
+    Capture Length: 3 bytes
+    [Frame is marked: False]
+    [Protocols in frame: isdn:lapd:data]
+    Point-to-Point Direction: Received (1)
+ISDN
+    Channel: D (0)
+Link Access Procedure, Channel D (LAPD)
+    [Direction: Network->User (1)]
+    Address Field: 0x0081
+        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
+        .... ..0. .... .... = C/R: 0
+        .... ...0 .... .... = EA1: 0
+        .... .... 1000 000. = TEI: 64
+        .... .... .... ...1 = EA2: 1
+    Control field: U F, func=UA (0x73)
+        ...1 .... = Final: Set
+        011. 00.. = Response: Unnumbered Acknowledge (0x18)
+        .... ..11 = Frame type: Unnumbered frame (0x03)
+\end{lstlisting}
+
+Der Austausch dieser Nachrichten ist zeitüberwacht. Sende- und
+Empfangszähler werden an dieser Stelle zurückgesetzt. Nach dem erfolgreichen
+Aufbau der Schicht 2 können nummerierte I-Blöcke ausgetauscht werden. Diese sind
+mit Zählernummern versehen: N(S), die gesendeten Blöcke, und N(R), die
+empfangenen Blöcke.\\
 \newline
-Dieses Schaubild wurde anhand des Wireshark Mitschnittes erstellt und stellt den vollständige Auf 
-und Abbau der getestet Gesprächsverbindung dar. Aus dem Wireshark mitschnitt konnte nur der linke 
-teil der Nachrichten entnommen werden (Tel. 1 zu Vermittlungsstelle (VST) und umgekehrt). Der 
-Rechte Teil der Nachrichten (VST und Tel. 2) hier grün dargestellt wurde zur Gesamtdarstellung
- hinzugefügt. Zur Vervollständigung wurde das Buch „Die Technik der Netze 1 von Gerd Siegmund“ 
- (S. 357 -364) betrachtet.
+Der Aufbau der Schicht 3 beginnt mit der SETUP-Nachricht und findet im
+Anschluss, bei bestehender Schicht-2-Verbindung, statt. Mit Senden der
+CONNECT ACKNOWLEDGE ist der Aufbau dre Schicht 3
+abgeschlossen. Diese Nachricht dient zur Bestätigung, dass der angerufene
+Teilnehmer die Verbindung angenommen hat (Hörer abgenommen). Danach wird der
+B-Kanal im Netz durchgeschaltet, welcher zuvor mit der CONN ACK zugewiesen
+wurde.\\
+In diesem Versuch wurde der B-Kanal 1 zugewiesen. Dies ist der letzten Zeile des
+folgenden Frames zu entnehmen:
+\begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    342 2018-04-16 17:44:55.177168 Network               User                  Q.931    SETUP ACKNOWLEDGE
+
+Frame 342 (11 bytes on wire, 11 bytes captured)
+    Arrival Time: Apr 16, 2018 17:44:55.177168000
+    [Time delta from previous captured frame: 0.007984000 seconds]
+    [Time delta from previous displayed frame: 0.007984000 seconds]
+    [Time since reference or first frame: 24075.818168000 seconds]
+    Frame Number: 342
+    Frame Length: 11 bytes
+    Capture Length: 11 bytes
+    [Frame is marked: False]
+    [Protocols in frame: isdn:lapd:q931]
+    Point-to-Point Direction: Received (1)
+ISDN
+    Channel: D (0)
+Link Access Procedure, Channel D (LAPD)
+    [Direction: Network->User (1)]
+    Address Field: 0x0281
+        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
+        .... ..1. .... .... = C/R: 1
+        .... ...0 .... .... = EA1: 0
+        .... .... 1000 000. = TEI: 64
+        .... .... .... ...1 = EA2: 1
+    Control field: I, N(R)=1, N(S)=0 (0x0200)
+        0000 001. .... .... = N(R): 1
+        .... .... 0000 000. = N(S): 0
+        .... .... .... ...0 = Frame type: Information frame (0x0000)
+Q.931
+    Protocol discriminator: Q.931
+    Call reference value length: 1
+    Call reference flag: Message sent to originating side
+    Call reference value: 01
+    Message type: SETUP ACKNOWLEDGE (0x0d)
+    Channel identification
+        Information element: Channel identification
+        Length: 1
+        1... .... = Extension indicator: last octet
+        .0.. .... = Interface identifier present: False
+        ..0. .... = Interface type: Basic rate interface
+        .... 1... = Indicated channel is exclusive: Exclusive; only the indicated channel is acceptable
+        .... .0.. = D-channel indicator: False
+        .... ..01 = Information channel selection: B1 channel (0x01)
+\end{lstlisting}
+
+Im Mitschnitt dieses Versuchs wird die oben genannte CONNECT ACKNOWLEDGE nicht
+aufgeführt, da wir aufgrund des Versuchsaufbaus nur die Nachrichten der
+anrufenden Seite aufzeichnen konnten. Es wäre auch möglich, dass
+die CONNECTION ACKNOWLEDGE vom Telefon 1 zur \acs{VSt} gesendet wird. Da die
+Nachricht aber in diesem Fall keine Beduetung hat, kann diese, wie im
+Protokollmitschnitt, entfallen.\\%S.311 
 \newline
-\newline
-Im ersten abschnitt findet der Aufbau einer Schicht 2 Verbindung statt. Dies erfolgt durch das 
-Endgerät, da nur diese den eigene TEI kennt. Der Aufbau findet durch das senden der SABME Nachricht 
-statt und wird durch die VST quittiert mit einer UA Nachricht. Dieser Austausch ist zeitüberwacht 
-und dient dazu, alle Zähler (Sende und Empfangszähler) zurückzusetzten. Wenn dieser Vorgang 
-abgeschlossen ist, wurde die Schicht 2 aufgebaut und es können nummerierte I-Blöcke ausgetauscht 
-werden mit korrekter Zählernummer N(s) und N(R).
-\newline
-\newline
-Nachdem die Schicht 2 aufgebaut wurde beginnt im Folgenden mit der SETUP Nachricht der Aufbau der 
-Schicht 3, sowie die B-Kanal Zuweisung. Der Aufbau endet nach dem senden der Nachricht CONNECT 
-ACKNOWLEDGE, diese dient der Bestätigung, dass der Anruf von Tel. 2 angenommen wurde und der 
-Durchschaltung des B-Kanals im Netz. In unsrem Mitschnitt taucht diese jedoch nicht auf, da wir nur 
-die anrufende Seite mitschneiden konnten und dort (wenn sie gesendet wird) von Tel. 1 zur VST 
-gegangen wäre. In diesem Fall hat sie jedoch keine Bedeutung und kann entfallen. (Quelle Buch S.311)
-\newline
-\newline
-Der Abbau der Schicht 3 wird durch die DISCONNECT Nachricht eingeleitet und ist mit der RELEASE 
-COMPLETE Nachricht beendet. Danach erfolgt noch durch das aussenden der DISC Nachricht der Abbau 
-der Schicht 2 dies wird wieder durch eine UA Nachricht quittiert.
+Nachdem der Hörer von Telefon 2 aufgelegt wurde, wird eine DISCONNECT-Nachricht
+gesendet, welche den Abbau der Schicht-3-Verbindung einleitet. Durch die
+im Anschluss folgende RELEASE COMPLETE Nachricht ist die Schicht-3-Verbindung
+abgebaut.\\Danach wird die Schicht 2 abgebaut, dies geschieht durch eine
+DISC-Nachricht, welche mit einer UA quittiert wird.
 %TODO Quelle
->>>>>>> branch 'master' of https://github.com/giraffenkaro/Praktikum.git
-%auf die Schichten eingehen, vlt \subsection{Auf- und Abbau der Schichten}
-%Fragen 2, 6, 11
 
 \section{Adressierung der Endgeräte}\label{tei}
 Im Adressfeld des HDLC-Protokolls befindet sich der \ac{TEI}. Jedem Endgerät ist
@@ -131,66 +235,11 @@ Link Access Procedure, Channel D (LAPD)
 TEI Management Procedure, Channel D (LAPD)
 \end{lstlisting}
 
-
-\section{Kanalzuweisung}%Fragen 4, 7,
-Der Basisanschluss verfügt über zwei B-Kanäle (Nutzkanäle) und einen D-Kanal
-(Steuerkanal). %ITU T I.241.1
+ %ITU T I.241.1
 
 \section{Rufnummer und Wahlmöglichkeit}%Frage 5, 8, 9, 12
 
 
-\section{Nachrichtenelemente}%Elemente erlätern, zuordnen
+\section{Nachrichtenelemente}
 
-\begin{tabularx}{\textwidth}{ |X|X|X|X|X|X|X|X|X|X| }
-  \hline
-  Nachricht  &Aler \newline ting&Call Proc&Con-nect&DISC&In-fo&Re-lease&Rel.
-  Comp.&Set-up&Setup Ack \\
-  \hline 
-  Bearer Capability  &&&&&&&& M &  \\
-  \hline
-  Cause &&&&&&&&&  \\
-  \hline
-  Channel Identification  &&&&&&&&&  \\
-  \hline
-  Process Indicator  &&&&&&&&&  \\
-  \hline
-  Display  &&&&&&&&&  \\
-  \hline
-  Date/Time  &&&&&&&&&  \\
-  \hline
-  Calling Party Number  &&&&&&&&&  \\
-  \hline
-  Calles Party Number  &&&&&&&&&  \\
-  \hline
-  Sending Complete  &&&&&&&&&  \\
-  \hline
-  Facility  &&&&&&&&&  \\
-  \hline
-  User to User Information  &&&&&&&&&  \\
-  \hline
-\end{tabularx}
-
-
-\section{Inhalt einer SETUP-Nachricht}
-
-
-\begin{tabularx}{\textwidth}{ |X|X|X|X| }
-  \hline
-  & Bit-Nr. & Hex Code & Beschreibung \\
-  \hline 
-  Schicht-2-Header  & 0111 1110  & 0xFE  & Start-Flag  \\
-  \hline
-  Schicht-3-Paketkopf  &&&  \\
-  \hline
-  1. Info Element  &&&  \\
-  \hline
-  2. Info-Element  &&&  \\
-  \hline
-  3. Info-Element  &&&  \\
-  \hline
-  4. Info-Element  &&&  \\
-  \hline
-  Schicht-2-Trailer  & 0111 1110  &  & Ende-Flag  \\
-  \hline
-\end{tabularx}
 
