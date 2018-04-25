@@ -31,6 +31,11 @@
 		\item \textbf{Welche Kodierung des Sprachkanals wird gewählt?}
 		\item \textbf{Welche MSN-Nummer wird in welchem Rahmen übertragen?}
 		\item \textbf{Wann ist der gesicherte Aufbau der Schicht 3 abgeschlossen?}
+		\newline
+		Der gesicherte Aufbau der Schicht 3 ist nach Erhalt der CONNECTION ACHNOWLEDGE
+		abgeschlossen.
+		\newline
+		\textit{siehe Anhang: Frame xxx}
 		\item \textbf{Welchen B-Kanal weist die Vermittlung der Verbindung zu?}
 		\newline
 		Der Verbindung wird der B-Kanal 1 zugewiesen (B1 Channel)
@@ -64,6 +69,14 @@
 		unterscheidet sich die Signalisierung auf Schicht 3 (SETUP- und
 		INFO-Nachricht) der Teilnehmerschnittstelle in diesen beiden Fällen? Führen
 		Sie dazu einen erneuten Call mit aufgelegtem Hörer (= Blockwahl) durch.}
+		\newline
+		Beim normalen Anruf, d.h. bei Einzelwahl ist die Zielrufnummer zum Zeitpunkt
+		der SETUP-Nachricht noch nicht bekannt. Die Ziffern der Rufnummer werden im
+		Anschluss einzeln in INFO-Nachrichten zur VSt gesendet bis diese vollständig
+		ist. Bei Blockwahl hingegen ist die Zielrufnummer in der SETUP-Nachricht im
+		Nachrichtenelement ``Called Party Number'' enthalten.
+		\newline
+		\textit{siehe Anhang: Frame xxx und xxx}
 \end{enumerate}
 
 \clearpage
