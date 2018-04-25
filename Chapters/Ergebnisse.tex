@@ -156,15 +156,16 @@ DISC-Nachricht, welche mit einer UA quittiert wird.
 %TODO Quelle
 
 \section{Adressierung der Endgeräte}\label{tei}
-Im Adressfeld des HDLC-Protokolls befindet sich der \ac{TEI}. Jedem Endgerät ist
-ein solcher Identifier zugeordnet um eine logische Verbindung zwischen
+Im Adressfeld des \acs{HDLC}-Protokolls befindet sich der \ac{TEI}. Jedem
+Endgerät ist ein solcher Identifier zugeordnet um eine logische Verbindung zwischen
 Vermittlungsstelle und Endgerät sicherzustellen. Der TEI kennzeichnet die
 Schicht-2-Adresse für das ISDN-Gerät.\\%TODO Quelle: Net_IT, s.325
 Der TEI-Wert kann entweder durch manuelle Einstellung am Gerät hinterlegt werden
 oder von der Vermittlungsstelle zugeteilt werden (TEI-Vergabe). In diesem
 Versuch stellt das Endgerät zuerst eine Identity Request, worauf die
 Vermittlungsstelle bei Erfolg mit Identity Assigned antwortet. Die Vergabe
-erfolgt mittels U-Frame.%TODO: mehr
+erfolgt mittels U-Frame.
+\newline
 Dem Gerät wird der TEI 64 zugeteilt. Dies ist der erste von der
 Vermittlungsstelle zu vergebende Wert. Die Adressen 1-63 können eingestellt
 werden, 64-126 werden von der Vermittlungsstelle verteilt. TEI 127 stellt die
@@ -326,7 +327,7 @@ Q.931
 \end{lstlisting}
 
 Diesbezüglich unterscheidet sich die SETUP-Nachricht bei den unterschiedlich
-Wählvorgängen. Beim normal Wählverfahren ist die ``Called Party Number'' kein
+Wählvorgängen. Beim normalen Wählverfahren ist die ``Called Party Number'' kein
 Element der Nachricht, da die Nummer zu diesem Zeitpunkt nur bei der Blockwahl
 bekannt ist.
 
@@ -338,3 +339,11 @@ bekannt ist.
   \caption{Nachrichtenelemente}
   \label{fig:elemente}
 \end{figure}
+
+In der Tabelle \label{elemente} ist eine Übersicht gegeben, welche
+Nachrichtenelemente in welchen Nachrichten im Prtokollmitschnitts des Versuchs
+vorkommen. Die Angaben sind sowohl bei Einzelwahl, als auch bei Blockwahl
+identisch, mit einer Ausnahme: ``Called Party Number''.
+Dises Element ist lediglich bei der Blockwahl in der SETUP-Nachricht zu finden.
+Bei Einzelwahl ist die MSN-Nummer zu der geroutet werden soll zum Zeitpunkt der
+SETUP-Nachricht nicht bekannt.
