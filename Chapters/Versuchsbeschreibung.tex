@@ -5,15 +5,33 @@ Telefonverbindung wird das D-Kanal-Protokoll mitgeschnitten und analysiert.
 
 \section{Versuchsaufbau}\label{Aufbau}
 
+\begin{figure}[htbp] 
 \includegraphics[width=\linewidth]{Graphics/Versuchsaufbau}
+\caption{Versuchsaufbau}
+\label{fig:versuch}
+\end{figure}
+
+\clearpage
 
 \subsection{Komponenten}
 
-Telefone
-%Softswitch
-%EyeSDN
+\begin{itemize}
+  \item Telefon 1 mit der Rufnummer 100
+  \item Telefon 2 mit der Rufnummer 200
+  \item ISDN Switch Patapsco Liberator S, verbunden mit
+  	\begin{itemize}
+    \item Verbindung zum EyeSDN USB-S0
+    \item Verbindung zum Telefon 2
+    \item fungiert als Vermittlungsstelle
+	\end{itemize}
+  \item EyeSDN USB-S0
+  	\begin{itemize}
+    \item Verbindung zum Telefon 1
+    \item Verbindung zum Computer
+    \item schneidet das D-Kanalprotokoll mit
+	\end{itemize}
+\end{itemize}
 
-\clearpage
 
 \section{Versuchsdurchführung}
 
