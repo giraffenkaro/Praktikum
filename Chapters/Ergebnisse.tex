@@ -3,12 +3,13 @@
 \section{Verbindungsauf- und abbau}%Namen überdenken
 
 
-%\clearpage
 \begin{figure}[htbp] 
 \includegraphics[width=\linewidth]{Graphics/KRAUS2}
 \caption{Sequenzdiagramm zum Verbindungsauf- und abbau}
 \label{fig:seq}
 \end{figure}
+
+\clearpage
 
 Das Sequenzdiagramm zeigt den Ablauf des Verbindungsauf- und abbaus eines
 Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
@@ -249,11 +250,47 @@ abgenommen und dann die Zielrufnummer eingegeben.\\Bei der zweiten Variante wird
 zuerst die Rufnummer vollständig eingegeben bevor der Hörer abgenommen wird.
 Dieser Wählvorgang wird Blockwahl genannt.\\
 \newline
-Bei der normalen Wahl werden die Ziffern der Rufnummer in einzelnen
-Info-Nachrichten übertragen:
-%TODO Ausschnitt
+Bei der normalen Wahl (Einzelwahl) werden die Ziffern der Rufnummer in einzelnen
+Info-Nachrichten übertragen:\\
+FRAME 344
+\begin{lstlisting}
+Called party number: '2'
+        Information element: Called party number
+        Length: 2
+        .... 0001 = Numbering plan: E.164 ISDN/telephony numbering (0x01)
+        .000 .... = Number type: Unknown (0x00)
+        1... .... = Extension indicator: last octet
+        Called party number digits: 2
+        E.164 Called party number digits: 2
+\end{lstlisting}
+FRAME 346
+\begin{lstlisting}
+Called party number: '0'
+        Information element: Called party number
+        Length: 2
+        .... 0001 = Numbering plan: E.164 ISDN/telephony numbering (0x01)
+        .000 .... = Number type: Unknown (0x00)
+        1... .... = Extension indicator: last octet
+        Called party number digits: 0
+        E.164 Called party number digits: 0
+\end{lstlisting}
+FRAME 348
+\begin{lstlisting}
+Called party number: '0'
+        Information element: Called party number
+        Length: 2
+        .... 0001 = Numbering plan: E.164 ISDN/telephony numbering (0x01)
+        .000 .... = Number type: Unknown (0x00)
+        1... .... = Extension indicator: last octet
+        Called party number digits: 0
+        E.164 Called party number digits: 0
+\end{lstlisting}
+Die vollständigen Frames, aus denen die Ausschnitte entstammen, sind im Anhang
+zu finden.
+        
 Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
 in der SETUP-Nachricht übertragen:
+
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     366 2018-04-16 17:56:17.227216 User                  Network               Q.931    SETUP
@@ -347,3 +384,13 @@ identisch, mit einer Ausnahme: ``Called Party Number''.
 Dises Element ist lediglich bei der Blockwahl in der SETUP-Nachricht zu finden.
 Bei Einzelwahl ist die MSN-Nummer zu der geroutet werden soll zum Zeitpunkt der
 SETUP-Nachricht nicht bekannt.
+
+
+\section{SETUP-Nachricht}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/Bit.pdf}
+  \caption{SETUP-Nachricht in Schicht-2-Rahmen eingebunden}
+  \label{fig:setup}
+\end{figure}
