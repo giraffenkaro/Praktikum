@@ -1,5 +1,5 @@
 #TeXlipse project settings
-#Tue Apr 17 16:03:11 CEST 2018
+#Tue Apr 24 23:09:26 CEST 2018
 outputDir=
 markDer=true
 mainTexFile=document.tex
@@ -11,4 +11,4 @@ srcDir=
 markTmpDer=true
 tempDir=tmp
 outputFormat=pdf
-langSpell=en
+langSpell=de
