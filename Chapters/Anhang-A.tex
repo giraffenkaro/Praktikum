@@ -26,10 +26,32 @@
 		\item \textbf{Welchen ISDN-Dienst fordert das Telefon von der
 		Vermittlungsstelle an, welche Übertragungskapazität benötigt dieser Dienst?}
 		\newline
-		Das Telefon fordert von der VSt den Dienst der Sprachübertragung an.
+		Das Telefon fordert von der VSt den Dienst der Sprachübertragung an. Diese
+		Information ist der SETUP-Nachricht zu entnehmen, ebenso wie die
+		Übertragunskapazität:
+		\newline
+		Information transfer capability: Speech (0x00)
+		\newline
+		Information transfer rate: 64 kbit/s (0x10)
+		\newline
 		\textit{siehe Anhang: Frame xxx}
 		\item \textbf{Welche Kodierung des Sprachkanals wird gewählt?}
+		\newline
+		Auch die Kodierung ist der SETUP-Nachricht zu entnehmen.
+		\newline
+		Coding standard: ITU-T standardized coding (0x00)
+		\newline
+		\textit{siehe Anhang: Frame xxx}
 		\item \textbf{Welche MSN-Nummer wird in welchem Rahmen übertragen?}
+		Die MSN des anrufenden Teilnehmers wird mit der SETUP-Nachrijct übertragen:
+		Calling Party Number. Die Zielrufnummer wird bei Einzelwahl in den
+		Informationsnachrichten übertragen.
+		\newline
+		\textit{(siehe Anhang: Frame xx,xx,xx)}
+		Bei einer Blockwahl wird die MSN der Zielrufnummer in der SETUP-Nachricht
+		übermittelt: Called Party Number.
+		\newline
+		\textit{siehe Anhang: Frame xx}
 		\item \textbf{Wann ist der gesicherte Aufbau der Schicht 3 abgeschlossen?}
 		\newline
 		Der gesicherte Aufbau der Schicht 3 ist nach Erhalt der CONNECTION ACHNOWLEDGE
@@ -43,6 +65,7 @@
 		\textit{siehe Anhang: Frame xxx}
 		\item \textbf{Wo wird die gerufene Telefonnummer übermittelt?}
 		\newline
+		Diese Frage wurde bereits unter 5. beantwortet.
 		\item \textbf{Mit welchem Rahmen bestätigt die Vermittlung die Vollständigkeit
 		der Rufnummer und beginnt den angeforderten Teilnehmer anzuwählen?}
 		\newline
