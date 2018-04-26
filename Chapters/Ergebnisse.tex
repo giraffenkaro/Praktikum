@@ -2,11 +2,25 @@
 % \section{ISDN-Dienste}%Fragen 3, 10
 \section{Verbindungsauf- und abbau}%Namen überdenken
 
+% \begin{figure}[htbp] 
+% \centering
+% \includegraphics[width=\linewidth]{Graphics/KRAUS2}
+% \caption{Verbindungsauf- und abbau}
+% \label{fig:seq}
+% \end{figure}
 
-\begin{figure}[htbp] 
-\includegraphics[width=\linewidth]{Graphics/KRAUS2}
-\caption{Sequenzdiagramm zum Verbindungsauf- und abbau}
-\label{fig:seq}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{Graphics/seq1.png}
+\caption{Verbindungsauf- und abbau - Teil 1}
+\label{fig:seq1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{Graphics/seq2.png}
+\caption{Verbindungsauf- und abbau - Teil 2}
+\label{fig:seq2}
 \end{figure}
 
 \clearpage
@@ -16,7 +30,7 @@ Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
 erstellt. Aus dem Mitschnitt konnte der Nachrichtenverlauf zwischen Telefon 1
 und der \ac{VSt} entnommen werden. Um die Kommunikation
 zwischen Telefon 2 und der \acs{VSt} zu visualisieren wurde ``Die Technik der
-Netze'' von Gerd Sigmund, als Quelle genutzt.\\%Quelle, S. 357-364
+Netze'' von Gerd Sigmund, als Quelle genutzt.\\
 \newline
 Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
 Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
