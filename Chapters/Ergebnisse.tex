@@ -1,14 +1,6 @@
-\chapter{Beschreibung der verschiedenen Messungen und
-Ergebnisdarstellung}\label{kap2}
+\chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
-\section{Verbindungsauf- und abbau}%Namen überdenken
-
-% \begin{figure}[htbp] 
-% \centering
-% \includegraphics[width=\linewidth]{Graphics/KRAUS2}
-% \caption{Verbindungsauf- und abbau}
-% \label{fig:seq}
-% \end{figure}
+\section{Verbindungsauf- und abbau}
 
 \begin{figure}[htbp]
 \centering
@@ -29,9 +21,9 @@ Ergebnisdarstellung}\label{kap2}
 Das Sequenzdiagramm zeigt den Ablauf des Verbindungsauf- und abbaus eines
 Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
 erstellt. Aus dem Mitschnitt konnte der Nachrichtenverlauf zwischen Telefon 1
-und der \ac{VSt} entnommen werden. Um die Kommunikation
-zwischen Telefon 2 und der \acs{VSt} zu visualisieren wurde u.a. ``Die Technik
-der Netze'' von Gerd Sigmund, als Quelle genutzt.\\
+und der \ac{VSt} entnommen werden. Um die Kommunikation zwischen Telefon 2 und
+der \acs{VSt} zu visualisieren wurde u.a. ``Die Technik der Netze'' von Gerd
+Sigmund, als Quelle genutzt.\\
 \newline
 Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
 Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
@@ -48,14 +40,13 @@ No.     Time                       Source                Destination           P
 
 \end{lstlisting}
 
-Der Austausch dieser Nachrichten ist zeitüberwacht. Sende- und
-Empfangszähler werden an dieser Stelle zurückgesetzt. Nach dem erfolgreichen
-Aufbau der Schicht 2 können nummerierte I-Blöcke ausgetauscht werden. Diese sind
-mit Zählernummern versehen: N(S), die gesendeten Blöcke, und N(R), die
-empfangenen Blöcke.\\
+Nach dem erfolgreichen Aufbau der Schicht 2 können nummerierte I-Blöcke
+ausgetauscht werden. Diese sind mit Zählern versehen: N(S) zählt die gesendeten
+Blöcke, N(R) die empfangenen Blöcke. Sende- und Empfangszähler werden an
+dieser Stelle zurückgesetzt.\cite{siegmund2002technik}
 \newline
 Der Aufbau der Schicht 3 beginnt mit der SETUP-Nachricht und findet im
-Anschluss, bei bestehender Schicht-2-Verbindung, statt. Außerdem lässt sich aus
+Anschluss statt. Außerdem lassen sich aus
 der SETUP-Nachricht Coding Standard, der angeforderte ISDN-Dienst und die
 Übertragungskapazität entnehmen:
 \newline
@@ -75,12 +66,12 @@ No.     Time                       Source                Destination           P
 [...]
 \end{lstlisting}
 
-Mit Senden der CONNECT ACKNOWLEDGE ist der Aufbau der Schicht 3 abgeschlossen.
+Mit Senden von CONNECT ACKNOWLEDGE ist der Aufbau von Schicht 3 abgeschlossen.
 Diese Nachricht dient zur Bestätigung, dass der angerufene Teilnehmer die
 Verbindung angenommen hat (Hörer abgenommen). Danach wird der B-Kanal im Netz
 durchgeschaltet, welcher zuvor zugewiesen wurde.\cite{siegmund2002technik}\\
-In diesem Versuch wurde der B-Kanal 1 zugewiesen. Dies ist der letzten Zeile des
-folgenden Frames zu entnehmen:
+In diesem Versuch wurde der B-Kanal 1 zugewiesen.
+
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     342 2018-04-16 17:44:55.177168 Network               User                  Q.931    SETUP ACKNOWLEDGE
@@ -91,16 +82,16 @@ No.     Time                       Source                Destination           P
 \end{lstlisting}
 
 Im Mitschnitt dieses Versuchs wird die oben genannte CONNECT ACKNOWLEDGE nicht
-aufgeführt, da wir aufgrund des Versuchsaufbaus nur die Nachrichten der
-anrufenden Seite aufzeichnen konnten. Es wäre auch möglich, dass
-die CONNECTION ACKNOWLEDGE vom Telefon 1 zur \acs{VSt} gesendet wird. Da die
-Nachricht aber in diesem Fall keine Beduetung hat, kann diese, wie im
-Protokollmitschnitt, entfallen.\cite{siegmund2002technik}
+aufgeführt, da aufgrund der Versuchsanordnung nur die Nachrichten
+auf Seite von Telefon 1 aufgezeichnet wurden. Es wäre auch möglich, dass die
+CONNECT ACKNOWLEDGE vom Telefon 1 zur \acs{VSt} gesendet wird. Da die Nachricht
+aber in diesem Fall keine Beduetung hat, kann diese
+entfallen.\cite{siegmund2002technik}
 \newline
 Nachdem der Hörer von Telefon 2 aufgelegt wurde, wird eine DISCONNECT-Nachricht
-gesendet, welche den Abbau der Schicht-3-Verbindung einleitet. Durch die
-im Anschluss folgende RELEASE COMPLETE Nachricht ist die Schicht-3-Verbindung
-abgebaut.
+gesendet, welche den Abbau der Schicht-3-Verbindung einleitet. Telefon 1
+antwortet mit RELEASE. Durch die im Anschluss folgende RELEASE COMPLETE
+Nachricht, ausgehend von der \acs{VSt}, ist die Schicht-3-Verbindung abgebaut.
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     358 2018-04-16 17:45:04.053200 User                  Network               Q.931    RELEASE
@@ -126,25 +117,25 @@ No.     Time                       Source                Destination           P
 Im Adressfeld des \acs{HDLC}-Protokolls befindet sich der \ac{TEI}. Jedem
 Endgerät ist ein solcher Identifier zugeordnet um eine logische Verbindung zwischen
 Vermittlungsstelle und Endgerät sicherzustellen. Der TEI kennzeichnet die
-Schicht-2-Adresse für das ISDN-Gerät.\\%TODO Quelle: Net_IT, s.325
-Der TEI-Wert kann entweder durch manuelle Einstellung am Gerät hinterlegt werden
+Schicht-2-Adresse für das ISDN-Gerät.\cite{brandt2011net}\\
+Der TEI kann entweder durch manuelle Einstellung am Gerät hinterlegt werden
 oder von der Vermittlungsstelle zugeteilt werden (TEI-Vergabe). In diesem
 Versuch stellt das Endgerät zuerst eine Identity Request, worauf die
 Vermittlungsstelle bei Erfolg mit Identity Assigned antwortet. Die Vergabe
 erfolgt mittels U-Frame.
 \newline
-Dem Gerät wird der TEI 64 zugeteilt. Dies ist der erste von der
+Dem Telefon 1 wird der TEI 64 zugeteilt. Dies ist der erste von der
 Vermittlungsstelle zu vergebende Wert. Die Adressen 1-63 können eingestellt
-werden, 64-126 werden von der Vermittlungsstelle verteilt. TEI 127 stellt die
+werden, 64-126 werden von der Vermittlungsstelle zugeteilt. TEI 127 stellt die
 Broadcast-Adresse dar.
 \newline
 \ac{SAPI} bezeichnet ein weiteres Element des HDLC-Adressfeldes und kennzeichnet
-den momentan verwendeten ISDN-Schicht-2-Dienst.%TODO Quelle: siehe oben,s.326
+den momentan verwendeten ISDN-Schicht-2-Dienst.\cite{brandt2011net}
 Bei der TEI-Vergabe ist der Wert des SAPI 63. Dem Protokoll zufolge bedeutet
 dies ``Layer 2 management procedures''. Es handelt sich hier um die Übertragung
-von paketvermittelten Daten.%TODO Qzelle identisch
+von paketvermittelten Daten.
 \newline
-%TODO Zeilennummerierung
+
 
 \begin{lstlisting}
 
@@ -216,15 +207,16 @@ TEI Management Procedure, Channel D (LAPD)
 \clearpage
 
 \section{Wählvorgang und Rufnummerübertragung}%Frage 5, 8, 9, 12
-Es gibt zwei Möglichkeiten beim Anruf die Rufnummer (\ac{MSN}) einzugeben.
-Beim Versuch, der im Diagramm \label{seq} dargestellt ist, wurde zunächst der Hörer
-abgenommen und dann die Zielrufnummer eingegeben.\\Bei der zweiten Variante wird
-zuerst die Rufnummer vollständig eingegeben bevor der Hörer abgenommen wird.
+Es gibt zwei Möglichkeiten beim Anruf die Rufnummer \ac{MSN} einzugeben.
+Beim Versuch, der in den Abbildungen \label{seq1} und \label{seq2} dargestellt
+ist, wurde zunächst der Hörer von Telefon 1 (100) abgenommen und dann die
+Zielrufnummer (200) eingegeben.\\Bei der zweiten Variante wird zuerst die
+Rufnummer vollständig eingegeben, bevor der Hörer abgenommen wird.
 Dieser Wählvorgang wird Blockwahl genannt.
 
 \subsection{Einzelwahl}
 
-Bei der normalen Wahl (Einzelwahl) werden die Ziffern der Rufnummer in einzelnen
+Bei Einzelwahl werden die Ziffern der Rufnummer in einzelnen
 Info-Nachrichten übertragen:\\
 
 \begin{lstlisting}
@@ -279,7 +271,7 @@ Called party number: '0'
 
 \subsection{Blockwahl}
 
-Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
+Bei der Blockwahl ist die \acs{MSN} des Ziels direkt bekannt und wird
 in der SETUP-Nachricht übertragen:
 \newline
 \begin{lstlisting}
@@ -311,7 +303,7 @@ No.     Time                       Source                Destination           P
 \end{lstlisting}
 
 Diesbezüglich unterscheidet sich die SETUP-Nachricht bei den unterschiedlich
-Wählvorgängen. Beim normalen Wählverfahren ist die ``Called Party Number'' kein
+Wählvorgängen. Bei Einzelwahl ist die ``Called Party Number'' kein
 Element der Nachricht, da die Nummer zu diesem Zeitpunkt nur bei der Blockwahl
 bekannt ist.
 
@@ -325,17 +317,18 @@ bekannt ist.
 \end{figure}
 
 In der Tabelle \label{elemente} ist eine Übersicht gegeben, welche
-Nachrichtenelemente in welchen Nachrichten im Prtokollmitschnitts des Versuchs
-vorkommen. Die Angaben sind sowohl bei Einzelwahl, als auch bei Blockwahl
-identisch, mit einer Ausnahme: ``Called Party Number''.
+Nachrichtenelemente in welchen Nachrichten im Protokollmitschnitt des Versuchs
+vorkommen (angekreuzt). Die Angaben sind sowohl bei Einzelwahl, als auch bei
+Blockwahl identisch, mit einer Ausnahme: ``Called Party Number''.
 Dises Element ist lediglich bei der Blockwahl in der SETUP-Nachricht zu finden.
-Bei Einzelwahl ist die MSN-Nummer zu der geroutet werden soll zum Zeitpunkt der
+Bei Einzelwahl ist die MSN zu der geroutet werden soll zum Zeitpunkt der
 SETUP-Nachricht nicht bekannt.
 
 \clearpage
+
 \section{SETUP-Nachricht}
 Die folgende Tabelle wurde anhand des Mitschnitts, genauer mit dem Rahmen der
-SETUP-Nachricht bei Blockwahl, ausgefüllt. Gleichzeitig wurden Informationen aus
+SETUP-Nachricht bei Blockwahl, erstelltt. Gleichzeitig wurden Informationen aus
 dem Standard herangezogen, um die Ergebnisse zu
 vergleichen.\cite{recommendation1998digital}
 

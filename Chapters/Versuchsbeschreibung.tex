@@ -18,7 +18,7 @@ einer Telefonverbindung wird das D-Kanal-Protokoll mitgeschnitten und analysiert
 \begin{itemize}
   \item Telefon 1 mit der Rufnummer 100
   \item Telefon 2 mit der Rufnummer 200
-  \item ISDN Switch Patapsco Liberator S, verbunden mit
+  \item ISDN Switch Patapsco Liberator S
   	\begin{itemize}
     \item Verbindung zum EyeSDN USB-S0
     \item Verbindung zum Telefon 2
@@ -43,20 +43,17 @@ Um die Telefone zu aktivieren werden die ISDN BRI Ports 1 und 2 konfiguriert.
 Danach wird das Call Routing eingerichtet. Dies geschieht durch Anlegen eines
 Routingprofils für die Route von Telefon 1 zu Telefon 2 und ein Profil für den
 umgekehrten Fall.\\In den Profilen werden die entsprechenden Ports aktiviert und
-die MSN-Nummer zu den durchgeroutet werden soll, eingetragen.\\Nach den
-beschriebenen Kofigurationen wird ein Anruf getätigt und ein Teilnehmer
+die MSN-Nummern zu den durchgeroutet werden soll, eingetragen.\\Nach den
+beschriebenen Konfigurationen wird ein Anruf getätigt und ein Teilnehmer
 beendet den Anruf durch Auflegen. Der Mitschnitt dieses Telefonats wird im
 Anschluss mittels des Analysetools Wireshark genauer betrachtet und analysiert.
 
-%Konfiguration erläutern
-%Ports
-%mehr auf Routigprofile eingehen
 
 \section{Versuchsziel}
 
 Mit dem beschriebenen Versuchsaufbau soll das Funktionsprinzip
 einer Verbindungsauf- und abbauphase innerhalb des Basisanschlusses
-veranschaulicht und das D-Kanal-Protokoll einer Telefnverbundung interpretiert
+veranschaulicht und das D-Kanal-Protokoll einer Telefonverbindung interpretiert
 werden. Außerdem sollen in diesem Zusammenhang die Informationslemente näher
-betrachtet werden. In \label{kap2} folgt die Analyse, die sich an den
+betrachtet werden. Im nächsten Kapitel folgt die Analyse, die sich an den
 Versuchsaufgaben orientiert.

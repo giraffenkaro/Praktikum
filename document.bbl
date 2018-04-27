@@ -17,6 +17,34 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{brandt2011net}{book}{}
+    \name{author}{2}{}{%
+      {{hash=BF}{%
+         family={Brandt},
+         familyi={B\bibinitperiod},
+         given={Finn},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=OL}{%
+         family={Otten},
+         familyi={O\bibinitperiod},
+         given={Lars},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Verlag Handwerk und Technik}%
+    }
+    \strng{namehash}{BFOL1}
+    \strng{fullhash}{BFOL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Net IT: Fachqualifikationen Netzwerktechnologien}
+    \field{year}{2011}
+  \endentry
+
   \entry{recommendation1998digital}{article}{}
     \name{author}{1}{}{%
       {{hash=RI}{%
