@@ -30,8 +30,8 @@ Das Sequenzdiagramm zeigt den Ablauf des Verbindungsauf- und abbaus eines
 Telefongespräches und wurde mit Hilfe des Wireshark-Protokllmitschnitts
 erstellt. Aus dem Mitschnitt konnte der Nachrichtenverlauf zwischen Telefon 1
 und der \ac{VSt} entnommen werden. Um die Kommunikation
-zwischen Telefon 2 und der \acs{VSt} zu visualisieren wurde ``Die Technik der
-Netze'' von Gerd Sigmund, als Quelle genutzt.\\
+zwischen Telefon 2 und der \acs{VSt} zu visualisieren wurde u.a. ``Die Technik
+der Netze'' von Gerd Sigmund, als Quelle genutzt.\\
 \newline
 Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
 Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
@@ -55,12 +55,30 @@ mit Zählernummern versehen: N(S), die gesendeten Blöcke, und N(R), die
 empfangenen Blöcke.\\
 \newline
 Der Aufbau der Schicht 3 beginnt mit der SETUP-Nachricht und findet im
-Anschluss, bei bestehender Schicht-2-Verbindung, statt. Mit Senden der
-CONNECT ACKNOWLEDGE ist der Aufbau dre Schicht 3
-abgeschlossen. Diese Nachricht dient zur Bestätigung, dass der angerufene
-Teilnehmer die Verbindung angenommen hat (Hörer abgenommen). Danach wird der
-B-Kanal im Netz durchgeschaltet, welcher zuvor mit der CONN ACK zugewiesen
-wurde.\cite{siegmund2002technik}\\
+Anschluss, bei bestehender Schicht-2-Verbindung, statt. Außerdem lässt sich aus
+der SETUP-Nachricht Coding Standard, der angeforderte ISDN-Dienst und die
+Übertragungskapazität entnehmen:
+\newline
+\begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    340 2018-04-16 17:44:55.163216 User                  Network               Q.931    SETUP
+    
+[...]
+
+.00. .... = Coding standard: ITU-T standardized coding (0x00)
+ ...0 0000 = Information transfer capability: Speech (0x00)
+    
+[...]
+
+ ...1 0000 = Information transfer rate: 64 kbit/s (0x10)
+ 
+[...]
+\end{lstlisting}
+
+Mit Senden der CONNECT ACKNOWLEDGE ist der Aufbau der Schicht 3 abgeschlossen.
+Diese Nachricht dient zur Bestätigung, dass der angerufene Teilnehmer die
+Verbindung angenommen hat (Hörer abgenommen). Danach wird der B-Kanal im Netz
+durchgeschaltet, welcher zuvor zugewiesen wurde.\cite{siegmund2002technik}\\
 In diesem Versuch wurde der B-Kanal 1 zugewiesen. Dies ist der letzten Zeile des
 folgenden Frames zu entnehmen:
 \begin{lstlisting}
@@ -77,14 +95,32 @@ aufgeführt, da wir aufgrund des Versuchsaufbaus nur die Nachrichten der
 anrufenden Seite aufzeichnen konnten. Es wäre auch möglich, dass
 die CONNECTION ACKNOWLEDGE vom Telefon 1 zur \acs{VSt} gesendet wird. Da die
 Nachricht aber in diesem Fall keine Beduetung hat, kann diese, wie im
-Protokollmitschnitt, entfallen.\\%S.311 
+Protokollmitschnitt, entfallen.\cite{siegmund2002technik}
 \newline
 Nachdem der Hörer von Telefon 2 aufgelegt wurde, wird eine DISCONNECT-Nachricht
 gesendet, welche den Abbau der Schicht-3-Verbindung einleitet. Durch die
 im Anschluss folgende RELEASE COMPLETE Nachricht ist die Schicht-3-Verbindung
-abgebaut.\\Danach wird die Schicht 2 abgebaut, dies geschieht durch eine
+abgebaut.
+\begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    358 2018-04-16 17:45:04.053200 User                  Network               Q.931    RELEASE
+
+No.     Time                       Source                Destination           Protocol Info
+    360 2018-04-16 17:45:04.065184 Network               User                  Q.931    RELEASE COMPLETE
+\end{lstlisting}
+
+Danach wird Schicht 2 abgebaut, dies geschieht durch eine
 DISC-Nachricht, welche mit einer UA quittiert wird.
-%TODO Quelle
+
+\begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    362 2018-04-16 17:45:11.721200 User                  Network               LAPD     U P, func=DISC
+    
+No.     Time                       Source                Destination           Protocol Info
+    363 2018-04-16 17:45:11.725216 Network               User                  LAPD     U F, func=UA
+\end{lstlisting}
+
+\clearpage
 
 \section{Adressierung der Endgeräte}\label{tei}
 Im Adressfeld des \acs{HDLC}-Protokolls befindet sich der \ac{TEI}. Jedem
@@ -142,6 +178,8 @@ Link Access Procedure, Channel D (LAPD)
 TEI Management Procedure, Channel D (LAPD)
 \end{lstlisting}
 
+\clearpage
+
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
      57 2018-04-16 16:30:59.005200 Network               User                  TEI      Identity Assigned
@@ -174,19 +212,27 @@ TEI Management Procedure, Channel D (LAPD)
 \end{lstlisting}
 
  %ITU T I.241.1
+ 
+\clearpage
 
 \section{Wählvorgang und Rufnummerübertragung}%Frage 5, 8, 9, 12
 Es gibt zwei Möglichkeiten beim Anruf die Rufnummer (\ac{MSN}) einzugeben.
 Beim Versuch, der im Diagramm \label{seq} dargestellt ist, wurde zunächst der Hörer
 abgenommen und dann die Zielrufnummer eingegeben.\\Bei der zweiten Variante wird
 zuerst die Rufnummer vollständig eingegeben bevor der Hörer abgenommen wird.
-Dieser Wählvorgang wird Blockwahl genannt.\\
-\newline
+Dieser Wählvorgang wird Blockwahl genannt.
+
+\subsection{Einzelwahl}
+
 Bei der normalen Wahl (Einzelwahl) werden die Ziffern der Rufnummer in einzelnen
 Info-Nachrichten übertragen:\\
-\newline
-FRAME 344
+
 \begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    344 2018-04-16 17:44:56.463200 User                  Network               Q.931    INFORMATION
+    
+[...]    
+
 Called party number: '2'
         Information element: Called party number
         Length: 2
@@ -197,8 +243,12 @@ Called party number: '2'
         E.164 Called party number digits: 2
 \end{lstlisting}
 
-FRAME 346
 \begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    346 2018-04-16 17:44:56.895184 User                  Network               Q.931    INFORMATION
+
+[...]
+
 Called party number: '0'
         Information element: Called party number
         Length: 2
@@ -209,8 +259,14 @@ Called party number: '0'
         E.164 Called party number digits: 0
 \end{lstlisting}
 
-FRAME 348
+\clearpage
+
 \begin{lstlisting}
+No.     Time                       Source                Destination           Protocol Info
+    348 2018-04-16 17:44:57.131184 User                  Network               Q.931    INFORMATION
+
+[...]
+
 Called party number: '0'
         Information element: Called party number
         Length: 2
@@ -221,7 +277,8 @@ Called party number: '0'
         E.164 Called party number digits: 0
 \end{lstlisting}
 
-     
+\subsection{Blockwahl}
+
 Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
 in der SETUP-Nachricht übertragen:
 \newline
