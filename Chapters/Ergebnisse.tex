@@ -107,7 +107,7 @@ den momentan verwendeten ISDN-Schicht-2-Dienst.%TODO Quelle: siehe oben,s.326
 Bei der TEI-Vergabe ist der Wert des SAPI 63. Dem Protokoll zufolge bedeutet
 dies ``Layer 2 management procedures''. Es handelt sich hier um die Übertragung
 von paketvermittelten Daten.%TODO Qzelle identisch
-
+\newline
 %TODO Zeilennummerierung
 
 \begin{lstlisting}
@@ -141,6 +141,7 @@ Link Access Procedure, Channel D (LAPD)
         .... ..11 = Frame type: Unnumbered frame (0x03)
 TEI Management Procedure, Channel D (LAPD)
 \end{lstlisting}
+
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
      57 2018-04-16 16:30:59.005200 Network               User                  TEI      Identity Assigned
@@ -183,6 +184,7 @@ Dieser Wählvorgang wird Blockwahl genannt.\\
 \newline
 Bei der normalen Wahl (Einzelwahl) werden die Ziffern der Rufnummer in einzelnen
 Info-Nachrichten übertragen:\\
+\newline
 FRAME 344
 \begin{lstlisting}
 Called party number: '2'
@@ -194,6 +196,7 @@ Called party number: '2'
         Called party number digits: 2
         E.164 Called party number digits: 2
 \end{lstlisting}
+
 FRAME 346
 \begin{lstlisting}
 Called party number: '0'
@@ -205,6 +208,7 @@ Called party number: '0'
         Called party number digits: 0
         E.164 Called party number digits: 0
 \end{lstlisting}
+
 FRAME 348
 \begin{lstlisting}
 Called party number: '0'
@@ -217,10 +221,10 @@ Called party number: '0'
         E.164 Called party number digits: 0
 \end{lstlisting}
 
-        
+     
 Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
 in der SETUP-Nachricht übertragen:
-
+\newline
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     366 2018-04-16 17:56:17.227216 User                  Network               Q.931    SETUP
@@ -273,6 +277,10 @@ SETUP-Nachricht nicht bekannt.
 
 \clearpage
 \section{SETUP-Nachricht}
+Die folgende Tabelle wurde anhand des Mitschnitts, genauer mit dem Rahmen der
+SETUP-Nachricht bei Blockwahl, ausgefüllt. Gleichzeitig wurden Informationen aus
+dem Standard herangezogen, um die Ergebnisse zu
+vergleichen.\cite{recommendation1998digital}
 
 \begin{figure}[htbp] 
      \includegraphics[width=\linewidth]{Graphics/Bit.pdf}
