@@ -17,6 +17,28 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{recommendation1998digital}{article}{}
+    \name{author}{1}{}{%
+      {{hash=RI}{%
+         family={Recommendation},
+         familyi={R\bibinitperiod},
+         given={ITUT},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RI1}
+    \strng{fullhash}{RI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Digital subscriber Signaling System No. 1 (DSS 1)-ISDN
+  user-network interface layer 3 specification for basic call control}
+    \field{volume}{931}
+    \field{journaltitle}{Rec. Q}
+    \field{year}{1998}
+  \endentry
+
   \entry{siegmund2002technik}{book}{}
     \name{author}{1}{}{%
       {{hash=SG}{%
