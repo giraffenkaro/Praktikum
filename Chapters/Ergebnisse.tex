@@ -1,5 +1,6 @@
-\chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
-% \section{ISDN-Dienste}%Fragen 3, 10
+\chapter{Beschreibung der verschiedenen Messungen und
+Ergebnisdarstellung}\label{kap2}
+
 \section{Verbindungsauf- und abbau}%Namen überdenken
 
 % \begin{figure}[htbp] 
@@ -34,65 +35,17 @@ Netze'' von Gerd Sigmund, als Quelle genutzt.\\
 \newline
 Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
 Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
-quittiert wird:
+quittiert wird:\footnote{Die volständigen Frames, denen die Auschnitte
+entstammen sind in Anhang B unter der jeweiligen Framenr. zu finden}
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     338 2018-04-16 17:44:55.129216 User                  Network               LAPD     U P, func=SABME
 
-Frame 338 (3 bytes on wire, 3 bytes captured)
-    Arrival Time: Apr 16, 2018 17:44:55.129216000
-    [Time delta from previous captured frame: 1561.020000000 seconds]
-    [Time delta from previous displayed frame: 1561.020000000 seconds]
-    [Time since reference or first frame: 24075.770216000 seconds]
-    Frame Number: 338
-    Frame Length: 3 bytes
-    Capture Length: 3 bytes
-    [Frame is marked: False]
-    [Protocols in frame: isdn:lapd:data]
-    Point-to-Point Direction: Sent (0)
-ISDN
-    Channel: D (0)
-Link Access Procedure, Channel D (LAPD)
-    [Direction: User->Network (0)]
-    Address Field: 0x0081
-        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
-        .... ..0. .... .... = C/R: 0
-        .... ...0 .... .... = EA1: 0
-        .... .... 1000 000. = TEI: 64
-        .... .... .... ...1 = EA2: 1
-    Control field: U P, func=SABME (0x7F)
-        ...1 .... = Poll: Set
-        011. 11.. = Command: Set Asynchronous Balanced Mode Extended (0x1b)
-        .... ..11 = Frame type: Unnumbered frame (0x03)
+[...]
 
 No.     Time                       Source                Destination           Protocol Info
     339 2018-04-16 17:44:55.133216 Network               User                  LAPD     U F, func=UA
 
-Frame 339 (3 bytes on wire, 3 bytes captured)
-    Arrival Time: Apr 16, 2018 17:44:55.133216000
-    [Time delta from previous captured frame: 0.004000000 seconds]
-    [Time delta from previous displayed frame: 0.004000000 seconds]
-    [Time since reference or first frame: 24075.774216000 seconds]
-    Frame Number: 339
-    Frame Length: 3 bytes
-    Capture Length: 3 bytes
-    [Frame is marked: False]
-    [Protocols in frame: isdn:lapd:data]
-    Point-to-Point Direction: Received (1)
-ISDN
-    Channel: D (0)
-Link Access Procedure, Channel D (LAPD)
-    [Direction: Network->User (1)]
-    Address Field: 0x0081
-        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
-        .... ..0. .... .... = C/R: 0
-        .... ...0 .... .... = EA1: 0
-        .... .... 1000 000. = TEI: 64
-        .... .... .... ...1 = EA2: 1
-    Control field: U F, func=UA (0x73)
-        ...1 .... = Final: Set
-        011. 00.. = Response: Unnumbered Acknowledge (0x18)
-        .... ..11 = Frame type: Unnumbered frame (0x03)
 \end{lstlisting}
 
 Der Austausch dieser Nachrichten ist zeitüberwacht. Sende- und
@@ -114,45 +67,8 @@ folgenden Frames zu entnehmen:
 No.     Time                       Source                Destination           Protocol Info
     342 2018-04-16 17:44:55.177168 Network               User                  Q.931    SETUP ACKNOWLEDGE
 
-Frame 342 (11 bytes on wire, 11 bytes captured)
-    Arrival Time: Apr 16, 2018 17:44:55.177168000
-    [Time delta from previous captured frame: 0.007984000 seconds]
-    [Time delta from previous displayed frame: 0.007984000 seconds]
-    [Time since reference or first frame: 24075.818168000 seconds]
-    Frame Number: 342
-    Frame Length: 11 bytes
-    Capture Length: 11 bytes
-    [Frame is marked: False]
-    [Protocols in frame: isdn:lapd:q931]
-    Point-to-Point Direction: Received (1)
-ISDN
-    Channel: D (0)
-Link Access Procedure, Channel D (LAPD)
-    [Direction: Network->User (1)]
-    Address Field: 0x0281
-        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
-        .... ..1. .... .... = C/R: 1
-        .... ...0 .... .... = EA1: 0
-        .... .... 1000 000. = TEI: 64
-        .... .... .... ...1 = EA2: 1
-    Control field: I, N(R)=1, N(S)=0 (0x0200)
-        0000 001. .... .... = N(R): 1
-        .... .... 0000 000. = N(S): 0
-        .... .... .... ...0 = Frame type: Information frame (0x0000)
-Q.931
-    Protocol discriminator: Q.931
-    Call reference value length: 1
-    Call reference flag: Message sent to originating side
-    Call reference value: 01
-    Message type: SETUP ACKNOWLEDGE (0x0d)
-    Channel identification
-        Information element: Channel identification
-        Length: 1
-        1... .... = Extension indicator: last octet
-        .0.. .... = Interface identifier present: False
-        ..0. .... = Interface type: Basic rate interface
-        .... 1... = Indicated channel is exclusive: Exclusive; only the indicated channel is acceptable
-        .... .0.. = D-channel indicator: False
+[...]
+
         .... ..01 = Information channel selection: B1 channel (0x01)
 \end{lstlisting}
 
@@ -224,7 +140,8 @@ Link Access Procedure, Channel D (LAPD)
         000. 00.. = Command: Unnumbered Information (0x00)
         .... ..11 = Frame type: Unnumbered frame (0x03)
 TEI Management Procedure, Channel D (LAPD)
-
+\end{lstlisting}
+\begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
      57 2018-04-16 16:30:59.005200 Network               User                  TEI      Identity Assigned
 
@@ -299,8 +216,7 @@ Called party number: '0'
         Called party number digits: 0
         E.164 Called party number digits: 0
 \end{lstlisting}
-Die vollständigen Frames, aus denen die Ausschnitte entstammen, sind im Anhang
-zu finden.
+
         
 Bei der Blockwahl hingegeben ist die \acs{MSN} des Ziels direkt bekannt und wird
 in der SETUP-Nachricht übertragen:
@@ -309,49 +225,8 @@ in der SETUP-Nachricht übertragen:
 No.     Time                       Source                Destination           Protocol Info
     366 2018-04-16 17:56:17.227216 User                  Network               Q.931    SETUP
 
-Frame 366 (30 bytes on wire, 30 bytes captured)
-    Arrival Time: Apr 16, 2018 17:56:17.227216000
-    [Time delta from previous captured frame: 0.034000000 seconds]
-    [Time delta from previous displayed frame: 0.034000000 seconds]
-    [Time since reference or first frame: 24757.868216000 seconds]
-    Frame Number: 366
-    Frame Length: 30 bytes
-    Capture Length: 30 bytes
-    [Frame is marked: False]
-    [Protocols in frame: isdn:lapd:q931]
-    Point-to-Point Direction: Sent (0)
-ISDN
-    Channel: D (0)
-Link Access Procedure, Channel D (LAPD)
-    [Direction: User->Network (0)]
-    Address Field: 0x0081
-        0000 00.. .... .... = SAPI: Q.931 Call control procedure (0)
-        .... ..0. .... .... = C/R: 0
-        .... ...0 .... .... = EA1: 0
-        .... .... 1000 000. = TEI: 64
-        .... .... .... ...1 = EA2: 1
-    Control field: I, N(R)=0, N(S)=0 (0x0000)
-        0000 000. .... .... = N(R): 0
-        .... .... 0000 000. = N(S): 0
-        .... .... .... ...0 = Frame type: Information frame (0x0000)
-Q.931
-    Protocol discriminator: Q.931
-    Call reference value length: 1
-    Call reference flag: Message sent from originating side
-    Call reference value: 01
-    Message type: SETUP (0x05)
-    Bearer capability
-        Information element: Bearer capability
-        Length: 3
-        1... .... = Extension indicator: last octet
-        .00. .... = Coding standard: ITU-T standardized coding (0x00)
-        ...0 0000 = Information transfer capability: Speech (0x00)
-        1... .... = Extension indicator: last octet
-        .00. .... = Transfer mode: Circuit mode (0x00)
-        ...1 0000 = Information transfer rate: 64 kbit/s (0x10)
-        1... .... = Extension indicator: last octet
-        .01. .... = Layer identification: Layer 1 identifier (0x01)
-        ...0 0011 = User information layer 1 protocol: Recommendation G.711 A-law (0x03)
+[...]
+
     Calling party number: '100'
         Information element: Calling party number
         Length: 5
@@ -370,11 +245,8 @@ Q.931
         1... .... = Extension indicator: last octet
         Called party number digits: 200
         E.164 Called party number digits: 200
-    High-layer compatibility
-        Information element: High-layer compatibility
-        Length: 2
-        .00. .... = Coding standard: ITU-T standardized coding (0x00)
-        High layer characteristics identification: Telephony
+
+[...]
 \end{lstlisting}
 
 Diesbezüglich unterscheidet sich die SETUP-Nachricht bei den unterschiedlich
@@ -399,11 +271,10 @@ Dises Element ist lediglich bei der Blockwahl in der SETUP-Nachricht zu finden.
 Bei Einzelwahl ist die MSN-Nummer zu der geroutet werden soll zum Zeitpunkt der
 SETUP-Nachricht nicht bekannt.
 
-
+\clearpage
 \section{SETUP-Nachricht}
 
 \begin{figure}[htbp] 
-  \centering
      \includegraphics[width=\linewidth]{Graphics/Bit.pdf}
   \caption{SETUP-Nachricht in Schicht-2-Rahmen eingebunden}
   \label{fig:setup}
