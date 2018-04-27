@@ -6,14 +6,14 @@
 \centering
 \includegraphics[width=\linewidth]{Graphics/seq1.png}
 \caption{Verbindungsauf- und abbau - Teil 1}
-\label{fig:seq1}
+\label{seq1}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{Graphics/seq2.png}
 \caption{Verbindungsauf- und abbau - Teil 2}
-\label{fig:seq2}
+\label{seq2}
 \end{figure}
 
 \clearpage
@@ -71,7 +71,7 @@ Diese Nachricht dient zur Bestätigung, dass der angerufene Teilnehmer die
 Verbindung angenommen hat (Hörer abgenommen). Danach wird der B-Kanal im Netz
 durchgeschaltet, welcher zuvor zugewiesen wurde.\cite{Siegmund2010}\\
 In diesem Versuch wurde der B-Kanal 1 zugewiesen.
-
+\clearpage
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     342 2018-04-16 17:44:55.177168 Network               User                  Q.931    SETUP ACKNOWLEDGE
@@ -208,7 +208,7 @@ TEI Management Procedure, Channel D (LAPD)
 
 \section{Wählvorgang und Rufnummerübertragung}%Frage 5, 8, 9, 12
 Es gibt zwei Möglichkeiten beim Anruf die Rufnummer \ac{MSN} einzugeben.
-Beim Versuch, der in den Abbildungen \label{seq1} und \label{seq2} dargestellt
+Beim Versuch, der in den Abbildungen \ref{seq1} und \ref{seq2} dargestellt
 ist, wurde zunächst der Hörer von Telefon 1 (100) abgenommen und dann die
 Zielrufnummer (200) eingegeben.\\Bei der zweiten Variante wird zuerst die
 Rufnummer vollständig eingegeben, bevor der Hörer abgenommen wird.
@@ -313,10 +313,10 @@ bekannt ist.
   \centering
      \includegraphics[width=\linewidth]{Graphics/Capture.PNG}
   \caption{Nachrichtenelemente}
-  \label{fig:elemente}
+  \label{elemente}
 \end{figure}
 
-In der Tabelle \label{elemente} ist eine Übersicht gegeben, welche
+In der Tabelle \ref{elemente} ist eine Übersicht gegeben, welche
 Nachrichtenelemente in welchen Nachrichten im Protokollmitschnitt des Versuchs
 vorkommen (angekreuzt). Die Angaben sind sowohl bei Einzelwahl, als auch bei
 Blockwahl identisch, mit einer Ausnahme: ``Called Party Number''.
@@ -326,14 +326,33 @@ SETUP-Nachricht nicht bekannt.
 
 \clearpage
 
-\section{SETUP-Nachricht}
+\section{SETUP-Nachricht}\label{setup}
 Die folgende Tabelle wurde anhand des Mitschnitts, genauer mit dem Rahmen der
 SETUP-Nachricht bei Blockwahl, erstelltt. Gleichzeitig wurden Informationen aus
 dem Standard herangezogen, um die Ergebnisse zu
 vergleichen.\cite{recommendation1998digital}
 
-\begin{figure}[htbp] 
-     \includegraphics[width=\linewidth]{Graphics/Bit.pdf}
+\begin{figure}[htbp]
+\centering 
+     \includegraphics[width=\linewidth]{Graphics/Bits.PNG}
   \caption{SETUP-Nachricht in Schicht-2-Rahmen eingebunden}
   \label{fig:setup}
 \end{figure}
+
+Die enthaltenen Informations-Elemente sind:
+
+\begin{itemize}
+  \item \textbf{Bearer Capability}
+  \newline
+  Die Bearer Capability spezifiziert den geforderten Übermittlungsdienst.
+  \item \textbf{Calling Party Number}
+  \newline
+  Die Calling Party Number bezeichnet die Rufnummer des anrufenden Teilnehmers.
+  \item \textbf{Called Party Number}
+  \newline
+  Die Ziel-Rufnummer wird im Info-Element Called Party Number gesendet.
+  \item \textbf{High-Layer Compatibility}
+  \newline
+  Die \acs{HLC} zeigt Protokolle und Parameter an, die bei den B-Kanälen
+  verwendet werden.\cite{recommendation1998digital}
+\end{itemize}
