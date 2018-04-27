@@ -67,7 +67,7 @@
     \field{year}{1998}
   \endentry
 
-  \entry{siegmund2002technik}{book}{}
+  \entry{Siegmund2010}{book}{}
     \name{author}{1}{}{%
       {{hash=SG}{%
          family={Siegmund},
@@ -77,7 +77,7 @@
       }}%
     }
     \list{publisher}{1}{%
-      {H{\"u}thig}%
+      {VDE-Verlag}%
     }
     \strng{namehash}{SG1}
     \strng{fullhash}{SG1}
@@ -85,8 +85,13 @@
     \field{labeltitlesource}{title}
     \field{sortinit}{S}
     \field{sortinithash}{S}
-    \field{title}{Technik der Netze}
-    \field{year}{2002}
+    \field{isbn}{978-3-800-73219-7}
+    \field{title}{Technik der Netze - Grundlagen, Verkehrstheorie, ISDN, GSM,
+  IN}
+    \list{location}{1}{%
+      {Berlin}%
+    }
+    \field{year}{2010}
   \endentry
 \enddatalist
 \endinput

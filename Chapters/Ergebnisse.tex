@@ -27,8 +27,8 @@ Sigmund, als Quelle genutzt.\\
 \newline
 Im oberen Abschnitt wird die Schicht-2-Verbindung aufgebaut. Hierzu sendet das
 Endgerät eine SABME-Nachricht, welche von der VSt mit einer UA-Nachricht
-quittiert wird:\footnote{Die volständigen Frames, denen die Auschnitte
-entstammen sind in Anhang B unter der jeweiligen Framenr. zu finden}
+quittiert wird:\footnote{Die vollständigen Frames, denen die Auschnitte
+entstammen, sind in Anhang B unter der jeweiligen Framenr. zu finden}
 \begin{lstlisting}
 No.     Time                       Source                Destination           Protocol Info
     338 2018-04-16 17:44:55.129216 User                  Network               LAPD     U P, func=SABME
@@ -43,7 +43,7 @@ No.     Time                       Source                Destination           P
 Nach dem erfolgreichen Aufbau der Schicht 2 können nummerierte I-Blöcke
 ausgetauscht werden. Diese sind mit Zählern versehen: N(S) zählt die gesendeten
 Blöcke, N(R) die empfangenen Blöcke. Sende- und Empfangszähler werden an
-dieser Stelle zurückgesetzt.\cite{siegmund2002technik}
+dieser Stelle zurückgesetzt.\cite{Siegmund2010}
 \newline
 Der Aufbau der Schicht 3 beginnt mit der SETUP-Nachricht und findet im
 Anschluss statt. Außerdem lassen sich aus
@@ -69,7 +69,7 @@ No.     Time                       Source                Destination           P
 Mit Senden von CONNECT ACKNOWLEDGE ist der Aufbau von Schicht 3 abgeschlossen.
 Diese Nachricht dient zur Bestätigung, dass der angerufene Teilnehmer die
 Verbindung angenommen hat (Hörer abgenommen). Danach wird der B-Kanal im Netz
-durchgeschaltet, welcher zuvor zugewiesen wurde.\cite{siegmund2002technik}\\
+durchgeschaltet, welcher zuvor zugewiesen wurde.\cite{Siegmund2010}\\
 In diesem Versuch wurde der B-Kanal 1 zugewiesen.
 
 \begin{lstlisting}
@@ -86,7 +86,7 @@ aufgeführt, da aufgrund der Versuchsanordnung nur die Nachrichten
 auf Seite von Telefon 1 aufgezeichnet wurden. Es wäre auch möglich, dass die
 CONNECT ACKNOWLEDGE vom Telefon 1 zur \acs{VSt} gesendet wird. Da die Nachricht
 aber in diesem Fall keine Beduetung hat, kann diese
-entfallen.\cite{siegmund2002technik}
+entfallen.\cite{Siegmund2010}
 \newline
 Nachdem der Hörer von Telefon 2 aufgelegt wurde, wird eine DISCONNECT-Nachricht
 gesendet, welche den Abbau der Schicht-3-Verbindung einleitet. Telefon 1
