@@ -1,59 +1,18 @@
 \chapter{Beschreibung des Versuchs}
 
-Der folgende Versuch beschäftigt sich mit dem \acs{ISDN}-Basisanschluss. Anhand
-einer Telefonverbindung wird das D-Kanal-Protokoll mitgeschnitten und analysiert.
+
 
 \section{Versuchsaufbau}\label{Aufbau}
 
-\begin{figure}[htbp] 
-\includegraphics[width=\linewidth]{Graphics/Versuchsaufbau}
-\caption{Versuchsaufbau}
-\label{fig:versuch}
-\end{figure}
 
-\clearpage
 
 \subsection{Komponenten}
-
-\begin{itemize}
-  \item Telefon 1 mit der Rufnummer 100
-  \item Telefon 2 mit der Rufnummer 200
-  \item ISDN Switch Patapsco Liberator S
-  	\begin{itemize}
-    \item Verbindung zum EyeSDN USB-S0
-    \item Verbindung zum Telefon 2
-    \item fungiert als Vermittlungsstelle
-	\end{itemize}
-  \item EyeSDN USB-S0
-  	\begin{itemize}
-    \item Verbindung zum Telefon 1
-    \item Verbindung zum Computer
-    \item schneidet das D-Kanal-Protokoll mit
-	\end{itemize}
-\end{itemize}
 
 
 \section{Versuchsdurchführung}
 
-Nach dem Versuchsaufbau wird die Anwendung EyeSDN gestartet und sichergestellt,
-dass der Mitschnittdienst aktiviert ist. Der Switchmanager wird ebenfalls
-gestartet (Login als Super User).\\Im Anschluss wird durch Starten des ISDN Softswitch
-Liberator S1 eine Verbindung zum ISDN Switch hergestellt.
-Um die Telefone zu aktivieren werden die ISDN BRI Ports 1 und 2 konfiguriert.
-Danach wird das Call Routing eingerichtet. Dies geschieht durch Anlegen eines
-Routingprofils für die Route von Telefon 1 zu Telefon 2 und ein Profil für den
-umgekehrten Fall.\\In den Profilen werden die entsprechenden Ports aktiviert und
-die MSN-Nummern zu den durchgeroutet werden soll, eingetragen.\\Nach den
-beschriebenen Konfigurationen wird ein Anruf getätigt und ein Teilnehmer
-beendet den Anruf durch Auflegen. Der Mitschnitt dieses Telefonats wird im
-Anschluss mittels des Analysetools Wireshark genauer betrachtet und analysiert.
+
 
 
 \section{Versuchsziel}
 
-Mit dem beschriebenen Versuchsaufbau soll das Funktionsprinzip
-einer Verbindungsauf- und abbauphase innerhalb des Basisanschlusses
-veranschaulicht und das D-Kanal-Protokoll einer Telefonverbindung interpretiert
-werden. Außerdem sollen in diesem Zusammenhang die Informationslemente näher
-betrachtet werden. Im nächsten Kapitel folgt die Analyse, die sich an den
-Versuchsaufgaben orientiert.
