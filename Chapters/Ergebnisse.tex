@@ -2,6 +2,27 @@
 
 \section{Initial Setup eines Switch}
 
+Zunächst wird der Cisco 2960 Switch, mittels einem RJ-45-to-DB connector console
+Kabel, an einen Computer angeschlossen.\\Nach der Verkabelung wird
+HyperTerminal, das genutzte Terminal-Emulations-Programm auf dem Computer
+gestartet.
+\newline
+Der genutzte Port, in diesem Fall COM1, wird ausgeählt und die Parameter für die
+Terminal Emulation werden nach den Vorgaben des Versuchs konfiguriert. Nach
+diesen Einstellungen wird erst der Switch gestartet.
+\newline
+Um den Switch neu initialisieren zu können, müssen erst die bereits vorhandenen
+Konfigurationen gelöscht werden. Dies geschieht über den ``privilledged EXEC
+mode'' (enable)\footnote{In diesem Dokument werden die genutzten Kommandos
+\textit{kursiv} dargestellt.}\\
+\newline
+Vorgehensweise:
+\begin{itemize}
+  \item VLAN-Datei löschen (\textit{delete flash:vlan.dat})
+  \item Startup-Config-Datei löschen (\textit{erase startup-config})
+  \item Software neustarten (\textit{reaload})
+\end{itemize}
+
 \section{Initial Setup eines Routers}
 
 \section{Informationen des Router Systems}
