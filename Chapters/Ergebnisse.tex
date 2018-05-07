@@ -87,8 +87,19 @@ Die Geräte werden wie folgt konfiguriert:
 %TODO Tabelle
 
 \subsection{Konnektivität überprüfen}
+Die Konnektivität wird im ``Realtime Modus'' des Packet Tracers ausgeführt.
+Hierzu werden Ping-Befehle verwendet.
+\begin{itemize}
+  \item Ping von PC1 zu Router1, FE0/0
+  \item Ping von PC1 zu Router1, FE0/1
+  \item Ping von PC2 zu Router1, FE0/1
+  \item Ping von PC2 zu PC1
+\end{itemize}
 %TODO Ergebnisse/Ausgaben
 \subsection{Simulation eines Echo Request/Echo Reply}
+
+Für diesen Teil des Versuchs wird der ``Simulation Mode'' des Packet Tracers
+verwendet.
 
 \subsubsection{Analyse eines Ping Befehls}
 %TODO Sequenzdiagramm
