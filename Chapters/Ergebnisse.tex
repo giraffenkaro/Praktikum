@@ -1,9 +1,9 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
-\section{Initial Setup eines Switch}
+\section{Initial Setup eines Switch}\label{switch}
 
-Zunächst wird der Cisco 2960 Switch, mittels einem RJ-45-to-DB connector console
-Kabel, an einen Computer angeschlossen.\\Nach der Verkabelung wird
+Zunächst wird der Cisco 2960 Switch, mittels einem RJ-45-to-DB-9 connector
+console Kabel, an einen Computer angeschlossen.\\Nach der Verkabelung wird
 HyperTerminal, das genutzte Terminal-Emulations-Programm auf dem Computer
 gestartet.
 \newline
@@ -16,15 +16,19 @@ Konfigurationen gelöscht werden. Dies geschieht über den ``privilledged EXEC
 mode'' (enable)\footnote{In diesem Dokument werden die genutzten Kommandos
 \textit{kursiv} dargestellt.}\\
 \newline
-Vorgehensweise:
+\underline{Vorgehensweise:}
 \begin{itemize}
   \item VLAN-Datei löschen (\textit{delete flash:vlan.dat})
   \item Startup-Config-Datei löschen (\textit{erase startup-config})
-  \item Software neustarten (\textit{reaload})
+  \item Software neustarten (\textit{reload})
 \end{itemize}
 
 \section{Initial Setup eines Routers}
 
+Äquivalent zum Initial Setup des Switchs in \ref{switch} wird der Cisco
+2811 Router mit einem Computer verbunden, das Programm HyperTerminal gestartet
+und die Konfigurationen des Emulations-Programms, wie im Versuch beschrieben,
+vorgenommen. Nach diesen Schritten wird der Router gestartet.
 \section{Informationen des Router Systems}
 
 \section{Packet Tracer}
