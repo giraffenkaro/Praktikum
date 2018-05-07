@@ -23,12 +23,59 @@ mode'' (enable)\footnote{In diesem Dokument werden die genutzten Kommandos
   \item Software neustarten (\textit{reload})
 \end{itemize}
 
+
+
 \section{Initial Setup eines Routers}
 
 Äquivalent zum Initial Setup des Switchs in \ref{switch} wird der Cisco
 2811 Router mit einem Computer verbunden, das Programm HyperTerminal gestartet
 und die Konfigurationen des Emulations-Programms, wie im Versuch beschrieben,
 vorgenommen. Nach diesen Schritten wird der Router gestartet.
+
+
+
 \section{Informationen des Router Systems}
+
+Durch \textit{show running-config} im Priviledged Mode werden die aktuellen
+Router-Konfigurationen im RAM angezeigt. %TODO evetnuell Auszüge der config
+\newline
+Danach wird der Configuration Mode (\textit{configure terminal}) genutzt um
+Änderungen vorzunehmen. In der aktuellen Konfiguration lautet der Hostname
+``Router''. Dieser wird nun mittels \textit{hostname} in
+``R1\textunderscore HTW'' geändert.
+\newline
+Ein erneutes Ausgeben der running-config zeigt, dass der Hostname erfolgreich
+geändert wurde:
+\begin{lstlisting}
+TODO Auszug
+\end{lstlisting}
+
+\subsection{Startup-Config}
+Mittels \textit{show startup-config} soll die entsprechende Konfigurationsdatei
+angezeigt werden. Nach Eingabe des Kommandos ist zu erkennen, dass solch eine
+Datei nicht existiert.
+\begin{lstlisting}
+TODO Auszug
+\end{lstlisting}
+Die vorgenommene Änderung wird nur in der Running-Config gespeichert, nicht in
+der Startup-Config. Durch Kopieren der Running- in die
+Startup-Konfiguratiosdatei sind die Änderungen beim nächsten Bootvorgang des
+Routers verfügbar.\\
+\newline
+\underline{Vorgehensweise:}
+\begin{itemize}
+  \item Überschreiben der Startup-Config (\textit{copy running-config
+  startup-config})
+  \item Neustart des Routers (\textit{reload})
+\end{itemize}
+
+Da der Router nach dem Neustart den Hostnamen ``R1\textunderscore HTW'' anzeigt,
+hat das Überschreiben der Startup-Config funktioniert.
+
+\subsection{Router zurücksetzen}
+
+Um die Default-Einstellungen wiederherzustellen wird im Priviledged Mode die
+Startup-Config gelöscht (\textit{erase startup-config}). Um den Vorgang
+abzuschließen wird der Router neugestartet (\textit{reload}).
 
 \section{Packet Tracer}
