@@ -45,18 +45,13 @@ Danach wird der Configuration Mode (\textit{configure terminal}) genutzt um
 ``R1\textunderscore HTW'' geändert.
 \newline
 Ein erneutes Ausgeben der running-config zeigt, dass der Hostname erfolgreich
-geändert wurde:
-\begin{lstlisting}
-TODO Auszug
-\end{lstlisting}
+geändert wurde
 
 \subsection{Startup-Config}
 Mittels \textit{show startup-config} soll die entsprechende Konfigurationsdatei
 angezeigt werden. Nach Eingabe des Kommandos ist zu erkennen, dass solch eine
 Datei nicht existiert.
-\begin{lstlisting}
-TODO Auszug
-\end{lstlisting}
+\newline
 Die vorgenommene Änderung wird nur in der Running-Config gespeichert, nicht in
 der Startup-Config. Durch Kopieren der Running- in die
 Startup-Konfiguratiosdatei sind die Änderungen beim nächsten Bootvorgang des
@@ -78,6 +73,8 @@ Um die Default-Einstellungen wiederherzustellen wird im Priviledged Mode die
 Startup-Config gelöscht (\textit{erase startup-config}). Um den Vorgang
 abzuschließen wird der Router neugestartet (\textit{reload}).
 
+\clearpage
+
 \section{Packet Tracer}
 
 Für eine Einführung in die Software ``Packet Tracer'' wird folgender Aufbau
@@ -86,16 +83,83 @@ erstellt:\\
 Die Geräte werden wie folgt konfiguriert:
 %TODO Tabelle
 
+
 \subsection{Konnektivität überprüfen}
 Die Konnektivität wird im ``Realtime Modus'' des Packet Tracers ausgeführt.
 Hierzu werden Ping-Befehle verwendet.
 \begin{itemize}
   \item Ping von PC1 zu Router1, FE0/0
+  \newline
+\begin{lstlisting}
+PC>ping 192.168.0.1
+
+Pinging 192.168.0.1 with 32 bytes of data:
+
+Reply from 192.168.0.1: bytes=32 time=62ms TTL=255
+Reply from 192.168.0.1: bytes=32 time=62ms TTL=255
+Reply from 192.168.0.1: bytes=32 time=62ms TTL=255
+Reply from 192.168.0.1: bytes=32 time=63ms TTL=255
+
+Ping statistics for 192.168.0.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 62ms, Maximum = 63ms, Average = 62ms
+  \end{lstlisting}
   \item Ping von PC1 zu Router1, FE0/1
+  \newline
+\begin{lstlisting}
+PC>ping 10.10.10.1
+
+Pinging 10.10.10.1 with 32 bytes of data:
+
+Reply from 10.10.10.1: bytes=32 time=62ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=62ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=47ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=49ms TTL=255
+
+Ping statistics for 10.10.10.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 47ms, Maximum = 62ms, Average = 55ms
+\end{lstlisting}
   \item Ping von PC2 zu Router1, FE0/1
+  \newline
+\begin{lstlisting}
+
+PC>ping 10.10.10.1
+
+Pinging 10.10.10.1 with 32 bytes of data:
+
+Reply from 10.10.10.1: bytes=32 time=31ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=31ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=32ms TTL=255
+Reply from 10.10.10.1: bytes=32 time=32ms TTL=255
+
+Ping statistics for 10.10.10.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 31ms, Maximum = 32ms, Average = 31ms
+
+\end{lstlisting}  
   \item Ping von PC2 zu PC1
+  \newline
+\begin{lstlisting}
+PC>ping 192.168.0.10
+
+Pinging 192.168.0.10 with 32 bytes of data:
+
+Reply from 192.168.0.10: bytes=32 time=93ms TTL=127
+Reply from 192.168.0.10: bytes=32 time=94ms TTL=127
+Reply from 192.168.0.10: bytes=32 time=94ms TTL=127
+Reply from 192.168.0.10: bytes=32 time=109ms TTL=127
+
+Ping statistics for 192.168.0.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 93ms, Maximum = 109ms, Average = 97ms
+\end{lstlisting}
 \end{itemize}
-%TODO Ergebnisse/Ausgaben
+
 \subsection{Simulation eines Echo Request/Echo Reply}
 
 Für diesen Teil des Versuchs wird der ``Simulation Mode'' des Packet Tracers
