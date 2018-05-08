@@ -89,8 +89,34 @@ erstellt:
 
 \subsection{Konfiguration}
 Die Geräte werden wie folgt konfiguriert:
-%TODO Tabelle
 
+
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|X|}
+	\hline
+	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+	\textbf{Subnet Mask} & \textbf{Default \newline Gateway} \\
+	\hline
+	PC0 	& Labor-PC1		& Fast-Ethernet	& 192.168.0.10 	& 255.255.255.128 &
+	192.168.0.1
+	\\
+	\hline
+	Switch0 & Labor-Switch1 & FE0/0 \newline FE0/1 & NA		& NA			& NA \\
+	\hline
+	Router0 & Labor-Router1 & FE0/0 \newline FE0/1 & 192.168.0.1 \newline 10.10.10.1
+	& 255.255.255.128 \newline 255.255.255.224 & NA \newline NA \\
+	\hline
+	PC1 	& Labor-PC2 	& Fast-Ethernet & 10.10.10.10	& 255.255.255.224	& 10.10.10.1
+	\\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration der Geräte im Packet Tracer}
+\label{config}
+\end{table}
+
+\clearpage
 
 \subsection{Konnektivität überprüfen}
 Die Konnektivität wird im ``Realtime Modus'' des Packet Tracers ausgeführt.
