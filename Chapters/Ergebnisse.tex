@@ -79,8 +79,14 @@ abzuschließen wird der Router neugestartet (\textit{reload}).
 
 \subsection{Versuchsaufbau}
 Für eine Einführung in die Software ``Packet Tracer'' wird folgender Aufbau
-erstellt:\\
-%TODO Bild einfügen
+erstellt:
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{Graphics/PacketTracer.PNG}
+\caption{Versuchsaufbau im Packet Tracer}
+\label{fig:ping}
+\end{figure}
+
 \subsection{Konfiguration}
 Die Geräte werden wie folgt konfiguriert:
 %TODO Tabelle
@@ -167,7 +173,8 @@ Approximate round trip times in milli-seconds:
 \subsection{Simulation eines Echo Request/Echo Reply}
 
 Für diesen Teil des Versuchs wird der ``Simulation Mode'' des Packet Tracers
-verwendet.
+verwendet. PC1 stellt die Quelle, und der Router das Ziel, dar. Es werden nur
+\acs{ICMP} Pakete für die Übertragung gefiltert.
 
 \subsubsection{Analyse eines Ping Befehls}
 
