@@ -192,6 +192,8 @@ Approximate round trip times in milli-seconds:
 \end{lstlisting}
 \end{itemize}
 
+Der ping-Test zeigt, dass alle Geräte erreichbar und korrekt konfiguriert sind.
+
 \clearpage
 
 \subsection{Simulation eines Echo Request/Echo Reply}
@@ -202,6 +204,10 @@ verwendet. PC1 stellt die Quelle, und der Router das Ziel, dar. Es werden nur
 
 \subsubsection{Analyse eines Ping Befehls}
 
+Die folgenden Diagramme \ref{fig:ping} und \ref{fig:pong} veranschaulichen auf
+welchen Schichten Switch und Router im \acs{ISO}-\acs{OSI}-Referenzmodell
+arbeiten.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{Graphics/PcToRouter.PNG}
@@ -209,9 +215,17 @@ verwendet. PC1 stellt die Quelle, und der Router das Ziel, dar. Es werden nur
 \label{fig:ping}
 \end{figure}
 
+Hier (\ref{fig:ping}) dargestellt ist der Echo Request (ICMP Message Type 8) vom
+Labor-PC1 zum Router. Den Ethernet-Headern sind MAC-Adressen der Quelle und des
+Ziels zu entnehmen.\\Es handelt sich um einen Layer-2-Switch in diesem
+Versuchsaufbau.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{Graphics/RouterToPc.PNG}
 \caption{Echo Reply vom Router zum PC1}
 \label{fig:pong}
 \end{figure}
+
+Äquivalent zum Echo Request ist in \ref{fig:pong} der Echo Reply (ICMP Message
+Type 0) vom Router zum Labor-PC1 dargestellt.
