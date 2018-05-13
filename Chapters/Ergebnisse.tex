@@ -1,20 +1,18 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
-%TODO mehr zur Verkabelung
+
 \section{Initial Setup eines Switch}\label{switch}
 
-Zunächst wird der Cisco 2960 Switch, mittels einem RJ-45-to-DB-9 connector
-console Kabel, an einen Computer angeschlossen.\\Nach der Verkabelung wird
-HyperTerminal, das genutzte Terminal-Emulations-Programm auf dem Computer
-gestartet.
+Zunächst wird der Cisco 2960 Switch, mittels einem RJ-45-zu-DB-9 Konsolenkabel,
+genutzte Terminal-Emulations-Programm auf dem Computer gestartet.
 \newline
-Der genutzte Port, in diesem Fall COM1, wird ausgeählt und die Parameter für die
-Terminal Emulation werden nach den Vorgaben des Versuchs konfiguriert. Nach
-diesen Einstellungen wird erst der Switch gestartet.
+Der genutzte Port, in diesem Fall COM1, wird ausgewählt und die Parameter für
+die Terminal Emulation werden nach den Vorgaben des Versuchs konfiguriert.
+Erst nach diesen Einstellungen wird der Switch gestartet.
 \newline
-Um den Switch neu initialisieren zu können, müssen erst die bereits vorhandenen
-Konfigurationen gelöscht werden. Dies geschieht über den ``privilledged EXEC
-mode'' (enable)\footnote{In diesem Dokument werden die genutzten Kommandos
-\textit{kursiv} dargestellt.}\\
+Um den Switch neu initialisieren zu können, müssen zunächst die bereits
+vorhandenen Konfigurationen gelöscht werden. Dies geschieht über den ``priviledged EXEC
+mode'' (\textit{enable})\footnote{In diesem Dokument werden die genutzten
+Kommandos \textit{kursiv} dargestellt.}\\
 \newline
 \underline{Vorgehensweise:}
 \begin{itemize}
@@ -52,7 +50,7 @@ Datei nicht existiert.
 \newline
 Die vorgenommene Änderung wird nur in der Running-Config gespeichert, nicht in
 der Startup-Config. Durch Kopieren der Running- in die
-Startup-Konfiguratiosdatei sind die Änderungen beim nächsten Bootvorgang des
+Startup-Konfigurationsdatei sind die Änderungen beim nächsten Bootvorgang des
 Routers verfügbar.\\
 \newline
 \underline{Vorgehensweise:}
@@ -199,7 +197,7 @@ Der ping-Test zeigt, dass alle Geräte erreichbar und korrekt konfiguriert sind.
 \subsection{Simulation eines Echo Request/Echo Reply}
 
 Für diesen Teil des Versuchs wird der ``Simulation Mode'' des Packet Tracers
-verwendet. PC1 stellt die Quelle, und der Router das Ziel, dar. Es werden nur
+verwendet. PC1 stellt die Quelle, der Router das Ziel dar. Es werden nur
 \acs{ICMP} Pakete für die Übertragung gefiltert.
 
 \subsubsection{Analyse eines Ping Befehls}
