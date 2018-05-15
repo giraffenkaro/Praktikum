@@ -42,9 +42,31 @@ Cisco Routern mit dem Cisco \ac{CLI}.
 
 \section{Versuchsdurchführung}
 
+\subsection{Part 1}
 Im ersten Teil des Versuchs wird ein Multi-Router-Netzwerk wie in \ref{Aufbau}
 aufgebaut und wie folgt konfiguriert:\\ %TODO Tabelle einfügen
-\newline
+
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
+	\hline
+	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+	\textbf{Subnet Mask} \\
+	\hline
+	R1 	& R1  & Serial 0/0/0 & 172.17.0.1 & 255.255.0.0 \\
+	\hline
+	& & FastEthernet 0/0 & 172.16.0.1 & 255.255.0.0 \\
+	\hline
+	R2 & R2 &Serial 0/0/0 & 172.17.0.2 & 255.255.0.0 \\
+	\hline
+	 & & FastEthernet 0/0 & 172.18.0.1	& 255.255.0.0 \\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration der Router}
+\label{config}
+\end{table}
+
 \underline{Weiteres Vorgehen:}
 \begin{itemize}
   \item Hostnamen der Router konfigurieren
@@ -58,8 +80,16 @@ aufgebaut und wie folgt konfiguriert:\\ %TODO Tabelle einfügen
   \item Verbindung der Hosts und Router überprüfen
 \end{itemize}
 
-Der zweite Teil des Versuchs ist analog durchzuführen. %TODO
-% aufgabenstellung, Config etc
+\subsection{Part 2}
+Der zweite Teil des Versuchs ist analog durchzuführen.\\Gegeben ist der
+Adressbereich 192.168.1.0/24. Die Anforderungen an das zu gestaltende Netzwerk
+sind:
+\begin{itemize}
+  \item das \acs{LAN} von Router 1 soll über IP-Adressen für 120 Hosts verfügen
+  \item das \acs{LAN} von Router 2 soll über IP-Adressen für 60 Host verfügen
+\end{itemize}
+Das weitere Vorgehen gestaltet sich wie der erste Teil des Laborversuchs.
+Zusätzlich wird \acs{RIP}-Routing konfiguriert.
 
 
 \section{Versuchsziel}
