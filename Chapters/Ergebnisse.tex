@@ -26,6 +26,21 @@ Zunächst werden die Host mit statischen IP-Adressen konfiguriert:
 
 \subsubsection{Basis-Einstellungen}
 
+Bei beiden Routern ist zunächst der \textbf{Hostname} zu ändern. Dies geschieht
+über den Priviledged EXEC Mode. Mit dem Kommando \textit{hostname R1} bzw.
+\textit{hostname R2} werden die Hostnamen zu R1 bzw. R2 geändert.
+\newline
+Danach werden die \textbf{Passwörter} (console und vty) konfiguriert und
+aktiviert.%TODO Auszüge
+\newline
+Es folgt die Konfiguration eines \textbf{\acs{MOTD}}-Banners:
+%TODO Auszug
+\newline
+Um zu gewährleisten, dass die Router \textbf{keine Namensauflösung via
+DNS-Server} betreiben, wird das Kommando \textit{no ip domain lookup} genutzt.
+\newline
+%TODO logging synchronous
+
 \subsubsection{Running Configuration}
 
 \subsubsection{Konfiguration der Serial Interfaces}
