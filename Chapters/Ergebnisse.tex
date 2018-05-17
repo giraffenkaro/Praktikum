@@ -3,7 +3,7 @@
 \section{Part 1}
 
 
-\subsection{Konfiguration der Hosts}
+\subsection{Konfiguration der Hosts}\label{hostconfig}
 
 Zunächst werden die Host mit statischen IP-Adressen konfiguriert:
 
@@ -27,7 +27,7 @@ Zunächst werden die Host mit statischen IP-Adressen konfiguriert:
 \subsubsection{Basis-Einstellungen}
 
 Bei beiden Routern ist zunächst der \textbf{Hostname} zu ändern. Dies geschieht
-über den Priviledged EXEC Mode. Mit dem Kommando \textit{hostname R1} bzw.
+über den Global Configuration Mode. Mit dem Kommando \textit{hostname R1} bzw.
 \textit{hostname R2} werden die Hostnamen zu R1 bzw. R2 geändert.
 \newline
 Danach werden die \textbf{Passwörter} (console und vty) konfiguriert und
@@ -41,9 +41,92 @@ DNS-Server} betreiben, wird das Kommando \textit{no ip domain lookup} genutzt.
 \newline
 %TODO logging synchronous
 
-\subsubsection{Running Configuration}
+\paragraph{Running Configuration}\mbox{} \\
+Die Ausgabe der running-config zeigt folgendes bzgl. der konfigurierten
+Passwörter:
+
+\begin{lstlisting}
+enable secret 5 $1$r.BO$ZHkNZfQvcrvrVhJWWQDtg/
+enable password cisco
+\end{lstlisting}
+
+Das Passwort für den allgemeinen Routerzugriff ist entschlüsselt in der
+Konfigurations-Datei zu finden. Verschlüsselt hingegen ist das Passwort für den
+Priviliedged EXEC Mode. Weitere Passwörter sind in dieser Datei nicht zu finden.
+
+\clearpage
 
 \subsubsection{Konfiguration der Serial Interfaces}
+
+Den Routern R1 und R2 müssen die jeweiligen IP-Adressen des Serial Interfaces
+zugewiesen werden:
+
+\begin{lstlisting}
+R1(config)#interface serial 0/0/0
+R1(config-if)#description WAN link to R2
+R1(config-if)#ip address 172.17.0.1 255.255.0.0
+R1(config-if)#clock rate 64000
+R1(config-if)#no shutdown
+R1(config-if)#exit
+R1(config)#exit
+\end{lstlisting}
+
+R1 wird 172.17.0.1 zugewiesen. Die Clock Rate muss nur an dem Router
+konfiguriert werden, mit dem die DCE-Schnittstelle des Serial-Kabels verbunden
+ist (in diesem Fall R1).
+\newline
+\newline
+\underline{Informationen des Serial Interfaces von R1:}
+\newline
+\newline
+Durch das Kommando \textit{show interfaces serial 0/0/0} erhält man folgende
+Informationen über die durchgeführte Konfiguration:
+
+\begin{lstlisting}
+R1#show interfaces serial 0/0/0
+Serial0/0/0 is down, line protocol is down
+  Hardware is GT96K Serial
+  Description: WAN link to R2
+  Internet address is 172.17.0.1/16
+  MTU 1500 bytes, BW 128 Kbit/sec, DLY 20000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation HDLC, loopback not set
+ [...]
+  
+\end{lstlisting}\footnote{Zur Übersichtlichkeit sind nur Ausschnitte der
+Ausgabe aufgeführt, gekennzeichnet mit [\ldots]}
+
+Zu diesem Zeitpunkt ist die Serial 0/0/0 Schnittstelle noch ``down'', da die
+Schnittstelle bei Router 2 noch nicht konfiguriert wurde.\\Nachdem R2 äquivalent
+zu R1 konfiguriert ist, sind bei Schnittstellen ``up''. %TODO übles Denglisch
+\newline
+\ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco Routern.
+%
+% https://www.cisco.com/c/en/us/support/docs/wan/high-level-data-link-control-hdlc/7927-hdlc-back.html
+
+\paragraph{Überprüfung der Verbindung}\mbox{} \\
+
+Um die Konfiguration zu testen, werden ping-Befehle von R1 zu R2 und umgekehrt
+über das \acs{CLI} ausgeführt.
+
+\begin{lstlisting}
+R1#ping 172.17.0.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 172.17.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 28/28/28 ms
+\end{lstlisting}
+
+\begin{lstlisting}
+R2#ping 172.17.0.1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 172.17.0.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 28/28/28 ms
+\end{lstlisting}
+
+Die Aufgaben zeigen, dass die Konfiguration korrekt erfolgt ist und eine
+Verbindung möglich ist.
 
 \subsubsection{Konfiguration der Fast-Ethernet Interfaces}
 
@@ -83,7 +166,7 @@ zugewiesen.\\Dementsprechend erhält man folgende umzusetzende Konfiguration:
 	\hline
 	H2 & & Ethernet & 192.168.1.190 & 255.255.255.192 \\
 	\hline
-	R2 & R2 &Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
+	R2 & R2 & Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
 	\hline
 	 & & FastEthernet 0/0 & 192.168.1.129	& 255.255.255.192 \\
 	\hline
@@ -93,13 +176,19 @@ zugewiesen.\\Dementsprechend erhält man folgende umzusetzende Konfiguration:
 \end{table}
 
 
-
-
 \subsection{Konfiguration der Router}
 
 \subsection{Konfiguration der Hosts}
 
+Äquivalent zu \ref{hostconfig} werden die IP-Adressen der Hosts statisch
+konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
+(192.168.1.1), für Host 2 die IP-Adresse von Router 2 (192.168.1.129).
+
 \subsection{Konfiguration der Routing Protokolle}
 
-
+Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
+müssen zunächst die entsprechenden Routen eingerichtet werden. Hierzu wird RIPv2
+genutzt.
+\newline
+%TODO RIP erklären, RFC 1058, RFC 2453
 %TODO Verbindungen testen, Routingtabellen, debug RIP, Reflection (Step 12)
