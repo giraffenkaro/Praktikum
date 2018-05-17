@@ -63,6 +63,38 @@ notwendig:
   \item 192.168.1.192/30
 \end{itemize}
 
+Die erste IP-Adresse des jeweiligen Subnetzes wird für den Router reserviert.
+Den Hosts wird in diesem Fall die jeweils letzte mögliche IP-Adresse
+zugewiesen.\\Dementsprechend erhält man folgende umzusetzende Konfiguration:
+
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
+	\hline
+	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+	\textbf{Subnet Mask} \\
+	\hline
+	R1 	& R1  & Serial 0/0/0 & 192.168.1.193 & 255.255.255.252 \\
+	\hline
+	& & FastEthernet 0/0 & 192.168.1.1 & 255.255.255.128 \\
+	\hline
+	H1 & & Ethernet & 192.168.1.126 & 255.255.255.128 \\
+	\hline
+	H2 & & Ethernet & 192.168.1.190 & 255.255.255.192 \\
+	\hline
+	R2 & R2 &Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
+	\hline
+	 & & FastEthernet 0/0 & 192.168.1.129	& 255.255.255.192 \\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration der Netzkomponenten}
+\label{config2}
+\end{table}
+
+
+
+
 \subsection{Konfiguration der Router}
 
 \subsection{Konfiguration der Hosts}
