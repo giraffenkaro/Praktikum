@@ -130,7 +130,40 @@ Verbindung möglich ist.
 
 \subsubsection{Konfiguration der Fast-Ethernet Interfaces}
 
+Die Konfiguration der Fast-Ethernet-Schnittstellen erfolgt im Global
+Configuration Mode:
 
+\begin{lstlisting}
+R1(config)#interface FastEthernet 0/0
+R1(config-if)#description R1 LAN Default Gateway
+R1(config-if)#ip address 172.16.0.1 255.255.0.0
+R1(config-if)#no shutdown
+R1(config-if)#exit
+R1(config)#exit
+\end{lstlisting}
+
+Mit dem Kommando \textit{show interfaces FastEthernet 0/0} werden Informationen
+über die Schnittstellen-Konfiguration angezeigt:
+
+\begin{lstlisting}
+R1#show interfaces fastEthernet 0/0
+FastEthernet0/0 is up, line protocol is down
+  Hardware is MV96340 Ethernet, address is 0025.4569.13c0 (bia 0025.4569.13c0)
+  Description: R1 LAN Default Gateway
+  Internet address is 172.16.0.1/16
+  MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  [...]
+\end{lstlisting}
+
+Die Schnittstelle ist nach der Konfiguration aktiviert. \ac{ARPA} ist der
+Default Encapsulation Standard von Ethernet II bei Cisco Routern.
+%which uses a 16-bit protocol type code
+% https://www.cisco.com/c/en/us/td/docs/ios/12_2/interface/configuration/guide/finter_c/icflanin.html
+\newline
+\newline
+Danach wird die Schnittstelle bei Router 2 entsprechend konfiguriert.
 \clearpage
 
 \section{Part 2}
@@ -176,10 +209,11 @@ zugewiesen.\\Dementsprechend erhält man folgende umzusetzende Konfiguration:
 \end{table}
 
 
-\subsection{Konfiguration der Router}
+\subsection{Konfiguration der Netzkomponenten}
 
-\subsection{Konfiguration der Hosts}
-
+Den Routern werden nach den entsprechenden Einträgen in \ref{config2}
+konfiguriert. Das Vorgehen gestaltet sich wie im ersten Part des Laborversuchs.
+\newline
 Äquivalent zu \ref{hostconfig} werden die IP-Adressen der Hosts statisch
 konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
 (192.168.1.1), für Host 2 die IP-Adresse von Router 2 (192.168.1.129).
