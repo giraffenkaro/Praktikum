@@ -255,11 +255,38 @@ konfiguriert. Das Vorgehen gestaltet sich wie im ersten Part des Laborversuchs.
 konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
 (192.168.1.1), für Host 2 die IP-Adresse von Router 2 (192.168.1.129).
 
-\subsection{Konfiguration der Routing Protokolle}
+\clearpage
 
-Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
-müssen zunächst die entsprechenden Routen eingerichtet werden. Hierzu wird RIPv2
-genutzt.
-\newline
+\subsection{Routing Protokolle}
+
+\ac{RIP} bezeichnet ein Routing Protokoll, das auf dem
+Link-State-Algorithmus basiert. Es ist ein sog. ``interior gateway protocol''.\\
+RIPv2 ist eine Weiterentwicklung der ersten Version und wurde 1998
+standartisiert. Beide Protokolle besitzen das gleiche Paketformat:
+\begin{figure}[ht] 
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/RIPv12_packet.PNG}
+  \caption{RIPv1 und RIPv2 Paketformat}
+  \label{fig:packet}
+\end{figure}
+
+\begin{figure}[ht] 
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/RIPv1_entry.PNG}
+  \caption{RIPv1 Eintrag}
+  \label{fig:entry1}
+\end{figure}
+
+\begin{figure}[ht] 
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/RIPv2_entry.PNG}
+  \caption{RIPv2 Eintrag}
+  \label{fig:entry2}
+\end{figure}
+% Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
+% müssen zunächst die entsprechenden Routen eingerichtet werden. Hierzu wird RIPv2
+% genutzt.
+
+
 %TODO RIP erklären, RFC 1058, RFC 2453
 %TODO Verbindungen testen, Routingtabellen, debug RIP, Reflection (Step 12)
