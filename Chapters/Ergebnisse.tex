@@ -212,8 +212,17 @@ Um die gegebnen Anforderungen aus \ref{subnet} umzusetzen, sind 3 Subnetze
 notwendig:
 \begin{itemize}
   \item 192.168.1.0/25
+  	\begin{itemize}
+    	\item maximale Hostanzahl: 126
+    \end{itemize}
   \item 192.168.1.128/26
+  	\begin{itemize}
+    	\item maximale Hostanzahl: 62
+    \end{itemize}
   \item 192.168.1.192/30
+  	\begin{itemize}
+    	\item maximale Hostanzahl: 2
+    \end{itemize}
 \end{itemize}
 
 Die erste IP-Adresse des jeweiligen Subnetzes wird für den Router reserviert.
@@ -262,14 +271,16 @@ konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
 \ac{RIP} bezeichnet ein Routing Protokoll, das auf dem
 Link-State-Algorithmus basiert. Es ist ein sog. ``interior gateway protocol''.\\
 RIPv2 ist eine Weiterentwicklung der ersten Version und wurde 1998
-standartisiert. Beide Protokolle besitzen das gleiche Paketformat:
-\begin{figure}[ht] 
+standartisiert. Beide Protokolle besitzen das gleiche
+Paketformat:\cite{malkin1998rfc}
+ \begin{figure}[ht] 
   \centering
      \includegraphics[width=\linewidth]{Graphics/RIPv12_packet.PNG}
   \caption{RIPv1 und RIPv2 Paketformat}
   \label{fig:packet}
 \end{figure}
 
+Unterschiedlich sind die RIP Einträge: 
 \begin{figure}[ht] 
   \centering
      \includegraphics[width=\linewidth]{Graphics/RIPv1_entry.PNG}

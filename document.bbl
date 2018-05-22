@@ -16,5 +16,25 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global}\enddatalist
+\datalist[entry]{nty/global//global/global}
+  \entry{malkin1998rfc}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MG}{%
+         family={Malkin},
+         familyi={M\bibinitperiod},
+         given={G},
+         giveni={G},
+      }}%
+    }
+    \strng{namehash}{MG1}
+    \strng{fullhash}{MG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{RFC 2453: Rip version 2}
+    \field{journaltitle}{Accessed November}
+    \field{year}{1998}
+  \endentry
+\enddatalist
 \endinput
