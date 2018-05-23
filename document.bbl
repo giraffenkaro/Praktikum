@@ -17,6 +17,25 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{cisco}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=C}{%
+         family={Cisco},
+         familyi={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{C1}
+    \strng{fullhash}{C1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+  \field{howpublished}{\url{https://www.cisco.com/c/en/us/support/docs/wan/high-level-data-link-control-hdlc/7927-hdlc-back.html}}
+    \field{note}{[Document ID:7927]}
+    \field{title}{{HDLC Back-to-Back Connections}}
+    \field{year}{2005}
+  \endentry
+
   \entry{malkin1998rfc}{article}{}
     \name{author}{1}{}{%
       {{hash=MG}{%

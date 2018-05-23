@@ -73,7 +73,7 @@ R1(config)#exit
 
 R1 wird 172.17.0.1 zugewiesen. Die Clock Rate muss nur an dem Router
 konfiguriert werden, mit dem die DCE-Schnittstelle des Serial-Kabels verbunden
-ist (in diesem Fall R1).
+ist (in diesem Fall R1).\cite{cisco}
 \newline
 \newline
 \underline{Informationen des Serial Interfaces von R1:}
@@ -327,10 +327,37 @@ konfiguriert.
 Aufgrund der Übersichtlichkeit sind die vollständigen Routingtabellen
 (\textit{show ip route}) im Anhang unter \autoref{routing} zu finden.
 \newline
-\paragraph{Router 1}\mbox{} \\
+\paragraph{Router 1}\mbox{} \\\\
+\underline{Aufgeführte Netzwerke:}
+\begin{itemize}
+  \item 192.168.1.0/25
+  \item 192.168.1.1/32
+  \item 192.168.1.128/26
+  \item 192.168.1.192/30
+  \item 192.168.1.193/32
+\end{itemize}
 
+Die Zeile des Netzwerks 192.168.1.128/26 der Routingtabelle ist genauer zu
+betrachten:
+\begin{lstlisting}
+R        192.168.1.128/26 [120/1] via 192.168.1.194, 00:00:22, Serial0/0/0
+\end{lstlisting}
 
-\paragraph{Router 2}\mbox{} \\
+Das ``R'' in dieser Zeiler steht für \acs{RIP}. Geroutet wird über Router 2 mit
+der IP-Adresse 192.168.1.194.
+%TODO Serial erklären
+
+ \paragraph{Router 2}\mbox{} \\\\
+\underline{Aufgeführte Netzwerke:}
+\begin{itemize}
+  \item 192.168.1.0/25
+  \item 192.168.1.1/32
+  \item 192.168.1.192/30
+  \item 192.168.1.193/32
+\end{itemize}
+
+Die Routingtabelle von Router 2 beinhaltet die gleichen Netzwerke wie Router 1,
+allerding nicht das Netz 192.168.1.128/26.
 
 
 \subsection{Debug RIP}
