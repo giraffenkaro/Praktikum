@@ -12,6 +12,66 @@
 % 
 % sonstige Auszüge zu Part 1 hier rein, auch pings?
 
+\section{Informationen des Serial Interfaces}
+
+\begin{lstlisting}
+R1#show interfaces serial 0/0/0
+Serial0/0/0 is down, line protocol is down
+  Hardware is GT96K Serial
+  Description: WAN link to R2
+  Internet address is 172.17.0.1/16
+  MTU 1500 bytes, BW 128 Kbit/sec, DLY 20000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation HDLC, loopback not set
+  Keepalive set (10 sec)
+  Last input 00:10:55, output 00:10:56, output hang never
+  Last clearing of "show interface" counters 00:18:44
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     93 packets input, 6218 bytes, 0 no buffer
+     Received 93 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     93 packets output, 6218 bytes, 0 underruns
+     0 output errors, 0 collisions, 8 interface resets
+     2 unknown protocol drops
+     0 output buffer failures, 0 output buffers swapped out
+     11 carrier transitions
+     DCD=up  DSR=up  DTR=down  RTS=down  CTS=up
+\end{lstlisting}
+
+\begin{lstlisting}
+R2#show interfaces serial 0/0/0
+Serial0/0/0 is up, line protocol is up
+  Hardware is GT96K Serial
+  Description: WAN link to R1
+  Internet address is 172.17.0.2/16
+  MTU 1500 bytes, BW 128 Kbit/sec, DLY 20000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation HDLC, loopback not set
+  Keepalive set (10 sec)
+  Last input 00:00:06, output 00:00:05, output hang never
+  Last clearing of "show interface" counters 00:23:13
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     92 packets input, 5904 bytes, 0 no buffer
+     Received 92 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     99 packets output, 7259 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     0 unknown protocol drops
+     0 output buffer failures, 0 output buffers swapped out
+     0 carrier transitions
+     DCD=up  DSR=up  DTR=up  RTS=up  CTS=up
+\end{lstlisting}
+
 \chapter{Auszüge Part 2}
 
 \section{Routingtabellen}\label{sec:routing}

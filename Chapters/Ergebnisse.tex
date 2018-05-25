@@ -95,10 +95,10 @@ Serial0/0/0 is down, line protocol is down
   
 \end{lstlisting}\footnote{Zur Übersichtlichkeit sind nur Ausschnitte der
 Ausgabe aufgeführt, gekennzeichnet mit [\ldots]}
- %TODO in Anhang packen, beide Ausgaben
+%TODO Referrenz auf anahng machen
 Zu diesem Zeitpunkt ist die Serial 0/0/0 Schnittstelle noch ``down'', da die
 Schnittstelle bei Router 2 noch nicht konfiguriert wurde.\\Nachdem R2 äquivalent
-zu R1 konfiguriert ist, sind bei Schnittstellen ``up''. %TODO übles Denglisch
+zu R1 konfiguriert ist, sind bei Schnittstellen ``up''. %TODO übles Denglisch finde ich kann man so lassen
 \newline
 \ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco Routern.
 %
@@ -201,7 +201,16 @@ Ca. Zeitangaben in Millisek.:
     Minimum = 1ms, Maximum = 2ms, Mittelwert = 1ms
 \end{lstlisting}
 
-%TODO Step 14
+%TODO Step 14 noch vorwort dazu schreiben
+Die Pings von R1 zur R2 Fast Ethernet-Schnittstelle und von H1 zu H2 
+funktionieren nicht, da der Router R1 nicht weiß, wie der Weg zum R2-
+Ethernet-Netzwerk (172.18.0.0) ist. Darüber hinaus kennt R2 das Ethernet
+Netzwerk von R1 (172.16.0.0) nicht. Die Pings können nicht von R1 oder H1
+zum R2-Ethernet-Netzwerk gelangen. Damit die Pings funktionieren muss ein 
+Host-Computer zum anderen, Standard-Routen und / oder statische Routen auf
+den Routern konfiguriert werden, oder es muss ein dynamisches 
+Routing-Protokoll zwischen ihnen eingerichtet werden.
+
 \clearpage
 
 \section{Part 2}
@@ -267,7 +276,7 @@ konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
 
 \clearpage
 
-%TODO Step 7 und 10
+%TODO Step 7 und 10 (bei 7 Routingtabelle leer bei 10 eintrag vorhanden in Tabelle)
 
 \subsection{Routing Protokolle}
 
@@ -348,7 +357,7 @@ R        192.168.1.128/26 [120/1] via 192.168.1.194, 00:00:22, Serial0/0/0
 
 Das ``R'' in dieser Zeiler steht für \acs{RIP}. Geroutet wird über Router 2 mit
 der IP-Adresse 192.168.1.194.
-%TODO Serial erklären
+%TODO Serial erklären Würde ich nicht erklären
 
  \paragraph{Router 2}\mbox{} \\\\
 \underline{Aufgeführte Netzwerke:}
