@@ -36,6 +36,25 @@
     \field{title}{{Cisco IOS Debug Command Reference, Release 12.2}}
   \endentry
 
+  \entry{cisco3}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=CSI}{%
+         family={Cisco\bibnamedelima Systems},
+         familyi={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Inc.},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CSI1}
+    \strng{fullhash}{CSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+  \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/ios/12_2/interface/configuration/guide/finter_c/icflanin.html}}
+    \field{title}{{Cisco IOS Interface Configuration Guide, Release 12.2}}
+  \endentry
+
   \entry{cisco}{misc}{}
     \name{author}{1}{}{%
       {{hash=CSI}{%

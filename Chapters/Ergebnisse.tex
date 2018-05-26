@@ -1,6 +1,6 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
-\section{Part 1}
+\section{Teil 1}
 
 
 \subsection{Konfiguration der Hosts}\label{hostconfig}
@@ -31,15 +31,16 @@ Bei beiden Routern ist zunächst der \textbf{Hostname} zu ändern. Dies geschieht
 \textit{hostname R2} werden die Hostnamen zu R1 bzw. R2 geändert.
 \newline
 Danach werden die \textbf{Passwörter} (console und vty) konfiguriert und
-aktiviert.%TODO Auszüge
+aktiviert.
 \newline
-Es folgt die Konfiguration eines \textbf{\acs{MOTD}}-Banners:
-%TODO Auszug
+Es folgt die Konfiguration eines \textbf{\acs{MOTD}}-Banners, das den Titel
+``Unauthorized Use Prohibited'' trägt.
 \newline
 Um zu gewährleisten, dass die Router \textbf{keine Namensauflösung via
 DNS-Server} betreiben, wird das Kommando \textit{no ip domain lookup} genutzt.
 \newline
-%TODO logging synchronous
+Mit dem Kommando ``logging synchronous'' wird sichergestellt, dass keine
+Systemmeldungen bei Befehlseingaben erscheinen.
 
 \paragraph{Running Configuration}\mbox{} \\
 Die Ausgabe der running-config zeigt folgendes bzgl. der konfigurierten
@@ -61,8 +62,8 @@ Priviliedged EXEC Mode. Weitere Passwörter sind in dieser Datei nicht zu finden.
 Den Routern R1 und R2 müssen die jeweiligen IP-Adressen zugewiesen werden. 
 \newline
 R1 wird 172.17.0.1 zugewiesen. Die Clock Rate muss nur an dem Router
-konfiguriert werden, mit dem die DCE-Schnittstelle des Serial-Kabels verbunden
-ist (in diesem Fall R1).\cite{cisco}
+konfiguriert werden, mit dem die \acs{DCE}-Schnittstelle des Serial-Kabels
+verbunden ist (in diesem Fall R1).\cite{cisco}
 \newline
 \newline
 \underline{Informationen des Serial Interfaces von R1:}
@@ -83,15 +84,15 @@ Serial0/0/0 is down, line protocol is down
  [...]
   
 \end{lstlisting}\footnote{Zur Übersichtlichkeit sind nur Ausschnitte der
-Ausgabe aufgeführt, gekennzeichnet mit [\ldots]}
+Ausgabe aufgeführt, gekennzeichnet mit [\ldots], die vollständigen Ausgaben
+sind im Anhang \ref{InfoS} zu finden}
 %TODO Referrenz auf anahng machen
 Zu diesem Zeitpunkt ist die Serial 0/0/0 Schnittstelle noch inakiv (down), da
 die Schnittstelle bei Router 2 noch nicht konfiguriert wurde.\\Nachdem R2 äquivalent
 zu R1 konfiguriert ist, sind bei Schnittstellen aktiv (up).
 \newline
-\ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco Routern.
-%
-% https://www.cisco.com/c/en/us/support/docs/wan/high-level-data-link-control-hdlc/7927-hdlc-back.html
+\ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco
+Routern.\cite{cisco}
 
 \paragraph{Überprüfung der Verbindung}\mbox{} \\
 
@@ -114,7 +115,7 @@ Sending 5, 100-byte ICMP Echos to 172.17.0.1, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 28/28/28 ms
 \end{lstlisting}
 
-Die Aufgaben zeigen, dass die Konfiguration korrekt erfolgt ist und eine
+Die Ausgaben zeigen, dass die Konfiguration korrekt erfolgt ist und eine
 Verbindung möglich ist.
 
 \subsubsection{Konfiguration der Fast-Ethernet Interfaces}
@@ -139,54 +140,28 @@ FastEthernet0/0 is up, line protocol is down
 \end{lstlisting}
 
 Die Schnittstelle ist nach der Konfiguration aktiviert. \ac{ARPA} ist der
-Default Encapsulation Standard von Ethernet II bei Cisco Routern.
+Default Encapsulation Standard von Ethernet II bei Cisco
+Routern.\cite{cisco3}
 %which uses a 16-bit protocol type code
-% https://www.cisco.com/c/en/us/td/docs/ios/12_2/interface/configuration/guide/finter_c/icflanin.html
 \newline
 \newline
-Danach wird die Schnittstelle bei Router 2 entsprechend konfiguriert.
+Danach wird die Schnittstelle bei Router 2 äquivalent konfiguriert.
 
 \paragraph{Überprüfung der Verbindung}\mbox{} \\
-Mittels ping-Befehlen wird getestet, ob eine Verbindung zu den
-Fast-Ethernet-Schnittstelle der Router möglich ist.
+Mittels ping-Befehlen wird getestet, ob eine Verbindung über die
+Fast-Ethernet-Schnittstellen der Router möglich ist.
+\newline
+Beide Hosts pingen dazu ihren verbundenen Router über die
+Windows-Eingabeaufforderung.\footnote{siehe Anhang unter \ref{pingF}}
 
-\begin{lstlisting}
-C:\Dokumente und Einstellungen\cisco>ping 172.16.0.1
-
-Ping wird ausgeführt für 172.16.0.1 mit 32 Bytes Daten:
-
-Antwort von 172.16.0.1: Bytes=32 Zeit=4ms TTL=255
-Antwort von 172.16.0.1: Bytes=32 Zeit=1ms TTL=255
-Antwort von 172.16.0.1: Bytes=32 Zeit=1ms TTL=255
-Antwort von 172.16.0.1: Bytes=32 Zeit=1ms TTL=255
-
-Ping-Statistik für 172.16.0.1:
-    Pakete: Gesendet = 4, Empfangen = 4, Verloren = 0 (0% Verlust),
-Ca. Zeitangaben in Millisek.:
-    Minimum = 1ms, Maximum = 4ms, Mittelwert = 1ms
-\end{lstlisting}
-
-\begin{lstlisting}
-C:\Dokumente und Einstellungen\cisco>ping 172.18.0.1
-
-Ping wird ausgeführt für 172.18.0.1 mit 32 Bytes Daten:
-
-Antwort von 172.18.0.1: Bytes=32 Zeit=2ms TTL=255
-Antwort von 172.18.0.1: Bytes=32 Zeit=1ms TTL=255
-Antwort von 172.18.0.1: Bytes=32 Zeit=1ms TTL=255
-Antwort von 172.18.0.1: Bytes=32 Zeit=1ms TTL=255
-
-Ping-Statistik für 172.18.0.1:
-    Pakete: Gesendet = 4, Empfangen = 4, Verloren = 0 (0% Verlust),
-Ca. Zeitangaben in Millisek.:
-    Minimum = 1ms, Maximum = 2ms, Mittelwert = 1ms
-\end{lstlisting}
 
 %TODO Step 14 noch vorwort dazu schreiben
-Die Pings von R1 zur R2 Fast Ethernet-Schnittstelle und von H1 zu H2 
-funktionieren nicht, da der Router R1 nicht weiß, wie der Weg zum R2-
-Ethernet-Netzwerk (172.18.0.0) ist. Darüber hinaus kennt R2 das Ethernet
-Netzwerk von R1 (172.16.0.0) nicht. Die Pings können nicht von R1 oder H1
+Die Pings von Router 1 zu Router 2 über die Fast-Ethernet-Schnittstelle und von
+Host 1 zu Host 2 funktionieren nicht, da noch keine Route zum Netzwerk
+(172.18.0.0) bekannt ist.
+
+
+Darüber hinaus kennt R2 das Ethernet Netzwerk von R1 (172.16.0.0) nicht. Die Pings können nicht von R1 oder H1
 zum R2-Ethernet-Netzwerk gelangen. Damit die Pings funktionieren muss ein 
 Host-Computer zum anderen, Standard-Routen und / oder statische Routen auf
 den Routern konfiguriert werden, oder es muss ein dynamisches 
@@ -194,7 +169,7 @@ Routing-Protokoll zwischen ihnen eingerichtet werden.
 
 \clearpage
 
-\section{Part 2}
+\section{Teil 2}
 
 
 \subsection{Netzwerkplanung}
@@ -318,7 +293,7 @@ konfiguriert.
 
 \subsubsection{Routingtabellen}
 Aufgrund der Übersichtlichkeit sind die vollständigen Routingtabellen
-(\textit{show ip route}) im Anhang unter \autoref{routing} zu finden.
+(\textit{show ip route}) im Anhang unter \ref{routingtables} zu finden.
 \newline
 \paragraph{Router 1}\mbox{} \\\\
 \underline{Aufgeführte Netzwerke:}
