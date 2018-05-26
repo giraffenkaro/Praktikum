@@ -305,7 +305,7 @@ konfiguriert.
 
 \subsubsection{Routingtabellen}
 Aufgrund der Übersichtlichkeit sind die vollständigen Routingtabellen
-(\textit{show ip route}) im Anhang unter \ref{routingtables} zu finden.
+(\textit{show ip route}) im Anhang unter \ref{routeStep9} zu finden.
 \newline
 \paragraph{Router 1}\mbox{} \\\\
 \underline{Aufgeführte Netzwerke:}
@@ -327,20 +327,21 @@ Das ``R'' in dieser Zeiler steht für \acs{RIP}. Geroutet wird über Router 2 mit
 der IP-Adresse 192.168.1.194.
 \newline
 Vor der Konfiguration von RIPv2 war diese Route nicht bekannt (siehe
-\ref{routeStep6}).routeStep6
+\ref{routeStep6}).
 %TODO Serial erklären Würde ich nicht erklären
 
  \paragraph{Router 2}\mbox{} \\\\
 \underline{Aufgeführte Netzwerke:}
 \begin{itemize}
   \item 192.168.1.0/25
-  \item 192.168.1.1/32
+  \item 192.168.1.128/26
+  \item 192.168.1.129/32
   \item 192.168.1.192/30
-  \item 192.168.1.193/32
+  \item 192.168.1.194/32
 \end{itemize}
 
-Die Routingtabelle von Router 2 beinhaltet die gleichen Netzwerke wie Router 1,
-allerdings nicht das Netz 192.168.1.128/26.
+Bei Router 2 ist dementsprechend das Netzwerk 192.168.1.0/25 mit einem ``R''
+gekennzeichnet. Es wird über die IP-Adresse 192.168.1.193 geroutet.
 
 
 \subsection{Debug RIP}
