@@ -346,7 +346,40 @@ gekennzeichnet. Es wird über die IP-Adresse 192.168.1.193 (Router 1) geroutet.
 
 Mit dem Kommando \textit{debug ip rip} werden die Routing Transaktionen
 ausgegeben, die zwischen den Routern stattfinden, die RIP nutzen.\cite{cisco2}
-%TODO Step 11
+\begin{lstlisting}
+R1#debug ip rip
+RIP protocol debugging is on
+R1#
+*May 14 15:01:24.555: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
+92.168.1.1)
+*May 14 15:01:24.555: RIP: build update entries
+*May 14 15:01:24.555:   192.168.1.128/26 via 0.0.0.0, metric 2, tag 0
+*May 14 15:01:24.555:   192.168.1.192/30 via 0.0.0.0, metric 1, tag 0
+R1#
+*May 14 15:01:27.039: RIP: received v2 update from 192.168.1.194 on Serial0/0/0
+*May 14 15:01:27.039:      192.168.1.128/26 via 0.0.0.0 in 1 hops
+R1#
+*May 14 15:01:31.659: RIP: sending v2 update to 224.0.0.9 via Serial0/0/0 (192.1
+68.1.193)
+*May 14 15:01:31.659: RIP: build update entries
+*May 14 15:01:31.659:   192.168.1.0/25 via 0.0.0.0, metric 1, tag 0
+R1#
+*May 14 15:01:52.831: RIP: received v2 update from 192.168.1.194 on Serial0/0/0
+*May 14 15:01:52.831:      192.168.1.128/26 via 0.0.0.0 in 1 hops
+*May 14 15:01:53.575: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
+92.168.1.1)
 
-\subsection{Refelxion}%umbenennen
-%TODO Step 12
+[...]
+\end{lstlisting}
+
+Dem Auschnitt ist zu entnehmen, dass der R1 seine Updates sowohl über die
+Serial- als auch die Fast-Ethernet-Schnittstelle sendet. Der Empfang der
+Updates erfolgt allerdings nur über die Serial-Schnittstelle, da R2 nur über die
+Serial-Schnittstelle mit dem Netzwerk von R1 verbunden ist. Die Updates werden
+an die Multicastadresse 224.0.0.9 gesendet.
+\newline
+Auffällig sind auch die unterschiedlichen Metriken.
+ %TODO mehr Hops, höhere Metrik, blablabla
+ 
+ 
+\subsection{Refelxion}%umbenennen TODO Step 12
