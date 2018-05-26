@@ -154,8 +154,8 @@ Beide Hosts pingen dazu ihren verbundenen Router über die
 Windows-Eingabeaufforderung.\footnote{siehe Anhang unter \ref{pingF}}
 
 \paragraph{Verbindung zu anderen Netzwerken}\mbox{} \\
-Bei den bisher durchgeführten ping-Befehlen befanden sich Quelle- und
-Ziel-IP-Adresse im gleichen Netzwerk. Nun wird getestet, ob es möglich ist eine
+\label{pingNE}Bei den bisher durchgeführten ping-Befehlen befanden sich Quell-
+und Ziel-IP-Adresse im gleichen Netzwerk. Nun wird getestet, ob es möglich ist eine
 Verbindung zu einem anderen Netzwerks herzustellen.
 \begin{itemize}
   \item R1 zu R2
@@ -232,9 +232,18 @@ konfiguriert. Das Vorgehen gestaltet sich wie im ersten Part des Laborversuchs.
 konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
 (192.168.1.1), für Host 2 die IP-Adresse von Router 2 (192.168.1.129).
 
+\subsubsection{Verbindung prüfen}
+Zur Überprüfung der Verbindung über das eigene Netzwerk hinaus, werden folgende
+ping-Befehle ausgeführt:
+\begin{itemize}
+  \item R1 zu R2
+  \item H1 zu H2
+\end{itemize}
+Beide Versuche schlagen fehl, ebenso wie in \ref{pingNE} im ersten Teil. Die
+Ausgabe der Routingtabelle belegt, dass noch keine Route in das entsprechende Netzwerk
+bekannt ist.\footnote{siehe \ref{routeStep6}}
 \clearpage
 
-%TODO Step 7 und 10 (bei 7 Routingtabelle leer bei 10 eintrag vorhanden in Tabelle)
 
 \subsection{Routing Protokolle}
 
@@ -278,6 +287,7 @@ Bei RIPv2 erfolgte eine Änderung der Einträge:
 %TODO RIP erklären, RFC 1058, RFC 2453
 %TODO Verbindungen testen, Routingtabellen, debug RIP, Reflection (Step 12)
 \subsection{Konfiguration von RIPv2}
+
 Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
 müssen zunächst die entsprechenden Routen eingerichtet werden. Hierzu wird RIPv2
 genutzt.
@@ -315,6 +325,9 @@ R        192.168.1.128/26 [120/1] via 192.168.1.194, 00:00:22, Serial0/0/0
 
 Das ``R'' in dieser Zeiler steht für \acs{RIP}. Geroutet wird über Router 2 mit
 der IP-Adresse 192.168.1.194.
+\newline
+Vor der Konfiguration von RIPv2 war diese Route nicht bekannt (siehe
+\ref{routeStep6}).routeStep6
 %TODO Serial erklären Würde ich nicht erklären
 
  \paragraph{Router 2}\mbox{} \\\\
