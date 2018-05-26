@@ -144,7 +144,6 @@ Default Encapsulation Standard von Ethernet II bei Cisco
 Routern.\cite{cisco3}
 %which uses a 16-bit protocol type code
 \newline
-\newline
 Danach wird die Schnittstelle bei Router 2 äquivalent konfiguriert.
 
 \paragraph{Überprüfung der Verbindung}\mbox{} \\
@@ -154,18 +153,21 @@ Fast-Ethernet-Schnittstellen der Router möglich ist.
 Beide Hosts pingen dazu ihren verbundenen Router über die
 Windows-Eingabeaufforderung.\footnote{siehe Anhang unter \ref{pingF}}
 
-
-%TODO Step 14 noch vorwort dazu schreiben
-Die Pings von Router 1 zu Router 2 über die Fast-Ethernet-Schnittstelle und von
-Host 1 zu Host 2 funktionieren nicht, da noch keine Route zum Netzwerk
-(172.18.0.0) bekannt ist.
-
-
-Darüber hinaus kennt R2 das Ethernet Netzwerk von R1 (172.16.0.0) nicht. Die Pings können nicht von R1 oder H1
-zum R2-Ethernet-Netzwerk gelangen. Damit die Pings funktionieren muss ein 
-Host-Computer zum anderen, Standard-Routen und / oder statische Routen auf
-den Routern konfiguriert werden, oder es muss ein dynamisches 
-Routing-Protokoll zwischen ihnen eingerichtet werden.
+\paragraph{Verbindung zu anderen Netzwerken}\mbox{} \\
+Bei den bisher durchgeführten ping-Befehlen befanden sich Quelle- und
+Ziel-IP-Adresse im gleichen Netzwerk. Nun wird getestet, ob es möglich ist eine
+Verbindung zu einem anderen Netzwerks herzustellen.
+\begin{itemize}
+  \item R1 zu R2
+  \item H1 zu H2
+\end{itemize}
+%TODO Auszüge in Anhang und Verweis
+Beide Versuche schlagen fehl, da noch keine Route zum Netzwerk (172.18.0.0)
+bekannt ist. Desweiteren ist R2 das Netzwerk von R1 (172.16.0.0) nicht bekannt.
+\newline
+Um dieses Problem zu lösen, müssten die Routen statisch oder dynamisch
+konfiguriert werden bzw. ein dynamisches Routing-Protokoll bei beiden Routern
+verwendet werden.
 
 \clearpage
 
@@ -325,7 +327,7 @@ der IP-Adresse 192.168.1.194.
 \end{itemize}
 
 Die Routingtabelle von Router 2 beinhaltet die gleichen Netzwerke wie Router 1,
-allerding nicht das Netz 192.168.1.128/26.
+allerdings nicht das Netz 192.168.1.128/26.
 
 
 \subsection{Debug RIP}
