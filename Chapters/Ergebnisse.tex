@@ -169,7 +169,6 @@ Verbindung zu einem anderen Netzwerks herzustellen.
   \item R1 zu R2
   \item H1 zu H2
 \end{itemize}
-%TODO Auszüge in Anhang und Verweis
 Beide Versuche schlagen fehl, da noch keine Route zum Netzwerk (172.18.0.0)
 bekannt ist. Desweiteren ist R2 das Netzwerk von R1 (172.16.0.0) nicht bekannt.
 \newline
@@ -394,7 +393,6 @@ Um diesen Fall zu testen, wird das Ethernet-Kabel von Router 2 entfernt. Dadurch
 wird die Verbindung getrennt und der entsprechende Eintrag in
 der Routingtabelle verschwindet, da es keine Route mehr zu dem Netzwerk
 192.168.1.128/26 gibt.
-%TODO AUszug?
 
 \subsubsection{Unterschiedliche RIP-Versionen konfigurieren}\label{szenario2}
 Router 1 wird mit RIPv1 und Router 2 mit RIPv2 konfiguriert. Um das
@@ -422,4 +420,4 @@ Router 2 sendet wie bisher die Updates mittels Multicast (224.0.0.9) über beide
 Schnittstellen, empfängt allerdings keine Updates (siehe \ref{debugStep12}).
 \newline
 Die Änderungen der Konfiguration ändert nichts an den Einträgen in den
-Routingtabellen.%TODO evtl belegen, auszug
+Routingtabellen.
