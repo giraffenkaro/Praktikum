@@ -76,6 +76,27 @@
     \field{year}{2005}
   \endentry
 
+  \entry{cisco4}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=CSI}{%
+         family={Cisco\bibnamedelima Systems},
+         familyi={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Inc.},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CSI1}
+    \strng{fullhash}{CSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+  \field{howpublished}{\url{https://www.cisco.com/c/en/us/support/docs/routers/7200-series-routers/12219-17.html}}
+    \field{note}{[Document ID:12219]}
+    \field{title}{{Serial Cable Connection Guide}}
+    \field{year}{2006}
+  \endentry
+
   \entry{malkin1998rfc}{article}{}
     \name{author}{1}{}{%
       {{hash=MG}{%

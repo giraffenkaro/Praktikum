@@ -39,8 +39,8 @@ Es folgt die Konfiguration eines \textbf{\acs{MOTD}}-Banners, das den Titel
 Um zu gewährleisten, dass die Router \textbf{keine Namensauflösung via
 DNS-Server} betreiben, wird das Kommando \textit{no ip domain lookup} genutzt.
 \newline
-Mit dem Kommando ``logging synchronous'' wird sichergestellt, dass keine
-Systemmeldungen bei Befehlseingaben erscheinen.
+Mit dem Kommando ``\textbf{logging synchronous}'' wird sichergestellt, dass
+keine Systemmeldungen bei Befehlseingaben erscheinen.
 
 \paragraph{Running Configuration}\mbox{} \\
 Die Ausgabe der running-config zeigt Folgendes bzgl. der konfigurierten
@@ -394,7 +394,7 @@ der Routingtabelle verschwindet, da es keine Route mehr zu dem Netzwerk
 192.168.1.128/26 gibt.
 %TODO AUszug?
 
-\subsubsection{Unterschiedliche RIP-Versionen konfigurieren}
+\subsubsection{Unterschiedliche RIP-Versionen konfigurieren}\label{szenario2}
 Router 1 wird mit RIPv1 und Router 2 mit RIPv2 konfiguriert. Um das
 Verhalten der Router zu untersuchen, wird der RIP-Debug-Mode aktiviert und
 die Routingtabelle ausgegeben.
