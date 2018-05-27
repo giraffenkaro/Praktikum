@@ -248,7 +248,13 @@ bekannt ist.\footnote{siehe \ref{routeStep6}}
 \subsection{Routing Protokolle}
 
 \ac{RIP} bezeichnet ein Routing Protokoll, das auf dem
-Link-State-Algorithmus basiert. Es ist ein sog. ``interior gateway protocol''.\\
+Link-State-Algorithmus basiert. Es ist ein sog. ``Interior Gateway Protocol''.
+Das Protokoll dient dazu Routingtabellen automatisch zu generieren. Dazu
+sendet der Router initial ein Anfrage (Request) an seine Nachbarn, die dann mit
+ihrer Routingtabelle antworten (Reply). Die Routingtabelle wird weiterhin
+zyklisch an die Nachbarn versendet (Updates) um einen möglichen Ausfall einer
+Route feststellen zu können.
+\\
 RIPv2 ist eine Weiterentwicklung der ersten Version und wurde 1998
 standartisiert. Beide Protokolle besitzen das gleiche
 Paketformat:\cite{malkin1998rfc}
@@ -278,31 +284,20 @@ Bei RIPv2 erfolgte eine Änderung der Einträge:
   \label{fig:entry2}
 \end{figure}
 
-% Einträge unterschiedlich
-% Subnet Mask
-% Authentication
-% Route Tag
-% Multicasting
-% Queries
-%TODO Verbindungen testen, debug RIP, Reflection (Step 12)
+Die unterschiedlichen Einträge zeigen, dass RIPv1 nicht über
+Subnetzinformationen verfügt. RIPv2 hingegen nutzt \ac{CIDR}.\\Außerdem bietet
+RIPv2 eine Möglichkeit zur Authentifizierung. %TODO Route Tags
+\newline
+Die maximale Hop-Count einer Route beträgt bei beiden Versionen 15.
+
 \subsection{Konfiguration von RIPv2}
 
 Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
-müssen zunächst die entsprechenden Routen eingerichtet werden. Hierzu wird RIPv2
-genutzt.
-
-\begin{lstlisting}
-R1(config)#router rip
-R1(config-router)# version 2
-R1(config-router)# network 192.168.1.0
-R1(config-router)# exit
-R1(config)#exit
-\end{lstlisting}
-
-Bei Router wird RIP äquivalent mit der Netzwerkadresse 192.168.1.128
-konfiguriert.
+müssen zunächst die entsprechenden Routen nach Versuchanleitung eingerichtet
+werden. Es wird RIPv2 genutzt.
 
 \subsubsection{Routingtabellen}
+
 Aufgrund der Übersichtlichkeit sind die vollständigen Routingtabellen
 (\textit{show ip route}) im Anhang unter \ref{routeStep9} zu finden.
 \newline
@@ -387,7 +382,7 @@ Auffällig sind auch die unterschiedlichen Metriken.
 \subsubsection{Netzwerk von Router 2 bricht zusammen}
 
 Um diesen Fall zu testen, wird das Ethernet-Kabel von Router 2 entfernt. Dadurch
-wurd die Verbindung getrennt und der entsprechende Eintrag in
+wird die Verbindung getrennt und der entsprechende Eintrag in
 der Routingtabelle verschwindet, da es keine Route mehr zu dem Netzwerk
 192.168.1.128/26 gibt.
 %TODO AUszug?
