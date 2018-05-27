@@ -382,4 +382,40 @@ Auffällig sind auch die unterschiedlichen Metriken.
  %TODO mehr Hops, höhere Metrik, blablabla
  
  
-\subsection{Refelxion}%umbenennen TODO Step 12
+\subsection{Reflection}%umbenennen
+
+\subsubsection{Netzwerk von Router 2 bricht zusammen}
+
+Um diesen Fall zu testen, wird das Ethernet-Kabel von Router 2 entfernt. Dadurch
+wurd die Verbindung getrennt und der entsprechende Eintrag in
+der Routingtabelle verschwindet, da es keine Route mehr zu dem Netzwerk
+192.168.1.128/26 gibt.
+%TODO AUszug?
+
+\subsubsection{Unterschiedliche RIP-Versionen konfigurieren}
+Router 1 wird mit RIPv1 und Router 2 mit RIPv2 konfiguriert. Um das
+Verhalten der Router zu untersuchen, wird der RIP-Debug-Mode aktiviert und
+die Routingtabelle ausgegeben.
+\begin{lstlisting}
+R1#
+*May 14 15:08:31.963: RIP: sending v1 update to 255.255.255.255 via FastEthernet
+0/0 (192.168.1.1)
+*May 14 15:08:31.963: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:08:53.871: RIP: sending v1 update to 255.255.255.255 via Serial0/0/0
+(192.168.1.193)
+*May 14 15:08:53.871: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:08:56.103: RIP: ignored v2 packet from 192.168.1.194 (illegal version
+)
+
+[...]
+\end{lstlisting}
+Router 1 sendet Updates mittels Broadcast (255.255.255.255) über beide
+Schnittstellen. Die ankommenden v2-Updates werden ignoriert (illegal version).
+\newline
+Router 2 sendet wie gewohnt die Updates mittels Multicast (224.0.0.9) über beide
+Schnittstellen, empfängt allerdings keine Updates (siehe \ref{debugStep12}).
+\newline
+Die Änderungen der Konfiguration ändert nichts an den Einträgen in den
+Routingtabellen.%TODO evtl belegen, auszug

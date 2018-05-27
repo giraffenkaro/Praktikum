@@ -214,3 +214,76 @@ L        192.168.1.129/32 is directly connected, FastEthernet0/0
 C        192.168.1.192/30 is directly connected, Serial0/0/0
 L        192.168.1.194/32 is directly connected, Serial0/0/0
 \end{lstlisting}
+
+
+\section{RIPv1 vs. RIPv2}
+
+\subsection{Debug Mode - Router 1}
+
+\begin{lstlisting}
+R1#debug ip rip
+RIP protocol debugging is on
+R1#
+*May 14 15:08:31.963: RIP: sending v1 update to 255.255.255.255 via FastEthernet
+0/0 (192.168.1.1)
+*May 14 15:08:31.963: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:08:53.871: RIP: sending v1 update to 255.255.255.255 via Serial0/0/0
+(192.168.1.193)
+*May 14 15:08:53.871: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:08:56.103: RIP: ignored v2 packet from 192.168.1.194 (illegal version
+)
+R1#
+*May 14 15:08:59.251: RIP: sending v1 update to 255.255.255.255 via FastEthernet
+0/0 (192.168.1.1)
+*May 14 15:08:59.251: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:09:21.847: RIP: sending v1 update to 255.255.255.255 via Serial0/0/0
+(192.168.1.193)
+*May 14 15:09:21.847: RIP: build update entries - suppressing null update
+*May 14 15:09:22.227: RIP: ignored v2 packet from 192.168.1.194 (illegal version
+)
+R1#
+*May 14 15:09:25.255: RIP: sending v1 update to 255.255.255.255 via FastEthernet
+0/0 (192.168.1.1)
+*May 14 15:09:25.255: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:09:48.995: RIP: sending v1 update to 255.255.255.255 via Serial0/0/0
+(192.168.1.193)
+*May 14 15:09:48.995: RIP: build update entries - suppressing null update
+R1#
+*May 14 15:09:50.759: RIP: ignored v2 packet from 192.168.1.194 (illegal version
+)
+R1#
+*May 14 15:09:51.831: RIP: ignored v2 packet from 192.168.1.194 (illegal version
+)
+\end{lstlisting}
+\subsection{Debug Mode - Router 2}\label{debugStep12}
+
+\begin{lstlisting}
+R2#debug ip rip
+RIP protocol debugging is on
+R2#
+*May 14 15:05:50.547: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
+92.168.1.129)
+*May 14 15:05:50.547: RIP: build update entries
+*May 14 15:05:50.547:   192.168.1.0/25 via 0.0.0.0, metric 2, tag 0
+*May 14 15:05:50.547:   192.168.1.192/30 via 0.0.0.0, metric 1, tag 0
+R2#
+*May 14 15:06:03.595: RIP: sending v2 update to 224.0.0.9 via Serial0/0/0 (192.1
+68.1.194)
+*May 14 15:06:03.595: RIP: build update entries
+*May 14 15:06:03.595:   192.168.1.128/26 via 0.0.0.0, metric 1, tag 0
+R2#
+*May 14 15:06:16.535: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
+92.168.1.129)
+*May 14 15:06:16.535: RIP: build update entries
+*May 14 15:06:16.535:   192.168.1.0/25 via 0.0.0.0, metric 2, tag 0
+*May 14 15:06:16.535:   192.168.1.192/30 via 0.0.0.0, metric 1, tag 0
+R2#undebug all
+*May 14 15:06:29.719: RIP: sending v2 update to 224.0.0.9 via Serial0/0/0 (192.1
+68.1.194)
+*May 14 15:06:29.719: RIP: build update entries
+*May 14 15:06:29.719:   192.168.1.128/26 via 0.0.0.0, metric 1, tag 0
+\end{lstlisting}
