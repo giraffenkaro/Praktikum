@@ -68,8 +68,6 @@ R1).\cite{cisco} Router R2 ist mit der \acs{DTE}-Schnittstelle verbunden und
 ignoriert das Kommando.
 \newline
 \newline
-\underline{Informationen des Serial Interfaces von R1:}
-\newline
 \newline
 Durch das Kommando \textit{show interfaces serial 0/0/0} kann die durchgeführte
 Konfiguration überprüft werden.
@@ -93,7 +91,8 @@ die Schnittstelle bei Router 2 noch nicht konfiguriert wurde.\\Nachdem R2 äquiva
 zu R1 konfiguriert ist, sind bei Schnittstellen aktiv (up).
 \newline
 \ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco
-Routern.\cite{cisco}
+Routern und wird der Schicht 2 des \acs{ISO}/\acs{OSI}-Referenzmodells
+zugeordnet.\cite{cisco}
 \newline
 Es ist zu beachten, dass die Clock Rate mit 64000 konfiguriert wurde, die
 Übertragungsrate allerdings bei 128 Kbit/s liegt. Es ist zu vermuten, dass
@@ -146,8 +145,10 @@ FastEthernet0/0 is up, line protocol is down
 \end{lstlisting}
 
 Die Schnittstelle ist nach der Konfiguration aktiviert. Der
-Encapsulation Standard ist \acs{ARPA}.\footnote{\ac{ARPA} ist der Default
-Encapsulation Standard von Ethernet II bei Cisco Routern.\cite{cisco3}}
+Encapsulation Standard ist \acs{ARPA}, weclher der Schicht 2
+des \acs{ISO}/\acs{OSI}-Referenzmodells
+zugeordnet werden kann.\footnote{\ac{ARPA} ist der Default Encapsulation
+Standard von Ethernet II bei Cisco Routern.\cite{cisco3}}
 \newline
 Danach wird die Schnittstelle bei Router 2 äquivalent konfiguriert.
 
