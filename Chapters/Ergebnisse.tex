@@ -380,8 +380,9 @@ Updates erfolgt allerdings nur über die Serial-Schnittstelle, da R2 nur über die
 Serial-Schnittstelle mit dem Netzwerk von R1 verbunden ist. Die Updates werden
 an die Multicastadresse 224.0.0.9 gesendet.
 \newline
-Auffällig sind auch die unterschiedlichen Metriken.
- %TODO mehr Hops, höhere Metrik, blablabla
+Auffällig sind auch die unterschiedlichen Metriken (Hop Counts). Das Netz
+192.168.1.192/30 ist mit einem Hop zu erreichen. 192.168.1.128/26 hingegen
+benötigt zwei Hops. Der zweite Hop stellt hier den Weg über Router 2 dar.
  
  
 \subsection{Szenarien}
