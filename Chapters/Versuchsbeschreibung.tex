@@ -44,26 +44,29 @@ Cisco Switches mit dem Cisco \ac{CLI}.
 
 \subsection{Teil 1}\label{teil1}
 
-% \begin{table}[!htbp]
-% \centering
-% \small
-% 	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
-% 	\hline
-% 	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
-% 	\textbf{Subnet Mask} \\
-% 	\hline
-% 	R1 	& R1  & Serial 0/0/0 & 172.17.0.1 & 255.255.0.0 \\
-% 	\hline
-% 	& & FastEthernet 0/0 & 172.16.0.1 & 255.255.0.0 \\
-% 	\hline
-% 	R2 & R2 &Serial 0/0/0 & 172.17.0.2 & 255.255.0.0 \\
-% 	\hline
-% 	 & & FastEthernet 0/0 & 172.18.0.1	& 255.255.0.0 \\
-% 	\hline
-% 	\end{tabularx}
-% \caption{Konfiguration der Router}
-% \label{config}
-% \end{table}
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|X|X|}
+	\hline
+	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+	\textbf{Subnet Mask} & \textbf{Default Gateway} & \textbf{Switch Port}\\
+	\hline
+	S1 	& Customer-Switch  & VLAN 1 & 192.168.1.5 & 255.255.255.0 & 192.168.1.1 &
+	N/A \\
+	\hline
+	R1 & Customer-Router & Fa0/1 & 192.168.1.1 & 255.255.255.0 & N/A & Fa0/5 \\
+	\hline
+	H1 & H1 & NIC & 192.168.1.2 & 255.255.255.0 & 192.168.1.1 & Fa0/11 \\
+	\hline
+	H2 & H2 & NIC & 192.168.1.4	& 255.255.255.0 & 192.168.1.1 & fa0/18 \\
+	\hline
+	H3 & H3 & NIC & 192.168.1.6 & 255.255.255.0 & 192.168.1.1 & None \\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration für Teil 1}
+\label{config1}
+\end{table}
 
 \underline{Weiteres Vorgehen:}
 % \begin{itemize}
