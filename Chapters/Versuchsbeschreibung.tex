@@ -1,99 +1,85 @@
 \chapter{Beschreibung des Versuchs}
 
 Der Laborversuch beschäftigt sich mit einer Einführung in die Konfiguration von
-Cisco Routern mit dem Cisco \ac{CLI}.
+Cisco Switches mit dem Cisco \ac{CLI}.
 
 \section{Versuchsaufbau}\label{Aufbau}
 
-\begin{figure}[ht] 
-  \centering
-     \includegraphics[width=\linewidth]{Graphics/Aufbau.PNG}
-  \caption{Versuchsaufbau}
-  \label{fig:aufbau}
-\end{figure}
+% \begin{figure}[ht] 
+%   \centering
+%      \includegraphics[width=\linewidth]{Graphics/Aufbau.PNG}
+%   \caption{Versuchsaufbau}
+%   \label{fig:aufbau}
+% \end{figure}
 
 \subsection{Komponenten}
 
-\begin{itemize}
-  \item 2 Computer
-  \begin{itemize}
-    \item HyperTerminal als Emulationsprogramm
-  \end{itemize}
-  \item 2 Cisco 2811 Router
-  \begin{itemize}
-    \item Router 1: 
-    \begin{itemize}
-      \item Verbindung zu PC1 mittels DB-9 zu RJ45 Adapterkabel
-      \item Verbindung zum Switch durch Straight-Through-Kabel
-	\end{itemize}
-	\item Router 2:
-	\begin{itemize}
-    \item Verbindung zu PC2 durch Crossover-Kabel und DB-9 zu RJ45 Adapterkabel
-    \end{itemize}
-    \item Verbindung untereinander durch Serial-Kabel
-  \end{itemize}
-  \item 1 Cisco 2960 Switch
-  	\begin{itemize}
-    	\item Verbindung zu PC1 durch Straight-Through-Kabel
-   	\end{itemize}
-\end{itemize}
+% \begin{itemize}
+%   \item 2 Computer
+%   \begin{itemize}
+%     \item HyperTerminal als Emulationsprogramm
+%   \end{itemize}
+%   \item 2 Cisco 2811 Router
+%   \begin{itemize}
+%     \item Router 1: 
+%     \begin{itemize}
+%       \item Verbindung zu PC1 mittels DB-9 zu RJ45 Adapterkabel
+%       \item Verbindung zum Switch durch Straight-Through-Kabel
+% 	\end{itemize}
+% 	\item Router 2:
+% 	\begin{itemize}
+%     \item Verbindung zu PC2 durch Crossover-Kabel und DB-9 zu RJ45 Adapterkabel
+%     \end{itemize}
+%     \item Verbindung untereinander durch Serial-Kabel
+%   \end{itemize}
+%   \item 1 Cisco 2960 Switch
+%   	\begin{itemize}
+%     	\item Verbindung zu PC1 durch Straight-Through-Kabel
+%    	\end{itemize}
+% \end{itemize}
 
 \clearpage
 
 \section{Versuchsdurchführung}
 
-\subsection{Teil 1}
-Im ersten Teil des Versuchs wird ein Multi-Router-Netzwerk wie in \ref{Aufbau}
-aufgebaut und wie folgt konfiguriert:\\ %TODO Tabelle einfügen
+\subsection{Teil 1}\label{teil1}
 
-\begin{table}[!htbp]
-\centering
-\small
-	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
-	\hline
-	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
-	\textbf{Subnet Mask} \\
-	\hline
-	R1 	& R1  & Serial 0/0/0 & 172.17.0.1 & 255.255.0.0 \\
-	\hline
-	& & FastEthernet 0/0 & 172.16.0.1 & 255.255.0.0 \\
-	\hline
-	R2 & R2 &Serial 0/0/0 & 172.17.0.2 & 255.255.0.0 \\
-	\hline
-	 & & FastEthernet 0/0 & 172.18.0.1	& 255.255.0.0 \\
-	\hline
-	\end{tabularx}
-\caption{Konfiguration der Router}
-\label{config}
-\end{table}
+% \begin{table}[!htbp]
+% \centering
+% \small
+% 	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
+% 	\hline
+% 	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+% 	\textbf{Subnet Mask} \\
+% 	\hline
+% 	R1 	& R1  & Serial 0/0/0 & 172.17.0.1 & 255.255.0.0 \\
+% 	\hline
+% 	& & FastEthernet 0/0 & 172.16.0.1 & 255.255.0.0 \\
+% 	\hline
+% 	R2 & R2 &Serial 0/0/0 & 172.17.0.2 & 255.255.0.0 \\
+% 	\hline
+% 	 & & FastEthernet 0/0 & 172.18.0.1	& 255.255.0.0 \\
+% 	\hline
+% 	\end{tabularx}
+% \caption{Konfiguration der Router}
+% \label{config}
+% \end{table}
 
 \underline{Weiteres Vorgehen:}
-\begin{itemize}
-  \item Hostnamen der Router konfigurieren
-  \item Konsole, ``priviledged EXEC mode'' und vty
-  passwords konfigurieren
-  \item Ethernet- und Serial-Schnittstellen konfigurieren
-  \item \ac{MOTD} konfigurieren
-  \item Router so konfigurieren, dass keine Adressauflösung für Hostnamen
-  durchgeführt wird
-  \item Synchrones ``console logging'' konfigurieren
-  \item Verbindung der Hosts und Router überprüfen
-\end{itemize}
+% \begin{itemize}
+%   \item Hostnamen der Router konfigurieren
+%   \item Konsole, ``priviledged EXEC mode'' und vty
+%   passwords konfigurieren
+%   \item Ethernet- und Serial-Schnittstellen konfigurieren
+%   \item \ac{MOTD} konfigurieren
+%   \item Router so konfigurieren, dass keine Adressauflösung für Hostnamen
+%   durchgeführt wird
+%   \item Synchrones ``console logging'' konfigurieren
+%   \item Verbindung der Hosts und Router überprüfen
+% \end{itemize}
 
-\subsection{Teil 2}\label{subnet}
-Der zweite Teil des Versuchs ist analog durchzuführen.\\Gegeben ist der
-Adressbereich 192.168.1.0/24. Die Anforderungen an das zu gestaltende Netzwerk
-sind:
-\begin{itemize}
-  \item das \acs{LAN} von Router 1 soll über IP-Adressen für 120 Hosts verfügen
-  \item das \acs{LAN} von Router 2 soll über IP-Adressen für 60 Host verfügen
-\end{itemize}
-Das weitere Vorgehen gestaltet sich äquivalent zum ersten Teil des
-Laborversuchs.
-Zusätzlich wird \acs{RIP}-Routing konfiguriert.
+\subsection{Teil 2}\label{teil2}
 
 
 \section{Versuchsziel}
 
-Dieser Versuch dient als Einführung zur Netzwerkgestaltung und
--Konfiguration.

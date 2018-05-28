@@ -5,419 +5,67 @@
 
 \subsection{Konfiguration der Hosts}\label{hostconfig}
 
-Zunächst werden die Hosts mit statischen IP-Adressen konfiguriert:
 
-\begin{itemize}
-  \item Host 1
-  	\begin{itemize}
-    	\item IP-Adresse: 172.16.0.2
-    	\item Subnetz-Maske: 255.255.0.0
-    	\item Default Gateway: 172.16.0.1
-    \end{itemize}
-  \item Host 2
-  	\begin{itemize}
-    	\item IP-Adresse: 172.18.0.2
-    	\item Subnetz-Maske: 255.255.0.0
-    	\item Default Gateway: 172.18.0.1
-    \end{itemize}
-\end{itemize}
+\subsection{Konfiguration des Router}
 
-\subsection{Konfiguration der Router}
+\subsection{Konfiguration des Switch}
 
-\subsubsection{Basis-Einstellungen}
+\subsubsection{Konfiguration überprüfen}
 
-Bei beiden Routern ist zunächst der \textbf{Hostname} zu ändern. Dies geschieht
-über den Global Configuration Mode. Mit dem Kommando \textit{hostname R1} bzw.
-\textit{hostname R2} werden die Hostnamen zu R1 bzw. R2 geändert.
-\newline
-Danach werden die \textbf{Passwörter} (console und vty) konfiguriert und
-aktiviert.
-\newline
-Es folgt die Konfiguration eines \textbf{\acs{MOTD}}-Banners, das den Titel
-``Unauthorized Use Prohibited'' trägt.
-\newline
-Um zu gewährleisten, dass die Router \textbf{keine Namensauflösung via
-DNS-Server} betreiben, wird das Kommando \textit{no ip domain lookup} genutzt.
-\newline
-Mit dem Kommando ``\textbf{logging synchronous}'' wird sichergestellt, dass
-keine Systemmeldungen bei Befehlseingaben erscheinen.
+\subsection{MAC-Addressen}
 
-\paragraph{Running Configuration}\mbox{} \\
-Die Ausgabe der running-config zeigt Folgendes bzgl. der konfigurierten
-Passwörter:
+\subsection{Geschwindigkeit und Duplex}
 
-\begin{lstlisting}
-enable secret 5 $1$r.BO$ZHkNZfQvcrvrVhJWWQDtg/
-enable password cisco
-\end{lstlisting}
+\subsection{Reflection}
 
-Das Passwort für den allgemeinen Routerzugriff ist entschlüsselt in der
-Konfigurations-Datei zu finden. Verschlüsselt hingegen ist das Passwort für den
-Priviliedged EXEC Mode. Weitere Passwörter sind in dieser Datei nicht zu finden.
-
-\clearpage
-
-\subsubsection{Konfiguration der Serial Interfaces}\label{serial}
-
-Den Routern R1 und R2 müssen die jeweiligen IP-Adressen zugewiesen werden. 
-\newline
-R1 wird 172.17.0.1 zugewiesen. Die Clock Rate wird mit 64000 konfiguriert
-und muss nur an dem Router konfiguriert werden, mit dem die
-\acs{DCE}-Schnittstelle des Serial-Kabels verbunden ist (in diesem Fall
-R1).\cite{cisco} Router R2 ist mit der \acs{DTE}-Schnittstelle verbunden und
-ignoriert das Kommando.
-\newline
-\newline
-\newline
-Durch das Kommando \textit{show interfaces serial 0/0/0} kann die durchgeführte
-Konfiguration überprüft werden.
-
-\begin{lstlisting}
-R1#show interfaces serial 0/0/0
-Serial0/0/0 is down, line protocol is down
-  Hardware is GT96K Serial
-  Description: WAN link to R2
-  Internet address is 172.17.0.1/16
-  MTU 1500 bytes, BW 128 Kbit/sec, DLY 20000 usec,
-     reliability 255/255, txload 1/255, rxload 1/255
-  Encapsulation HDLC, loopback not set
- [...]
-  
-\end{lstlisting}\footnote{Zur Übersichtlichkeit sind nur Ausschnitte der
-Ausgabe aufgeführt, gekennzeichnet mit [\ldots], die vollständigen Ausgaben
-sind im Anhang \ref{InfoS} zu finden}
-Zu diesem Zeitpunkt ist die Serial 0/0/0 Schnittstelle noch inakiv (down), da
-die Schnittstelle bei Router 2 noch nicht konfiguriert wurde.\\Nachdem R2 äquivalent
-zu R1 konfiguriert ist, sind bei Schnittstellen aktiv (up).
-\newline
-\ac{HDLC} ist der ``Default Serial Encapsulation'' Standard von Cisco
-Routern und wird der Schicht 2 des \acs{ISO}/\acs{OSI}-Referenzmodells
-zugeordnet.\cite{cisco}
-\newline
-Es ist zu beachten, dass die Clock Rate mit 64000 konfiguriert wurde, die
-Übertragungsrate allerdings bei 128 Kbit/s liegt. Es ist zu vermuten, dass
-sowohl bei positiver als auch negativer Taktflanke Daten übertragen werden, was
-einem impliziten Multiplikator mit dem Faktor 2 entspricht.
-
-\paragraph{Überprüfung der Verbindung}\mbox{} \\
-
-Um die Konfiguration zu testen, werden ping-Befehle von R1 zu R2 und umgekehrt
-über das \acs{CLI} ausgeführt.
-
-\begin{lstlisting}
-R1#ping 172.17.0.2
-Type escape sequence to abort.
-Sending 5, 100-byte ICMP Echos to 172.17.0.2, timeout is 2 seconds:
-!!!!!
-Success rate is 100 percent (5/5), round-trip min/avg/max = 28/28/28 ms
-\end{lstlisting}
-
-\begin{lstlisting}
-R2#ping 172.17.0.1
-Type escape sequence to abort.
-Sending 5, 100-byte ICMP Echos to 172.17.0.1, timeout is 2 seconds:
-!!!!!
-Success rate is 100 percent (5/5), round-trip min/avg/max = 28/28/28 ms
-\end{lstlisting}
-
-Die Ausgaben zeigen, dass die Konfiguration korrekt erfolgt ist und eine
-Verbindung möglich ist.
-
-\subsubsection{Konfiguration der Fast-Ethernet Interfaces}
-
-Die Konfiguration der Fast-Ethernet-Schnittstellen erfolgt
-äquvalent zu \ref{serial}. Die IP-Adresse 172.16.0.1 mit der Subnetzmaske
-255.255.0.0 wird zugewisen.
-\newline
-Mit dem Kommando \textit{show interfaces FastEthernet 0/0} werden Informationen
-über die Schnittstellen-Konfiguration ausgegeben:
-
-\begin{lstlisting}
-R1#show interfaces fastEthernet 0/0
-FastEthernet0/0 is up, line protocol is down
-  Hardware is MV96340 Ethernet, address is 0025.4569.13c0 (bia 0025.4569.13c0)
-  Description: R1 LAN Default Gateway
-  Internet address is 172.16.0.1/16
-  MTU 1500 bytes, BW 100000 Kbit/sec, DLY 100 usec,
-     reliability 255/255, txload 1/255, rxload 1/255
-  Encapsulation ARPA, loopback not set
-  [...]
-\end{lstlisting}
-
-Die Schnittstelle ist nach der Konfiguration aktiviert. Der
-Encapsulation Standard ist \acs{ARPA}, weclher der Schicht 2
-des \acs{ISO}/\acs{OSI}-Referenzmodells
-zugeordnet werden kann.\footnote{\ac{ARPA} ist der Default Encapsulation
-Standard von Ethernet II bei Cisco Routern.\cite{cisco3}}
-\newline
-Danach wird die Schnittstelle bei Router 2 äquivalent konfiguriert.
-
-\paragraph{Überprüfung der Verbindung}\mbox{} \\
-Mittels ping-Befehlen wird getestet, ob eine Verbindung über die
-Fast-Ethernet-Schnittstellen der Router möglich ist.
-\newline
-Beide Hosts pingen dazu ihren verbundenen Router über die
-Windows-Eingabeaufforderung. Beide Versuche sind erfolgreich
-verlaufen.\footnote{siehe Anhang unter
-\ref{pingF}}
-
-\paragraph{Verbindung zu anderen Netzwerken}\mbox{} \\
-\label{pingNE}Bei den bisher durchgeführten ping-Befehlen befanden sich Quell-
-und Ziel-IP-Adresse im gleichen Netzwerk. Nun wird getestet, ob es möglich ist eine
-Verbindung zu einem anderen Netzwerks herzustellen.
-\begin{itemize}
-  \item R1 zu R2
-  \item H1 zu H2
-\end{itemize}
-Beide Versuche schlagen fehl, da noch keine Route zum Netzwerk (172.18.0.0)
-bekannt ist. Desweiteren ist R2 das Netzwerk von R1 (172.16.0.0) nicht bekannt.
-\newline
-Um dieses Problem zu lösen, müssten die Routen statisch oder dynamisch
-konfiguriert werden bzw. ein dynamisches Routing-Protokoll bei beiden Routern
-verwendet werden.
 
 \clearpage
 
 \section{Teil 2}
 
 
-\subsection{Netzwerkplanung}
+\subsection{Basiskonfiguration}
 
-Um die gegebnen Anforderungen aus \ref{subnet} umzusetzen, sind 3 Subnetze
-notwendig:
-\begin{itemize}
-  \item 192.168.1.0/25
-  	\begin{itemize}
-    	\item maximale Hostanzahl: 126
-    \end{itemize}
-  \item 192.168.1.128/26
-  	\begin{itemize}
-    	\item maximale Hostanzahl: 62
-    \end{itemize}
-  \item 192.168.1.192/30
-  	\begin{itemize}
-    	\item maximale Hostanzahl: 2
-    \end{itemize}
-\end{itemize}
+\subsection{VLAN Konfiguration}
+\subsubsection{Erstellen der VLANs}
+\subsubsection{Zuweisung von Switchports zu den VLANs}
+\subsubsection{Konfiguration überprüfen}
 
-Die erste IP-Adresse des jeweiligen Subnetzes wird für den Router reserviert.
-Den Hosts wird in diesem Versuch die jeweils letzte mögliche Host-IP-Adresse
-zugewiesen.\\Dementsprechend erhält man folgende umzusetzende Konfiguration:
+\subsection{Konfigruation des zweiten Switches}%TODO umbenennen
 
-\begin{table}[!htbp]
-\centering
-\small
-	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
-	\hline
-	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
-	\textbf{Subnet Mask} \\
-	\hline
-	R1 	& R1  & Serial 0/0/0 & 192.168.1.193 & 255.255.255.252 \\
-	\hline
-	& & FastEthernet 0/0 & 192.168.1.1 & 255.255.255.128 \\
-	\hline
-	H1 & & Ethernet & 192.168.1.126 & 255.255.255.128 \\
-	\hline
-	H2 & & Ethernet & 192.168.1.190 & 255.255.255.192 \\
-	\hline
-	R2 & R2 & Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
-	\hline
-	 & & FastEthernet 0/0 & 192.168.1.129	& 255.255.255.192 \\
-	\hline
-	\end{tabularx}
-\caption{Konfiguration der Netzkomponenten}
-\label{config2}
-\end{table}
+\subsection{Trunk Konfiguration}
 
+\subsection{InterVLAN Routing}
+\subsubsection{Konfiguration der Router}
 
-\subsection{Konfiguration der Netzkomponenten}
+\subsection{Verbindung zwischen Router und Switch einrichten}
+\subsubsection{Verbindungen überprüfen}
 
-Den Routern werden nach den entsprechenden Einträgen in \ref{config2}
-konfiguriert. Das Vorgehen gestaltet sich wie im ersten Teil des Laborversuchs.
-\newline
-Äquivalent zu \ref{hostconfig} werden die IP-Adressen der Hosts statisch
-konfiguriert. Default-Gateway für Host 1 ist die IP-Adresse von Router 1
-(192.168.1.1), für Host 2 die IP-Adresse von Router 2 (192.168.1.129).
+\subsection{Analyse der Pakete}
 
-\subsubsection{Verbindung prüfen}
-Zur Überprüfung der Verbindung über das eigene Netzwerk hinaus, werden folgende
-ping-Befehle ausgeführt:
-\begin{itemize}
-  \item R1 zu R2
-  \item H1 zu H2
-\end{itemize}
-Beide Versuche schlagen fehl, ebenso wie in \ref{pingNE} im ersten Teil. Die
-Ausgabe der Routingtabelle belegt, dass noch keine Route in das entsprechende Netzwerk
-bekannt ist.\footnote{siehe \ref{routeStep6}}
-\clearpage
+% 
+% \begin{table}[!htbp]
+% \centering
+% \small
+% 	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
+% 	\hline
+% 	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
+% 	\textbf{Subnet Mask} \\
+% 	\hline
+% 	R1 	& R1  & Serial 0/0/0 & 192.168.1.193 & 255.255.255.252 \\
+% 	\hline
+% 	& & FastEthernet 0/0 & 192.168.1.1 & 255.255.255.128 \\
+% 	\hline
+% 	H1 & & Ethernet & 192.168.1.126 & 255.255.255.128 \\
+% 	\hline
+% 	H2 & & Ethernet & 192.168.1.190 & 255.255.255.192 \\
+% 	\hline
+% 	R2 & R2 & Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
+% 	\hline
+% 	 & & FastEthernet 0/0 & 192.168.1.129	& 255.255.255.192 \\
+% 	\hline
+% 	\end{tabularx}
+% \caption{Konfiguration der Netzkomponenten}
+% \label{config2}
+% \end{table}
 
-
-\subsection{Routing Protokolle}
-
-\ac{RIP} bezeichnet ein Routing Protokoll, das auf dem
-Link-State-Algorithmus basiert. Es ist ein sog. ``Interior Gateway Protocol''.
-Das Protokoll dient dazu Routingtabellen automatisch zu generieren. Dazu
-sendet der Router initial ein Anfrage (Request) an seine Nachbarn, die dann mit
-ihrer Routingtabelle antworten (Reply). Die Routingtabelle wird weiterhin
-zyklisch an die Nachbarn versendet (Updates) um einen möglichen Ausfall einer
-Route feststellen zu können.
-\\
-RIPv2 ist eine Weiterentwicklung der ersten Version und wurde 1998
-standartisiert. Beide Protokolle besitzen das gleiche
-Paketformat:\cite{malkin1998rfc}
- \begin{figure}[ht] 
-  \centering
-     \includegraphics[width=\linewidth]{Graphics/RIPv12_packet.PNG}
-  \caption{RIPv1 und RIPv2 Paketformat}
-  \label{fig:packet}
-\end{figure}
-
-Unterschiedlich sind die RIP Einträge. Bei RIPv1 haben die Einträge folgendes
-Format:
- \begin{figure}[ht] 
-  \centering
-     \includegraphics[width=\linewidth]{Graphics/RIPv1_entry.PNG}
-  \caption{RIPv1 Eintrag}
-  \label{fig:entry1}
-\end{figure}
-
-\clearpage
-
-Bei RIPv2 erfolgte eine Änderung der Einträge:
-\begin{figure}[h!] 
-  \centering
-     \includegraphics[width=\linewidth]{Graphics/RIPv2_entry.PNG}
-  \caption{RIPv2 Eintrag}
-  \label{fig:entry2}
-\end{figure}
-
-Die unterschiedlichen Einträge zeigen, dass RIPv1 nicht über
-Subnetzinformationen verfügt. RIPv2 hingegen nutzt \ac{CIDR}.\\Außerdem bietet
-RIPv2 eine Möglichkeit zur Authentifizierung. %TODO Route Tags
-\newline
-Die maximale Hop-Count einer Route beträgt bei beiden Versionen 15.
-
-\subsection{Konfiguration von RIPv2}
-
-Um eine Ende-zu-Ende Verbindung zwischen Host 1 und Host 2 zu ermöglichen,
-müssen zunächst die entsprechenden Routen nach Versuchanleitung eingerichtet
-werden. Es wird RIPv2 genutzt.
-
-\subsubsection{Routingtabellen}
-
-Aufgrund der Übersichtlichkeit sind die vollständigen Routingtabellen
-(\textit{show ip route}) im Anhang unter \ref{routeStep9} zu finden.
-\newline
-\paragraph{Router 1}\mbox{} \\\\
-\underline{Aufgeführte Netzwerke:}
-\begin{itemize}
-  \item 192.168.1.0/25
-  \item 192.168.1.1/32
-  \item 192.168.1.128/26
-  \item 192.168.1.192/30
-  \item 192.168.1.193/32
-\end{itemize}
-
-Die Zeile des Netzwerks 192.168.1.128/26 der Routingtabelle ist genauer zu
-betrachten:
-\begin{lstlisting}
-R        192.168.1.128/26 [120/1] via 192.168.1.194, 00:00:22, Serial0/0/0
-\end{lstlisting}
-
-Das ``R'' in dieser Zeiler steht für \acs{RIP}. Geroutet wird über Router 2 mit
-der IP-Adresse 192.168.1.194.
-\newline
-Vor der Konfiguration von RIPv2 war diese Route nicht bekannt (siehe
-\ref{routeStep6}).
-
- \paragraph{Router 2}\mbox{} \\\\
-\underline{Aufgeführte Netzwerke:}
-\begin{itemize}
-  \item 192.168.1.0/25
-  \item 192.168.1.128/26
-  \item 192.168.1.129/32
-  \item 192.168.1.192/30
-  \item 192.168.1.194/32
-\end{itemize}
-
-Bei Router 2 ist dementsprechend das Netzwerk 192.168.1.0/25 mit einem ``R''
-gekennzeichnet. Es wird über die IP-Adresse 192.168.1.193 (Router 1) geroutet.
-
-
-\subsection{Debug RIP}
-
-Mit dem Kommando \textit{debug ip rip} werden die Routing Transaktionen
-ausgegeben, die zwischen den Routern stattfinden, die RIP nutzen.\cite{cisco2}
-\begin{lstlisting}
-R1#debug ip rip
-RIP protocol debugging is on
-R1#
-*May 14 15:01:24.555: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
-92.168.1.1)
-*May 14 15:01:24.555: RIP: build update entries
-*May 14 15:01:24.555:   192.168.1.128/26 via 0.0.0.0, metric 2, tag 0
-*May 14 15:01:24.555:   192.168.1.192/30 via 0.0.0.0, metric 1, tag 0
-R1#
-*May 14 15:01:27.039: RIP: received v2 update from 192.168.1.194 on Serial0/0/0
-*May 14 15:01:27.039:      192.168.1.128/26 via 0.0.0.0 in 1 hops
-R1#
-*May 14 15:01:31.659: RIP: sending v2 update to 224.0.0.9 via Serial0/0/0 (192.1
-68.1.193)
-*May 14 15:01:31.659: RIP: build update entries
-*May 14 15:01:31.659:   192.168.1.0/25 via 0.0.0.0, metric 1, tag 0
-R1#
-*May 14 15:01:52.831: RIP: received v2 update from 192.168.1.194 on Serial0/0/0
-*May 14 15:01:52.831:      192.168.1.128/26 via 0.0.0.0 in 1 hops
-*May 14 15:01:53.575: RIP: sending v2 update to 224.0.0.9 via FastEthernet0/0 (1
-92.168.1.1)
-
-[...]
-\end{lstlisting}
-
-Dem Auschnitt ist zu entnehmen, dass der R1 seine Updates sowohl über die
-Serial- als auch die Fast-Ethernet-Schnittstelle sendet. Der Empfang der
-Updates erfolgt allerdings nur über die Serial-Schnittstelle, da R2 nur über die
-Serial-Schnittstelle mit dem Netzwerk von R1 verbunden ist. Die Updates werden
-an die Multicastadresse 224.0.0.9 gesendet.
-\newline
-Auffällig sind auch die unterschiedlichen Metriken (Hop Counts). Das Netz
-192.168.1.192/30 ist mit einem Hop zu erreichen. 192.168.1.128/26 hingegen
-benötigt zwei Hops. Der zweite Hop stellt hier den Weg über Router 2 dar.
- 
- 
-\subsection{Szenarien}
-
-\subsubsection{Netzwerk von Router 2 bricht zusammen}
-
-Um diesen Fall zu testen, wird das Ethernet-Kabel von Router 2 entfernt. Dadurch
-wird die Verbindung getrennt und der entsprechende Eintrag in
-der Routingtabelle verschwindet, da es keine Route mehr zu dem Netzwerk
-192.168.1.128/26 gibt.
-
-\subsubsection{Unterschiedliche RIP-Versionen konfigurieren}\label{szenario2}
-Router 1 wird mit RIPv1 und Router 2 mit RIPv2 konfiguriert. Um das
-Verhalten der Router zu untersuchen, wird der RIP-Debug-Mode aktiviert und
-die Routingtabelle ausgegeben.
-\begin{lstlisting}
-R1#
-*May 14 15:08:31.963: RIP: sending v1 update to 255.255.255.255 via FastEthernet
-0/0 (192.168.1.1)
-*May 14 15:08:31.963: RIP: build update entries - suppressing null update
-R1#
-*May 14 15:08:53.871: RIP: sending v1 update to 255.255.255.255 via Serial0/0/0
-(192.168.1.193)
-*May 14 15:08:53.871: RIP: build update entries - suppressing null update
-R1#
-*May 14 15:08:56.103: RIP: ignored v2 packet from 192.168.1.194 (illegal version
-)
-
-[...]
-\end{lstlisting}
-Router 1 sendet Updates mittels Broadcast (255.255.255.255) über beide
-Schnittstellen. Die ankommenden v2-Updates werden ignoriert (illegal version).
-\newline
-Router 2 sendet wie bisher die Updates mittels Multicast (224.0.0.9) über beide
-Schnittstellen, empfängt allerdings keine Updates (siehe \ref{debugStep12}).
-\newline
-Die Änderungen der Konfiguration ändert nichts an den Einträgen in den
-Routingtabellen.
