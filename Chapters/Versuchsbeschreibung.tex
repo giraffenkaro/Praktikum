@@ -12,35 +12,35 @@ Cisco Switches mit dem Cisco \ac{CLI}.
   \label{fig:aufbau1}
 \end{figure}
 
-\subsection{Komponenten}
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=0.6\linewidth]{Graphics/aufbau_2complete.PNG}
+  \caption{Versuchsaufbau - Teil 2}
+  \label{fig:aufbau2}
+\end{figure}
 
+% \subsection{Komponenten}
+% 
 % \begin{itemize}
-%   \item 2 Computer
-%   \begin{itemize}
-%     \item HyperTerminal als Emulationsprogramm
-%   \end{itemize}
-%   \item 2 Cisco 2811 Router
-%   \begin{itemize}
-%     \item Router 1: 
-%     \begin{itemize}
-%       \item Verbindung zu PC1 mittels DB-9 zu RJ45 Adapterkabel
-%       \item Verbindung zum Switch durch Straight-Through-Kabel
-% 	\end{itemize}
-% 	\item Router 2:
-% 	\begin{itemize}
-%     \item Verbindung zu PC2 durch Crossover-Kabel und DB-9 zu RJ45 Adapterkabel
-%     \end{itemize}
-%     \item Verbindung untereinander durch Serial-Kabel
-%   \end{itemize}
-%   \item 1 Cisco 2960 Switch
+%   	\item 3 Computer
+%   	\item Cisco 2811 Router
 %   	\begin{itemize}
-%     	\item Verbindung zu PC1 durch Straight-Through-Kabel
-%    	\end{itemize}
+%       	\item Verbindung zum Switch durch Straight-Through-Kabel
+% 	\end{itemize}
+%   	\item 1 Cisco 2960 Switch
+%   		\begin{itemize}
+%     	\item Verbindung zu Host 1 durch Straight-Through-Kabel und DB-9 zu
+% 		RJ45 Adapterkabel
+% 		\item Verbindung zu Host 2 durch Straight-Through-Kabel
+%    		\end{itemize}
 % \end{itemize}
 
 \clearpage
 
 \section{Versuchsdurchführung}
+
+Aus organisatorischen Gründen wurde dieser Laborversuch mittels
+Cisco PacketTracer durchgeführt.
 
 \subsection{Teil 1}\label{teil1}
 
@@ -69,20 +69,26 @@ Cisco Switches mit dem Cisco \ac{CLI}.
 \end{table}
 
 \underline{Weiteres Vorgehen:}
-% \begin{itemize}
-%   \item Hostnamen der Router konfigurieren
-%   \item Konsole, ``priviledged EXEC mode'' und vty
-%   passwords konfigurieren
-%   \item Ethernet- und Serial-Schnittstellen konfigurieren
-%   \item \ac{MOTD} konfigurieren
-%   \item Router so konfigurieren, dass keine Adressauflösung für Hostnamen
-%   durchgeführt wird
-%   \item Synchrones ``console logging'' konfigurieren
-%   \item Verbindung der Hosts und Router überprüfen
-% \end{itemize}
+\begin{itemize}
+  \item Initiale Switch-Konfiguration
+  \item Hosts konfigurieren und mit Switch verbinden
+  \item Router konfigurieren und mit Switch verbinden
+  \item Switch Management VLAN IP-Adresse konfigurieren
+  \item Überprüfung der Netzwerk-Verbindungen
+  \item Basic Port Security konfigurieren
+  \item Port Duplex und Geschwindikeit konfigurieren
+\end{itemize}
 
 \subsection{Teil 2}\label{teil2}
 
+
+
+\underline{Weiteres Vorgehen:}
+\begin{itemize}
+  \item Initiale Switch-Konfiguration
+  \item VLAN-Konfiguration
+  \item InterVLAN-Routing
+\end{itemize}
 
 \section{Versuchsziel}
 
