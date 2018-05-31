@@ -4,17 +4,72 @@
 
 
 \subsection{Konfiguration der Hosts}\label{hostconfig}
+Die Hosts werden nach den Vorgaben in \ref{config1} konfiguriert. Host 1 wird an
+den Port Fa0/11 angeschlossen, Host 2 an Fa0/18. Host 3 wird nicht
+verbunden.\footnote{siehe Versuchsanleitung}
 
-
-\subsection{Konfiguration des Router}
+\subsection{Konfiguration des Router}\label{routerconfig}
+Der Router wird an den Port Fa0/5 des Switches angeschlossen und konfiguriert.
+Die Konfiguration beinhaltet die Änderung des Hostnames in ``CustomerRouter'',
+die Konfiguration und Aktivierung der Passwörter und die Konfiguration der
+Fa0/1-Schnittstelle:
+\begin{lstlisting}
+CustomerRouter(config-if)#ip address 192.168.1.1 255.255.255.0
+CustomerRouter(config-if)#line console 0
+CustomerRouter(config-line)#password cisco
+CustomerRouter(config-line)#login
+CustomerRouter(config-line)#exit
+CustomerRouter(config)#line vty 0 4
+CustomerRouter(config-line)#password cisco
+CustomerRouter(config-line)#login
+CustomerRouter(config-line)#exit
+CustomerRouter(config)#enable password cisco
+CustomerRouter(config)#enable secret class
+CustomerRouter(config)#exit
+\end{lstlisting}
 
 \subsection{Konfiguration des Switch}
+Die Konfiguration des Switches erfolgt analog zu \ref{routerconfig}. Das
+Passwort für den Priviledge EXEC Mode lautet ``cisco123''. Das gleiche Passwort
+wird auch für die Konsole und für die \acs{VTY}-Ports (Telnet Ports)
+verwendet.\footnote{siehe Versuchsanleitung}
+
+\subsubsection{Konfiguration des Management-Interfaces von VLAN1}
+Um die Schnittslelle von VLAN 1 zu konfigurieren, wird im Configuration-Mode der
+Befehl ``\textit{interface vlan 1}'' genutzt. Dann wird die IP-Adresse und das
+Default-Gateway konfiguriert.
 
 \subsubsection{Konfiguration überprüfen}
+Zunächst wird durch ``\textit{show running-config}'' die aktuelle Konfiguration
+ausgegeben. Nach einer Kontrolle wird die Konfiguration gesichert, durch das
+Kopieren der running-config in die startup-config.
+\newline
+\newline
+Um die Verbindung zu testen, werden Ping- und Telnet-Befehle genutzt.
+\begin{itemize}
+  	\item Pings
+  	\begin{itemize}
+    	\item Switch -> Router (192.168.1.1)
+    	\item Host 1 -> Switch (192.168.1.5)
+    \end{itemize}
+\end{itemize}
 
+\paragraph{Telnet-Session}\mbox{}\\
+Zunächst wird von Host 1 eine Telnet-Session zum Switch-Management VLAN 1
+eröffnet:
+
+\begin{lstlisting}
+PC>telnet 192.168.1.5
+Trying 192.168.1.5 ...Open
+\end{lstlisting}
+
+Nach Eingabe des zuvor konfigurierten Passworts (cisco123) ist der Zugriff auf
+den Switch möglich.
 \subsection{MAC-Addressen}
 
+
 \subsection{Geschwindigkeit und Duplex}
+
 
 \subsection{Reflection}
 
@@ -50,29 +105,4 @@
 
 \subsection{Analyse der Pakete}
 
-% 
-% \begin{table}[!htbp]
-% \centering
-% \small
-% 	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
-% 	\hline
-% 	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
-% 	\textbf{Subnet Mask} \\
-% 	\hline
-% 	R1 	& R1  & Serial 0/0/0 & 192.168.1.193 & 255.255.255.252 \\
-% 	\hline
-% 	& & FastEthernet 0/0 & 192.168.1.1 & 255.255.255.128 \\
-% 	\hline
-% 	H1 & & Ethernet & 192.168.1.126 & 255.255.255.128 \\
-% 	\hline
-% 	H2 & & Ethernet & 192.168.1.190 & 255.255.255.192 \\
-% 	\hline
-% 	R2 & R2 & Serial 0/0/0 & 192.168.1.194 & 255.255.255.252 \\
-% 	\hline
-% 	 & & FastEthernet 0/0 & 192.168.1.129	& 255.255.255.192 \\
-% 	\hline
-% 	\end{tabularx}
-% \caption{Konfiguration der Netzkomponenten}
-% \label{config2}
-% \end{table}
 
