@@ -210,10 +210,86 @@ Die VLANs für die Abteilungen werden nach folgenden Vorgaben konfiguriert:
 \end{table}
 
 \subsubsection{Erstellen der VLANs}
-\subsubsection{Zuweisung von Switchports zu den VLANs}
-\subsubsection{Konfiguration überprüfen}
+Die Erstellung erfolgt über das \acs{CLI} des Switchs. Mit \textit{vlan 10} im
+Configuration Mode und der anschließenden Eingabe des Namens ist das
+entsprechende VLAN erstellt.\footnote{siehe Versuchsanleitung 4.1}
+\newline
+Durch \texit{show vlan} lässt sich die vorgenommene Konfiguration überprüfen:
+\begin{lstlisting}
+WTHswitch1#show vlan
 
-\subsection{Konfigruation des zweiten Switches}%TODO umbenennen
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5, Fa0/6, Fa0/7, Fa0/8
+                                                Fa0/9, Fa0/10, Fa0/11, Fa0/12
+                                                Fa0/13, Fa0/14, Fa0/15, Fa0/16
+                                                Fa0/17, Fa0/18, Fa0/19, Fa0/20
+                                                Fa0/21, Fa0/22, Fa0/23, Fa0/24
+                                                Gig1/1, Gig1/2
+10   Produktion                       active    
+20   Verwaltung                       active  
+
+[...]
+\end{lstlisting}
+Alle Ports sind zu diesem Zeitpunkt noch dem Standard-VLAN 1 zugeordnet.
+\subsubsection{Zuweisung von Switchports zu den VLANs}
+Die Ports können den VLANs entweder einzeln oder mittels Range-Operator
+zugeordnet werden. Die Ports 0/1 bis 0/4 werden VLAN 10 zugeordnet. 0/5 bis 0/8
+sollen zum VLAN 20 angehören.
+\newline
+Eine erneute Überprüfung durch \textit{show vlan} zeigt, dass die Zuweisung
+erfolgreich war:
+\begin{lstlisting}
+[...]
+10   Produktion                       active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+20   Verwaltung                       active    Fa0/5, Fa0/6, Fa0/7, Fa0/8
+[...]
+\end{lstlisting}
+Auch durch den Befehl \textit{show running-config} lässt sich die Konfiguration
+überprüfen.\footnote{siehe Anhang \ref{running-config}}
+\subsubsection{Konfiguration überprüfen}
+Um die Konfiguration zu testen, werden vier Hosts an den Switch angeschlossen
+und wie folgt konfiguriert:
+
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|}
+	\hline
+	\textbf{Device} & \textbf{VLAN} & \textbf{IP-Address} &
+	\textbf{Subnet Mask} & \textbf{Switch Port}\\
+	\hline
+	PC 1 & VLAN 10 & 192.168.1.10 & 255.255.255.0 & Fa0/1 \\
+	\hline
+	PC 2 & VLAN 10 & 192.168.1.11 & 255.255.255.0 & Fa0/2 \\
+	\hline
+	PC 3 & VLAN 20 & 192.168.2.11 & 255.255.255.0 & Fa0/6 \\
+	\hline
+	PC 4 & VLAN 20 & 192.168.2.10 & 255.255.255.0 & Fa0/5 \\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration der Hosts}
+\label{configh}
+\end{table}
+
+Anschließend wird mittels Ping-Befehlen die Konfiguration der VLANs getestet.
+
+\begin{itemize}
+  \item PC1 zu PC2
+  \item PC2 zu PC1
+  \item PC3 zu PC4
+  \item PC4 zu PC3
+\end{itemize}
+Die aufgezählten Pings sind erfolgreich, da sich die entprechenden Hosts im
+gleichen VLAN befinden.\footnote{siehe Anhang \ref{pingv1}}
+\newline
+Ein Ping von PC1 zu PC4 ist nicht erfolgreich, da die beiden Computer sich nicht
+im selben VLAN befinden. Daraus folgt, dass die
+Konfiguration erfolgreich war.
+
+\subsection{Konfigruation des zweiten
+Switches}%TODO umbenennen
 
 \subsection{Trunk Konfiguration}
 

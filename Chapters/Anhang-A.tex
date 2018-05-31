@@ -203,3 +203,133 @@ FastEthernet0/18 is up, line protocol is up (connected)
 \end{lstlisting}
 
 \chapter{Auszüge Part 2}
+
+\section{Running-Config nach Erstellung der VLANs}\label{running-config}
+\begin{lstlisting}
+WTHswitch1#show running-config
+Building configuration...
+
+Current configuration : 1361 bytes
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname WTHswitch1
+!
+enable secret 5 $1$mERr$/VT.EosIwbboaDHzZXq7r1
+enable password cisco
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 10
+!
+interface FastEthernet0/2
+ switchport access vlan 10
+!
+interface FastEthernet0/3
+ switchport access vlan 10
+!
+interface FastEthernet0/4
+ switchport access vlan 10
+!
+interface FastEthernet0/5
+ switchport access vlan 20
+!
+interface FastEthernet0/6
+ switchport access vlan 20
+!
+interface FastEthernet0/7
+ switchport access vlan 20
+!
+interface FastEthernet0/8
+ switchport access vlan 20
+!
+
+[...]
+\end{lstlisting}
+
+\section{Konfiguration von WTHswitch1 testen}\label{pingv1}
+
+\subsection{PC1 zu PC2}
+\begin{lstlisting}
+PC>ping 192.168.1.11
+
+Pinging 192.168.1.11 with 32 bytes of data:
+
+Reply from 192.168.1.11: bytes=32 time=62ms TTL=128
+Reply from 192.168.1.11: bytes=32 time=47ms TTL=128
+Reply from 192.168.1.11: bytes=32 time=47ms TTL=128
+Reply from 192.168.1.11: bytes=32 time=47ms TTL=128
+
+Ping statistics for 192.168.1.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 47ms, Maximum = 62ms, Average = 50ms
+\end{lstlisting}
+\subsection{PC2 zu PC1}
+\begin{lstlisting}
+PC>ping 192.168.1.10
+
+Pinging 192.168.1.10 with 32 bytes of data:
+
+Reply from 192.168.1.10: bytes=32 time=125ms TTL=128
+Reply from 192.168.1.10: bytes=32 time=63ms TTL=128
+Reply from 192.168.1.10: bytes=32 time=62ms TTL=128
+Reply from 192.168.1.10: bytes=32 time=62ms TTL=128
+
+Ping statistics for 192.168.1.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 62ms, Maximum = 125ms, Average = 78ms
+\end{lstlisting}
+\subsection{PC3 zu PC4}
+\begin{lstlisting}
+PC>ping 192.168.2.10
+
+Pinging 192.168.2.10 with 32 bytes of data:
+
+Reply from 192.168.2.10: bytes=32 time=125ms TTL=128
+Reply from 192.168.2.10: bytes=32 time=62ms TTL=128
+Reply from 192.168.2.10: bytes=32 time=62ms TTL=128
+Reply from 192.168.2.10: bytes=32 time=49ms TTL=128
+
+Ping statistics for 192.168.2.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 49ms, Maximum = 125ms, Average = 74ms
+\end{lstlisting}
+\subsection{PC4 zu PC3}
+\begin{lstlisting}
+PC>ping 192.168.2.11
+
+Pinging 192.168.2.11 with 32 bytes of data:
+
+Reply from 192.168.2.11: bytes=32 time=63ms TTL=128
+Reply from 192.168.2.11: bytes=32 time=46ms TTL=128
+Reply from 192.168.2.11: bytes=32 time=47ms TTL=128
+Reply from 192.168.2.11: bytes=32 time=47ms TTL=128
+
+Ping statistics for 192.168.2.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 46ms, Maximum = 63ms, Average = 50ms
+\end{lstlisting}
+
+\subsection{PC1 zu PC4}
+
+\begin{lstlisting}
+PC>ping 192.168.2.10
+
+Pinging 192.168.2.10 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 192.168.2.10:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+\end{lstlisting}
