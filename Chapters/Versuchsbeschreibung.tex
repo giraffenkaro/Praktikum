@@ -1,7 +1,7 @@
 \chapter{Beschreibung des Versuchs}
 
 Der Laborversuch beschäftigt sich mit einer Einführung in die Konfiguration von
-Cisco Switches mit dem Cisco \ac{CLI}.
+Cisco Switches mit dem Cisco \ac{CLI} und der Konfiguration von VLANs.
 
 \section{Versuchsaufbau}\label{Aufbau}
 
@@ -14,7 +14,7 @@ Cisco Switches mit dem Cisco \ac{CLI}.
 
 \begin{figure}[ht]
   \centering
-     \includegraphics[width=0.6\linewidth]{Graphics/aufbau_2complete.PNG}
+     \includegraphics[width=0.8\linewidth]{Graphics/aufbau_2complete.PNG}
   \caption{Versuchsaufbau - Teil 2}
   \label{fig:aufbau2}
 \end{figure}
@@ -81,14 +81,25 @@ Cisco PacketTracer durchgeführt.
 
 \subsection{Teil 2}\label{teil2}
 
+Der zweite Teil beschäftigt sich mit einem Szenario in dem Unternehmen WTH.\\
+Zunächst ist ein Switch zu konfigurieren und die angeschlossenen PCs der
+Abteilungen ``Produktion'' und ``Verwaltung'' mittels VLANs zu trennen.
+\newline
+Im nächsten Schritt soll aufgrund von Kapazitätserweiterungen werden im
+Nebengebäude neue Arbeitsplätze für beide Abteilungen geschaffen. Somit wird ein
+zusätzlicher Switch angeschafft. Nach der Konfiguration sollen die Abteilungen
+intern gebäudeübergreifend kommunizieren können.
+\newline
+Nach einer Lockerung der Firmenpolitik soll es auch möglich sein, dass die
+Abteilungen untereinander kommunizieren können. Mit einem Router soll das
+Routing zwischen den VLANs realisiert werden.
+\newline
+Abschließend ist einer zweiter Port für die Verbindung zwischen den Switches zu
+verwenden um den Datendurchsatz zu verdoppeln.
 
-
-\underline{Weiteres Vorgehen:}
-\begin{itemize}
-  \item Initiale Switch-Konfiguration
-  \item VLAN-Konfiguration
-  \item InterVLAN-Routing
-\end{itemize}
 
 \section{Versuchsziel}
-
+Der Laborversuch dient der Einführung in die Konfiguration von Cisco Switches,
+in diesem Fall dem Modell Cisco 2960.\\Außerdem sollen Sinn und Zweck von VLANs
+veranschaulicht werden, besonders durch den zweiten Teil, der sich mit einem bestimmten Szenario
+beschäftigt.
