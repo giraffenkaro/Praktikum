@@ -170,7 +170,7 @@ FastEthernet0/5 is up, line protocol is up (connected)
 \end{lstlisting}
 
 \subsection{Reflection}
-
+%Fragen beantworten
 
 \clearpage
 
@@ -185,8 +185,30 @@ FastEthernet0/5 is up, line protocol is up (connected)
 \subsubsection{Spanning Tree Protokoll}
 
 \subsection{Basiskonfiguration}
+Zunächst wird der Switch konfiguriert. Der Hostname wird zu WTHswitch1 geändert,
+das Konsolenpasswort ``cisco'' und das Passwort für den Priviledged EXEC Mode
+``class123'' wird konfiguriert. Zur Sicherung der vorgenommenen Einstellungen
+wird die running-config in die startup-config kopiert.
 
 \subsection{VLAN Konfiguration}
+Die VLANs für die Abteilungen werden nach folgenden Vorgaben konfiguriert:
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|}
+	\hline
+	\textbf{VLAN Bezeichnung} & \textbf{VLAN Nummer} & \textbf{Subnet} &
+	\textbf{Ports}\\
+	\hline
+	Produktion 	& VLAN10 & 192.168.1.0/24 & 1 - 4 \\
+	\hline
+	Verwaltung & VLAN20 & 192.168.2.0/24 & 5 - 8 \\
+	\hline
+	\end{tabularx}
+\caption{Konfiguration der VLANs}
+\label{configv}
+\end{table}
+
 \subsubsection{Erstellen der VLANs}
 \subsubsection{Zuweisung von Switchports zu den VLANs}
 \subsubsection{Konfiguration überprüfen}
