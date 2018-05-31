@@ -16,5 +16,25 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global}\enddatalist
+\datalist[entry]{nty/global//global/global}
+  \entry{cisco1}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=CSI}{%
+         family={Cisco\bibnamedelima Systems},
+         familyi={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Inc.},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CSI1}
+    \strng{fullhash}{CSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+  \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_58_se/configuration/guide/2960scg/swadmin.html}}
+    \field{title}{{Catalyst 2960 and 2960-S Switches Software Configuration
+  Guide, Release 12.2(58)SE}}
+  \endentry
+\enddatalist
 \endinput

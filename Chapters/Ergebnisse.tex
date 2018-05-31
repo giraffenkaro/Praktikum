@@ -80,8 +80,68 @@ Auf dem Switch läuft die Cisco IOS Version 12.2(25)FX.
 \newline
 \newline
 Die vollständige Ausgabe ist im Anhang unter \ref{version} zu finden.
+
 \subsection{MAC-Addressen}
 
+\subsubsection{Hostadressen}\label{adressen}
+Um die Layer-2-Adressen der Hosts festzustellen, wird auf jedem Host mit der
+Eingabeaufforderung \textit{ipconfig /all} ausgeführt.\footnote{siehe Anhang
+\ref{mac}}
+\begin{itemize}
+  \item Host 1: 0001.C75A.60C4
+  \item Host 2: 0090.21A7.1539
+  \item Host 3: 0009.7C58.7137
+\end{itemize}
+
+\subsubsection{MAC-Adressen-Tabelle}
+Mit \textit{show mac-address-table} werden die MAC-Adressen aufgelistet, die dem
+Switch zu diesem Zeitpunkt bekannt sind.
+
+\begin{lstlisting}
+CustomerSwitch>show mac-address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+   1    0001.42a4.0002    DYNAMIC     Fa0/5
+   1    0001.c75a.60c4    DYNAMIC     Fa0/11
+\end{lstlisting}
+Dem Switch sind nur zwei dynamische Adressen bekannt. Die erste entspricht der
+Adresse von Host 1 am Port Fa0/11.
+
+\subsubsection{Statische MAC-Adresse}
+Die aus \ref{adressen} bekannte MAC-Adresse von Host 2 wird nun statisch der
+Tabelle des Switches hinzugefügt:
+
+\begin{lstlisting}
+CustomerSwitch(config)#mac-address-table static 0090.21A7.1539 vlan 1 interface
+fastEthernet 0/18
+\end{lstlisting}
+
+Eine erneute Ausgabe der MAC-Adressen-Tabelle zeigt, dass dem Switch nun zwei
+Adressen, eine dynamische und eine statische, bekannt sind.
+
+\begin{lstlisting}
+CustomerSwitch#show mac-address-table
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+
+   1    0001.42a4.0002    DYNAMIC     Fa0/5
+   1    0090.21a7.1539    STATIC      Fa0/18
+
+---------------------------------------------
+\end{lstlisting}
+
+Die Adresse von Host 1 wird nicht mehr in der Tabelle aufgeführt. Die Aging-Time
+beträgt standardmäßig 300 Sekunden. Nach dieser Zeit wird der Eintrag
+gelöscht.\cite{cisco1}
+
+%TODO andere MAC-Adresse?
 
 \subsection{Geschwindigkeit und Duplex}
 
