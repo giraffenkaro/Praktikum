@@ -53,7 +53,7 @@ Um die Verbindung zu testen, werden Ping- und Telnet-Befehle genutzt.
     	\item Host 1 -> Switch (192.168.1.5)
     \end{itemize}
 \end{itemize}
-
+Beides verlief erfolgreich.\footnote{siehe Anhang \ref{ping1}}
 \paragraph{Telnet-Session}\mbox{}\\
 Zunächst wird von Host 1 eine Telnet-Session zum Switch-Management VLAN 1
 eröffnet:
@@ -64,7 +64,22 @@ Trying 192.168.1.5 ...Open
 \end{lstlisting}
 
 Nach Eingabe des zuvor konfigurierten Passworts (cisco123) ist der Zugriff auf
-den Switch möglich.
+den Switch möglich. Mit \textit{show version} erhält man Informationen über die
+Version der Software des Switches.
+
+\begin{lstlisting}
+CustomerSwitch>show version
+Cisco IOS Software, C2960 Software (C2960-LANBASE-M), Version 12.2(25)FX, RELEASE SOFTWARE (fc1)
+Copyright (c) 1986-2005 by Cisco Systems, Inc.
+Compiled Wed 12-Oct-05 22:05 by pt_team
+
+[...]
+\end{lstlisting}
+
+Auf dem Switch läuft die Cisco IOS Version 12.2(25)FX.
+\newline
+\newline
+Die vollständige Ausgabe ist im Anhang unter \ref{version} zu finden.
 \subsection{MAC-Addressen}
 
 
