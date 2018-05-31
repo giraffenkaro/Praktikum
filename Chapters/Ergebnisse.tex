@@ -144,7 +144,30 @@ gelöscht.\cite{cisco1}
 %TODO andere MAC-Adresse?
 
 \subsection{Geschwindigkeit und Duplex}
+Zunächst werden die aktuellen Einstellungen der jewiligen Ports mit \textit{show
+interfaces} ausgegeben:\footnote{siehe Anhang \ref{duplex}}
+\begin{lstlisting}
+Full-duplex, 100Mb/s
+\end{lstlisting}
+Diese Einstellung liegt bei den Ports Fa0/5, Fa0/11 und Fa0/18 vor.
 
+\subsubsection{Änderungen am Port Fa0/5}
+Über das \acs{CLI} des Switchs wird nun die Geschwindikeit auf 10Mb/s bei
+Half-Duplex geändert.\footnote{siehe Versuchsanleitung}
+\newline
+Die erneute Ausgabe von \textit{show interfaces} zeigt, dass die Änderung
+erfolgreich war:
+\begin{lstlisting}
+FastEthernet0/5 is up, line protocol is up (connected)
+  Hardware is Lance, address is 0002.17c2.8305 (bia 0002.17c2.8305)
+ BW 10000 Kbit, DLY 1000 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Half-duplex, 10Mb/s
+  
+  [...]
+\end{lstlisting}
 
 \subsection{Reflection}
 
