@@ -14,7 +14,6 @@ Die Konfiguration beinhaltet die Änderung des Hostnames in ``CustomerRouter'',
 die Konfiguration und Aktivierung der Passwörter und die Konfiguration der
 Fa0/1-Schnittstelle:
 \begin{lstlisting}
-CustomerRouter(config-if)#ip address 192.168.1.1 255.255.255.0
 CustomerRouter(config-if)#line console 0
 CustomerRouter(config-line)#password cisco
 CustomerRouter(config-line)#login
@@ -184,7 +183,7 @@ FastEthernet0/5 is up, line protocol is up (connected)
 \subsubsection{Trunking}
 \subsubsection{Spanning Tree Protokoll}
 
-\subsection{Basiskonfiguration}
+\subsection{Basiskonfiguration}\label{sw1}
 Zunächst wird der Switch konfiguriert. Der Hostname wird zu WTHswitch1 geändert,
 das Konsolenpasswort ``cisco'' und das Passwort für den Priviledged EXEC Mode
 ``class123'' wird konfiguriert. Zur Sicherung der vorgenommenen Einstellungen
@@ -214,19 +213,10 @@ Die Erstellung erfolgt über das \acs{CLI} des Switchs. Mit \textit{vlan 10} im
 Configuration Mode und der anschließenden Eingabe des Namens ist das
 entsprechende VLAN erstellt.\footnote{siehe Versuchsanleitung 4.1}
 \newline
-Durch \texit{show vlan} lässt sich die vorgenommene Konfiguration überprüfen:
+Durch \textit{show vlan} lässt sich die vorgenommene Konfiguration überprüfen:
 \begin{lstlisting}
-WTHswitch1#show vlan
+[...]
 
-VLAN Name                             Status    Ports
----- -------------------------------- --------- -------------------------------
-1    default                          active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
-                                                Fa0/5, Fa0/6, Fa0/7, Fa0/8
-                                                Fa0/9, Fa0/10, Fa0/11, Fa0/12
-                                                Fa0/13, Fa0/14, Fa0/15, Fa0/16
-                                                Fa0/17, Fa0/18, Fa0/19, Fa0/20
-                                                Fa0/21, Fa0/22, Fa0/23, Fa0/24
-                                                Gig1/1, Gig1/2
 10   Produktion                       active    
 20   Verwaltung                       active  
 
@@ -288,15 +278,29 @@ Ein Ping von PC1 zu PC4 ist nicht erfolgreich, da die beiden Computer sich nicht
 im selben VLAN befinden. Daraus folgt, dass die
 Konfiguration erfolgreich war.
 
-\subsection{Konfigruation des zweiten
-Switches}%TODO umbenennen
+\subsection{Konfigruation des zweiten Switches}%TODO umbenennen
+Der zweite Switch wird äquivaelnt zum ersten Switch in \ref{sw1} konfiguriert.
+Die Konfiguration unterscheidet sich lediglich beim Hostnamen: WTHswitch2. Da
+dieser Versuch mittels PacketTracer durchgeführt wird, lässt sich die
+Konfiguration des ersten Switches exportieren und beim zweiten Switch
+importieren. Ein Neustart zeigt, dass die Konfiguration erfolgreich war.
 
 \subsection{Trunk Konfiguration}
+Die beiden Switchs werden nun verbunden. Um eine Portverschwenudng zu vermeiden
+wird ein Trunk konfiguriert. Dafür werden bei beiden Geräten die Ports Fa0/12
+verwendet. Die Konfiguration geschieht bei jeweils über das CLI der
+Switchs.\footnote{siehe Versuchsanleitung S.19}
+
+\subsubsection{Konfiguration überprüfen}
+
+
 
 \subsection{InterVLAN Routing}
-\subsubsection{Konfiguration der Router}
+%TODO Definition
 
-\subsection{Verbindung zwischen Router und Switch einrichten}
+\subsubsection{Konfiguration des Router}
+
+\subsubsection{Verbindung zwischen Router und Switch einrichten}
 \subsubsection{Verbindungen überprüfen}
 
 \subsection{Analyse der Pakete}
