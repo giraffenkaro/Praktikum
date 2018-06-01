@@ -292,8 +292,25 @@ verwendet. Die Konfiguration geschieht bei jeweils über das CLI der
 Switchs.\footnote{siehe Versuchsanleitung S.19}
 
 \subsubsection{Konfiguration überprüfen}
+Zur Überprüfung der Konfiguration wird zunächst das Netzwerk erweitert:
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=0.8\linewidth]{Graphics/aufbaustep6.PNG}
+  \caption{Versuchsaufbau erweitert}
+  \label{fig:aufbaustep6}
+\end{figure}
 
+Nach dem Aufbau wird die Erreichbarkeit der Hosts mittels Ping-Befehlen
+überprüft:
 
+\begin{itemize}
+  \item PC1 zu PC2
+  \item PC2 zu PC1
+  \item PC3 zu PC4
+  \item PC4 zu PC3
+\end{itemize}
+%wir gaben definitiv was falsch gemacht. die pings sollten nicht alle
+% funktiioniren, also nur die vlan internen, nicht die externen
 
 \subsection{InterVLAN Routing}
 %TODO Definition
