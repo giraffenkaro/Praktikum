@@ -301,16 +301,15 @@ Zur Überprüfung der Konfiguration wird zunächst das Netzwerk erweitert:
 \end{figure}
 
 Nach dem Aufbau wird die Erreichbarkeit der Hosts mittels Ping-Befehlen
-überprüft:
+überprüft.\footnote{Auszüge sind in \ref{pings2switchs} zu finden} Pings die
+innerhalb eines VLANs durchgeführt werden, sind erfolgreich.
+\newline
+Pingt man bspw. von PC1 zu PC4, schlägt der Versuch fehl. 
+\newline
+\newline
+Dieses Verhalten ist gewünscht. Die Mitarbeiter der Abteilungen können nur
+intern kommunizieren und nicht darüber hinaus.
 
-\begin{itemize}
-  \item PC1 zu PC2
-  \item PC2 zu PC1
-  \item PC3 zu PC4
-  \item PC4 zu PC3
-\end{itemize}
-%wir gaben definitiv was falsch gemacht. die pings sollten nicht alle
-% funktiioniren, also nur die vlan internen, nicht die externen
 
 \subsection{InterVLAN Routing}
 %TODO Definition
