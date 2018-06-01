@@ -315,9 +315,28 @@ intern kommunizieren und nicht darüber hinaus.
 %TODO Definition
 
 \subsubsection{Konfiguration des Router}
-
-\subsubsection{Verbindung zwischen Router und Switch einrichten}
-\subsubsection{Verbindungen überprüfen}
+Durch die Lockerung der Firmenpolitik sollen die Abteilungen auch untereinander
+kommunizieren können. Dafür wird ein Router benötigt, der nun konfiguriert wird.
+\newline
+Der Router erhält den Hostnamen ``WTHrouter1''. Anschließend wird die Fa0/0 wird
+aktiviert.
+\newline
+Für die VLANs werden zwei logische Subinterfaces bei der Schnittstelle Fa0/0
+benötigt:
+\begin{itemize}
+  \item Fa0/0.10: 192.168.1.1/24
+  \item Fa0/0.20: 192.168.2.1/24
+\end{itemize}
+\subsubsection{Verbindung zwischen Router und Switch}
+Um den Versuchsaufbau von \ref{fig:aufbau2} zu vervollständigen, wird der der
+Router WTHrouter 1 an den Switch WTHsweitch1 (Fa0/9) angeschlossen.
+\newline
+\newline
+Die Standardgateways der Hosts sind zu kontrollieren:
+\begin{itemize}
+  \item Hosts des VLAN 10: 192.168.1.1
+  \item Hosts des VLAN 20: 192.168.2.1
+\end{itemize}
 
 \subsection{Analyse der Pakete}
 
