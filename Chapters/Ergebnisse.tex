@@ -178,10 +178,92 @@ FastEthernet0/5 is up, line protocol is up (connected)
 
 \subsection{Theorie}
 \subsubsection{Einsatz von Switches}
+Ein Switch ist ein Kopplungselement, das mehrere Hosts in einem Netzwerk 
+miteinander verbindet. In einem Ethernet-Netzwerk, das auf der Stern-Topologie
+basiert dient z.B. ein Switch als Verteiler für die Datenpakete.
 \subsubsection{VLAN}
+Um den Begriff VLAN zu verstehen werden im folgenden zwei grundlegende Begriffe
+erklärt:
+\newline
+\newline
+Broadcast(-domain):
+\newline
+Sendet ein Gerät einen Broadcast, erhalten ihn alle anderen Geräte der Broadcastdomain.
+\newline
+\newline
+LAN (Local Area Network):
+\newline
+Schließt alle Geräte der gleichen Broadcastdomain ein. LAN = Broadcastdomain.
+Wenn man diese beiden Begriffe verstanden hat lässt sich VLAN sehr leicht erklären.
+VLAN ermöglicht die Segmentierung des LAN in verschiedene Broadcastdomains durch
+Separation von Ports. Solch eine individuelle Broadcastdomain nennt man Virtuelle LAN.
+\newline
+\newline
+Vorteile:
+\begin{itemize}
+\item Broadcast nur in eigenen VLAN
+\item Gruppierung von Nutzern pro Organisationseinheit
+\item Isolation von sensiblen Daten
+\item Trennung von wichtigen zu unwichtigen Diensten
+\end{itemize}
+
+Gründe für den Einsatz:
+\begin{itemize}
+\item Flexibleres Design bei der Gruppierung von Nutzern
+\item Segmentierung von Geräten in kleinere LANs zur Reduktion von Overhead
+\item Reduzierung der Größe des Spanning-Tree-Algorithmus
+\item Steigerung der Sicherung
+\item Trennung von Anwendungen -> QoS
+\end{itemize}
+
+Folien Vogt S.342 - 345
+
 \subsubsection{Zuordnung eines Teilnehmers}
 \subsubsection{Trunking}
+Mit einer Trunk-Leitung lassen sich Switches untereinander verbinden. 
+Sie koppeln Netzwerke miteinander und ermöglichen den Aufbau von LANs über 
+mehrere Lokationen hinweg. Das lokale Netzwerk ist nicht mehr auf einen 
+einzelnen physikalischen Switch begrenzt, sondern erstreckt sich über
+mehrere Switches. Kommt VLAN-Trunking zum Einsatz, sind über einzelne 
+Trunks auch die Informationen zu verschiedenen virtuellen lokalen Netzwerken 
+übertragbar. Die Trunk-Verbindung kann aus einer einzigen Leitung oder aus einem Bündel von 
+Leitungen bestehen. Durch das Bündeln von Leitungen erhöht sich die Bandbreite 
+der Kopplung. Trunking nutzt ein zusätzliches Tag im Ethernetheader (VLAN Tagging)
+Das Tag enthält eine VLAN ID zur Differenzierung verschiedener VLAN.
+
+% https://www.ip-insider.de/was-ist-ein-vlan-trunk-a-623319/ %
 \subsubsection{Spanning Tree Protokoll}
+
+STP (IEEE 802.1D, veraltet) ist ein:
+\begin{itemize}
+\item Protokoll zur Pfadoptimierung,
+\item Schaffung schleifenfreier Strukturen,
+\item Beliebige physikalische Topologie wird zu logischer Baumtopologi
+\end{itemize}
+
+Vorgehen:
+\begin{itemize}
+\item Es wird eine Root Brige festgelegt
+\item Jeder Switch prüft seine Ports
+\item Danach wird entschieden welcher Zustnad welcher Port hat
+\item Tauschen Informationen über BPDU’s (Bridge Protocol Data Unit) aus
+\item Organisation der Switches dauert max. 50 Sekunden
+\end{itemize}
+%TODO Bild einfügen Vogt S.353 %
+
+RSTP – Rapid STP, IEEE 802.1w
+\begin{itemize}
+\item Organisationszeit in der Regel in 6 Sekunden
+\item Neue Rollen
+\end{itemize}
+Alternate Ports: blockierte Ports, die einem Netzsegment verbinden, das eine
+andere Bridge günstiger erreichen kann. Sollte diese Bridge ausfallen, kann 
+auf den Alternate Port umgeschaltet werden.
+\newline
+Backup Ports: sind ebenfalls blockiert und verbinden zu einem Segement, das 
+ein anderer Port derselben Bridge günstiger erreicht. Von der Software der 
+Bridge ist abhängig, ob sie den Backup-Port parralle verwendet, oder lediglich 
+bei Ausfall des bevorzugten (designated) Ports.
 
 \subsection{Basiskonfiguration}\label{sw1}
 Zunächst wird der Switch konfiguriert. Der Hostname wird zu WTHswitch1 geändert,
