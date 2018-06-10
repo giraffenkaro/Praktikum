@@ -649,7 +649,7 @@ Ziel-Adresse. Beim Switch ist auf Layer 2 ein Dot1q Header vorhanden.
 
 \begin{figure}[ht]
   \centering
-     \includegraphics[width=\linewidth]{Graphics/dot1q.PNG}
+     \includegraphics[width=0.8\linewidth]{Graphics/dot1q.PNG}
   \caption{Layer 2 zum Zeitpunkt 0.001 bei WTHswitch1}
   \label{fig:dot1q}
 \end{figure}
@@ -663,4 +663,26 @@ Der Dot1q Header bleibt bestehen bis die Anfrage bei WTHSwitch2 ankommt. Dieser
 entfernt den VLAN-Tag, da der Port des Ziels sich an diesem Gerät befindet.
 \newline
 Bei der Antwort, dem Echo Reply, fügt WTHswitch2 das VLAN-Tag wieder hinzu,
-welcher erst wieder vom WTHswitch1 entfernt wird.
+welcher erst wieder vom WTHswitch1 entfernt wird. TPID ist in diesem Fall 0x014
+und enspricht demnach dem VLAN 20.
+\clearpage
+Der IP-Header aus Layer 3 beinhaltet zum Zeitpunkt 0.000 folgende Informationen:
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/ip.PNG}
+  \caption{Layer 3 zum Zeitpunkt 0.001 bei PC1}
+  \label{fig:ip}
+\end{figure}
+Sobald die Anfrage bei WHTswitch2 angelangt ist, verringert sich die \acs{TTL}
+um 1.
+\newline
+Nachdem die Anfrage bei PC4 angekommen ist, hat der IP-Header folgende Inhalte:
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/ip2.PNG}
+  \caption{Layer 3 zum Zeitpunkt 0.005 bei PC4}
+  \label{fig:ip2}
+\end{figure}
+
+Aus Quell- wird Ziel-Adresse und umgekehrt. Die TTL wird auf 128 gesetzt.
+Außerdem hat sich die ID geändert.
