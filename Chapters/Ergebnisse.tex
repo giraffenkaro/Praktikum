@@ -589,7 +589,9 @@ Der Weg, den ein Ping von PC1 zu PC4 nimmt, wird aufgezeichnet und analysiert.
 Hierzu ist Wireshark zu verwenden. Da dieser Laborversuch mit dem Cisco
 PacketTracer durchgeführt wurde, wird stattdessen der Simulation-Mode zur
 Aufzeichnung genutzt. 
-
+\newline
+Die Tabelle \ref{pingroute} zeigt den zeitlichen Ablauf des Wegs, den der Ping
+nimmt:
 
 \begin{table}[!htbp]
 \centering
@@ -624,3 +626,17 @@ Aufzeichnung genutzt.
 \caption{Weg eines Pings von PC1 zu PC4}
 \label{pingroute}
 \end{table}
+PC 1 sendet die Anfrage an WTHswitch1, welcher diese an WTHrouter1 weiterleitet.
+Von dort wird Anfrage zurück an den WTHswitch 1 geleitet. Auffäig ist, dass 
+WTHswitch1 im Anschluss (Zeitpunkt 0.004) die Anfrage sowohl an PC3 als
+auch WTHswitch2 weiterleitet. Zu diesem Zeitpunkt ist dem Switch PC3 nicht
+bekannt, somit erhält auch dieser die Anfrage, die er im Anschluss verwirft.
+\newline
+WTHswitch 2 erreicht im nächsten Schritt sein Ziel.
+\newline
+Die Antwort gelangt auf dem gleichen Weg zurück, allerding ohne eine
+Weiterleitung an P3.
+
+\paragraph{Pakete im Detail}
+
+
