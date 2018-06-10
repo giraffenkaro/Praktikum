@@ -241,23 +241,37 @@ VLANs erleichtern die Administration eines Netzwerks und dienen der Sicherheit.
 Die Gliederung erfolgt durch Setzen bzw. Auswerten des VLAN-Tags im
 Ethernet-Frame.
 
-\paragraph{Das VLAN-Tag}
+\paragraph{Das VLAN-Tag}\mbox{}\\
 \label{vlantag}
 Beim VLAN-Tag handelt es sich um ein Informationsfeld im Ethernet-Header,
 welches 4 Byte Daten zur Verarbeitung von VLAN-Informationen transportiert. Es
-besteht aus 3 Bit ``User_priority''. Weiterhin wird 1 Bit zu
-Kompatibilitätszwecken genutzt, um unterschiedliche Bitreihenfolgen bei FDDI MAC
-verarbeiten zu können. Darauf folgen 12 Bit VLAN-ID, welche zur Adressierung der
-VLAN genutzt werden können und somit 4096 mögliche Kombinationen
+besteht aus 3 Bit ``User\_priority''. Weiterhin wird 1 Bit zu
+Kompatibilitätszwecken genutzt, um unterschiedliche Bitreihenfolgen bei
+\acs{FDDI} \acs{MAC} verarbeiten zu können. Darauf folgen 12 Bit VLAN-ID,
+welche zur Adressierung der VLAN genutzt werden können und somit 4096 mögliche Kombinationen
 zulässt.\cite{vlan}
 
 
 \subsubsection{Zuordnung eines Teilnehmers}
 
-Portbasierte VLANs
-Tagged VLANs
-MAC-basiert
-IP-Basiert laut pauly - layer 3 vlan?
+Die Zuordnung der Teilnehmer eines VLANs kann auf verschiedene Arten erfolgen:
+Switch-Port, MAC-Adresse, Network-Layer Protokoll, verwendete Anwendungen und
+verschiedene Kombinationen aus den genannten Kriterien.\cite{diplom}
+\newline
+Portbasierte VLANs sind eine einfache und weit verbreitete Lösung. 
+Die Switch-Ports werden den VLANs zugeordnet und somit auch der angeschlossene
+Teilnehmer.\\Bei MAC-basierten VLANs entscheidet der Switch anhand der
+Source-Address des Frames, ob eine Weiterleitung stattfindet. Ist die
+Quelle dem gleichen VLAN zugeordnet wie das Ziel, wird der Frame an den
+entprechenden Port weitergeleitet.\cite{diplom}\cite{vlan}
+\newline
+Sowohl Port- als auch MAC-basierte VLANs werden vom Administrator statisch
+konfiguriert.
+\newline
+Bei sog. Layer-3-VLANs wird aufgrund des genutzten Protokolls des Teilnehmers
+(z.B. IPv4, IPv6) eine Zuordnung getroffen. Nur Anwender, die das gleiche
+Protokoll verwenden, befinden sich im selben VLAN.  Möglich ist auch eine
+Zuordnung anhand von IP-Subnetzen.\cite{diplom}
 
 \subsubsection{Trunking}
 VLANs können sich über mehrere Switches hinweg erstrecken. Um eine

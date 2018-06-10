@@ -36,5 +36,44 @@
     \field{title}{{Catalyst 2960 and 2960-S Switches Software Configuration
   Guide, Release 12.2(58)SE}}
   \endentry
+
+  \entry{vlan}{manual}{}
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \keyw{vlan}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{IEEE 802.1q: Virtual Bridged Local Area Networks}
+    \list{location}{1}{%
+  {\url{http://w3.tmit.bme.hu/courses/onlab/library/standards/802-1Q-2003.pdf}}%
+    }
+    \field{year}{2003}
+  \endentry
+
+  \entry{diplom}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=SU}{%
+         family={Schartner},
+         familyi={S\bibinitperiod},
+         given={Ute},
+         giveni={U\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SU1}
+    \strng{fullhash}{SU1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{{Virtuelle Lokale Netze - Analyse, Realisierung,
+  Einsatzkonzept am Beispiel des Gebäudekomplexes Oettingenstraße}}
+    \list{institution}{1}{%
+      {Technische Universität München}%
+    }
+    \field{type}{Diplomarbeit}
+    \field{year}{1998}
+  \endentry
 \enddatalist
 \endinput
