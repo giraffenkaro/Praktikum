@@ -268,6 +268,9 @@ entprechenden Port weitergeleitet.\cite{diplom}\cite{vlan}
 Sowohl Port- als auch MAC-basierte VLANs werden vom Administrator statisch
 konfiguriert.
 \newline
+Wenn sich ein VLAN über mehrere Switches erstreckt, kommen Tagged VLANs zum
+Einsatz (siehe auch \ref{vlantag}).
+\newline
 Bei sog. Layer-3-VLANs wird aufgrund des genutzten Protokolls des Teilnehmers
 (z.B. IPv4, IPv6) eine Zuordnung getroffen. Nur Anwender, die das gleiche
 Protokoll verwenden, befinden sich im selben VLAN.  Möglich ist auch eine
@@ -277,52 +280,77 @@ Zuordnung anhand von IP-Subnetzen.\cite{diplom}
 VLANs können sich über mehrere Switches hinweg erstrecken. Um eine
 Verbindung zwischen den Switches herzustellen sind VLAN-Trunks eine Möglichkeit
 ressourcenschonend die Teilnetze zu verbinden. Dabei werden Ethernet-Frames mit
-unterschiedlichen VLAN-Tags über das selbe Kabel transportiert.
+unterschiedlichen VLAN-Tags über das selbe Kabel transportiert. 
 
-
-
-% . Kommt VLAN-Trunking zum Einsatz, sind über einzelne 
-% Trunks auch die Informationen zu verschiedenen virtuellen lokalen Netzwerken 
-% übertragbar. Die Trunk-Verbindung kann aus einer einzigen Leitung oder aus einem Bündel von 
-% Leitungen bestehen. Durch das Bündeln von Leitungen erhöht sich die Bandbreite 
-% der Kopplung. Trunking nutzt ein zusätzliches Tag im Ethernetheader (VLAN Tagging)
-% Das Tag enthält eine VLAN ID zur Differenzierung verschiedener VLAN.
-
-% http://www.ciscopress.com/articles/article.asp?p=29803&seqNum=3
-
-% https://www.ip-insider.de/was-ist-ein-vlan-trunk-a-623319/ %
 \subsubsection{Spanning Tree Protokoll}
 
-\acs{STP} bezeichnet ein Protokoll zur Pfadoptimierung.\footnote{IEEE 802.1D}
+\acs{STP} bezeichnet ein Protokoll zur Pfadoptimierung, das die
+Schleifenfreiheit der Netzwerktoplogie gewährleisten soll.\footnote{IEEE 802.1D}
 
+\paragraph{Funktionsweise}\mbox{}\\
+Man unterscheidet folgende Port-Zustände bei einem Switch: Disabled, Blocking,
+Listening, Learning, Forwarding. Dies beugt einer Schleifenbildung vor, die
+bspw. bei einem Übergang von einem blockierten in eines weiterleitenden Zustand,
+auftretetn könnte. Die Zustandsänderung wird von drei Timern getriggert:
 \begin{itemize}
-\item Schaffung schleifenfreier Strukturen,
-\item Beliebige physikalische Topologie wird zu logischer Baumtopologi
-\end{itemize}
+  \item Hello-Timer: Zeitspanne zwischen \acp{BPDU} (2s)
+  \item Forward-Delay: Zeit für die Zustände Learning und Listening (je 15s)
+  \item Maximun Age: Dauer, wie lange ein Port die Konfigurationsinformation
+  behält (20s)
+\end{itemize} 
 
-Vorgehen:
-\begin{itemize}
-\item Es wird eine Root Brige festgelegt
-\item Jeder Switch prüft seine Ports
-\item Danach wird entschieden welcher Zustnad welcher Port hat
-\item Tauschen Informationen über BPDU’s (Bridge Protocol Data Unit) aus
-\item Organisation der Switches dauert max. 50 Sekunden
-\end{itemize}
-%TODO Bild einfügen Vogt S.353 %
-
-RSTP – Rapid STP, IEEE 802.1w
-\begin{itemize}
-\item Organisationszeit in der Regel in 6 Sekunden
-\item Neue Rollen
-\end{itemize}
-Alternate Ports: blockierte Ports, die einem Netzsegment verbinden, das eine
-andere Bridge günstiger erreichen kann. Sollte diese Bridge ausfallen, kann 
-auf den Alternate Port umgeschaltet werden.
+Zunächst werden alle Ports geblockt. Es findet kein normaler Datenverkehr
+statt.
 \newline
-Backup Ports: sind ebenfalls blockiert und verbinden zu einem Segement, das 
-ein anderer Port derselben Bridge günstiger erreicht. Von der Software der 
-Bridge ist abhängig, ob sie den Backup-Port parralle verwendet, oder lediglich 
-bei Ausfall des bevorzugten (designated) Ports.
+Im nächsten Schritt wird eine Root-Bridge festgelegt, welche als ``Wurzel'' des
+aufgespannten Baumes fungiert. Dazu generiert jeder Switch \acp{BPDU} und sendet
+die über alle Ports. \acs{BPDU}s werden zum Austausch von konfigurationsnachrihcten
+verwendet und alle zwei Sekunden gesendet. Diese werden von jedem Switch
+aktualisiert und weitergeleitet.
+\newline
+Die Auswahl einer Root-Bridge geschieht mit Hilfe der \acp{BID}. Die BID
+ist 8 Bit lang und setzt sich aus 2 Bit Bridge Priority und 6 Bit MAC-Adresse
+zusammen. Root-Bridge wird die Bridge mit der niedrigsten Priorität. Nach
+Festlegund der Root-Bridge sendet nur noch diese weiterhin BPDUs.
+\newline
+\newline
+Ausgehend von der Root-Bridge werden Pfade festgelegt, über die die anderen
+Bridges erreichbar sind. Dazu berechnet jeder Switch Pfadkosten zur Root-Bridge
+und aktiviert nur den Port mit den gerigsten Pfadkosten.
+\newline
+Anschließend befinden sich alle Ports des Roots im Forwarding Modus, ebenso wie
+der jeweilige Root Port der Switches. Redundante Pfade (Backup Verbindungen)
+werden durch die Deaktivierung des entsprechenden Ports bei der betreffenden
+Bridge ausgeschlossen.
+\newline
+Bei Ausfall eines Pfades wird durch die regelmäßig gesendeten Hello-Messages ein
+anderer Port zum Root Port. Bei Ausfall der Root-Bridge wird der ganze Baum neu
+organisiert und ein neuer Root festgelegt.
+Die initiale Konfiguration dauert ca. 50 Sekunden.\cite{folien}
+
+
+\subsubsection{Rapid Spanning Tree Protokoll}
+\ac{RSTP} ist eine Weiterentwicklung des \acs{STP}. Es zeichnet sich durch eine
+deutlich geringere Organisationszeit der Switches aus (ca. 6 Sekunden).
+
+\paragraph{Änderungen gegenüber STP}\mbox{}\\
+Mit \acs{RSTP} werden neue Port-Zustände und neue Port-Rollen eingeführt.
+Außerdem ändert sich das BPDU-Format und -Handling.
+
+% RSTP – Rapid STP, IEEE 802.1w
+
+% \begin{itemize}
+% 
+% \item Neue Rollen
+% \end{itemize}
+% Alternate Ports: blockierte Ports, die einem Netzsegment verbinden, das eine
+% andere Bridge günstiger erreichen kann. Sollte diese Bridge ausfallen, kann 
+% auf den Alternate Port umgeschaltet werden.
+% \newline
+% Backup Ports: sind ebenfalls blockiert und verbinden zu einem Segement, das 
+% ein anderer Port derselben Bridge günstiger erreicht. Von der Software der 
+% Bridge ist abhängig, ob sie den Backup-Port parralle verwendet, oder lediglich 
+% bei Ausfall des bevorzugten (designated) Ports.
 
 \subsection{Basiskonfiguration}\label{sw1}
 Zunächst wird der Switch konfiguriert. Der Hostname wird zu WTHswitch1 geändert,
@@ -458,7 +486,7 @@ intern kommunizieren und nicht darüber hinaus.
 
 
 \subsection{InterVLAN Routing}
-%TODO Definition
+Wenn die Hosts an einem Switch unterschiedliche IP-Netze angehören
 
 \subsubsection{Konfiguration des Router}
 Durch die Lockerung der Firmenpolitik sollen die Abteilungen auch untereinander
