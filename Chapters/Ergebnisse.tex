@@ -591,13 +591,36 @@ PacketTracer durchgeführt wurde, wird stattdessen der Simulation-Mode zur
 Aufzeichnung genutzt. 
 
 
-
-% Ping:
-% PC1 -> S1 -> R1
-% R1 -> S1
-% PC3 <- S1 -> S2
-% S2 -> PC4
-% 
-% Pong:
-% PC4 -> S2 -> S1 -> R1
-% R1 -> S1 -> PC1
+\begin{table}[!htbp]
+\centering
+\small
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|}
+	\hline
+	\textbf{Zeit} & \textbf{Quelle} & \textbf{Ziel} \\
+	\hline
+	0.001 & PC1 & WTHswitch1 \\
+	\hline
+	0.002 & WTHswitch1 & WTHrouter1 \\
+	\hline
+	0.003 & WTHrouter1 & WTHswitch1 \\
+	\hline
+	0.004 & WTHswitch1 & PC3 \\
+	\hline
+	0.004 & WTHswitch1 & WTHswitch2 \\
+	\hline
+	0.005 & WTHswitch2 & PC4 \\
+	\hline
+	0.006 & PC4 & WTHswitch2 \\
+	\hline
+	0.007 & WTHswitch2 & WTHswitch1 \\
+	\hline
+	0.008 & WTHswitch1 & WTHrouter1 \\
+	\hline
+	0.009 & WTHrouter1 & WTHswitch1 \\
+	\hline
+	0.010 & WTHswitch1 & PC1 \\
+	\hline
+	\end{tabularx}
+\caption{Weg eines Pings von PC1 zu PC4}
+\label{pingroute}
+\end{table}
