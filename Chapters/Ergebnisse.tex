@@ -8,7 +8,7 @@ Die Hosts werden nach den Vorgaben in \ref{config1} konfiguriert. Host 1 wird an
 den Port Fa0/11 angeschlossen, Host 2 an Fa0/18. Host 3 wird nicht
 verbunden.\footnote{siehe Versuchsanleitung S.3}
 
-\subsection{Konfiguration des Router}\label{routerconfig}
+\subsection{Konfiguration des Routers}\label{routerconfig}
 Der Router wird an den Port Fa0/5 des Switches angeschlossen und konfiguriert.
 Die Konfiguration beinhaltet die Änderung des Hostnames in ``CustomerRouter'',
 die Konfiguration und Aktivierung der Passwörter und die Konfiguration der
@@ -27,7 +27,7 @@ CustomerRouter(config)#enable secret class
 CustomerRouter(config)#exit
 \end{lstlisting}
 
-\subsection{Konfiguration des Switch}\label{password}
+\subsection{Konfiguration des Switches}\label{password}
 Die Konfiguration des Switches erfolgt analog zu \ref{routerconfig}. Das
 Passwort für den Priviledge EXEC Mode lautet ``cisco123''. Das gleiche Passwort
 wird auch für die Konsole und für die \acs{VTY}-Ports (Telnet Ports)
@@ -75,15 +75,15 @@ Um die Verbindung zu testen, werden Ping- und Telnet-Befehle genutzt.
 \begin{itemize}
   	\item Pings
   	\begin{itemize}
-    	\item Switch -> Router (192.168.1.1)
-    	\item Host 1 -> Switch (192.168.1.5)
+    	\item Switch zu Router (192.168.1.1)
+    	\item Host 1 zu Switch (192.168.1.5)
     \end{itemize}
 \end{itemize}
 Beides verlief erfolgreich.\footnote{siehe Anhang \ref{ping1}}
 
 \paragraph{Telnet-Session}\mbox{}\\
-Ausgehend von Host 1 eine Telnet-Session zum Switch-Management VLAN 1
-eröffnet:
+Ausgehend von Host 1 wird eine Telnet-Session zum Switch-Management VLAN 1
+geöffnet:
 
 \begin{lstlisting}
 PC>telnet 192.168.1.5
@@ -189,7 +189,7 @@ Full-duplex, 100Mb/s
 Diese Einstellung liegt bei den Ports Fa0/5, Fa0/11 und Fa0/18 vor.
 
 \subsubsection{Änderungen am Port Fa0/5}
-Über das \acs{CLI} des Switchs wird nun die Geschwindikeit auf 10Mb/s bei
+Über das \acs{CLI} des Switches wird nun die Geschwindigkeit auf 10Mb/s bei
 Half-Duplex geändert.\footnote{siehe Versuchsanleitung S.8}
 \newline
 Die erneute Ausgabe von \textit{show interfaces} zeigt, dass die Änderung
@@ -210,7 +210,7 @@ FastEthernet0/5 is up, line protocol is up (connected)
 \subsection{Reflection}
 \begin{enumerate}
   	\item Welches Passwort muss eingegeben werden, um vom User Mode in den
-  	Priviledges EXEC Mode des Switches zu wechseln?
+  	Priviledged EXEC Mode des Switches zu wechseln?
   	\begin{itemize}
     	\item Das zuvor konfigurierte Passwort ``cisco123''. (siehe \ref{password})
   	\end{itemize}
@@ -238,10 +238,10 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 31/31/32 ms
 	  \item Port Blocking: Standardmäßig sendet ein Switch Pakete mit einer
 	  unbekannten Zieladresse an alle Ports. Um dies zu vermeiden ist es möglich,
 	  Ports zu blockieren. Durch \textit{switchport block multicast} bzw.
-	  \textit{switchport block multicast} wird ein Weiterleiten
+	  \textit{switchport block unicast} wird ein Weiterleiten
 	  verhindert.\cite{cisco4}
 	  \item Dynamic Secure MAC Addresses: Diese Adressen werden zwar in der
-	  MAC-Adressen-Tabelle gespeichert, beim Neustart allerding gelöscht.
+	  MAC-Adressen-Tabelle gespeichert, beim Neustart allerdings gelöscht.
 	  \item Sticky Secure MAC Addresses: Diese Adressen können entweder
 	  konfiguriert oder dynamisch vom Switch erlernt werden. Eine dynamisch
 	  erlernte Adresse bleibt auch nach Neustart weiterhin in der
@@ -264,7 +264,7 @@ eines Netzwerks sind Switches für Verteilung, Priorisierung und der Zuweisung
 von Datenpaketen (Frames) zu VLANs verantwortlich.\\Im Gegensatz zu Bridges verfügen
 Switches über eine Vielzahl von Ports. Alle Ports können unabhängig voneinander
 Senden und Empfangen. Für andere Netzwerkgeräte verhält sich ein Switch
-transparent.
+transparent auf OSI-Schicht 3 transparent.
 \newline
 Gewöhnliche Switches arbeiten auf Schicht 2 des OSI-Modells. Aus den erhaltenen
 Frames wird die MAC-Adresse extrahiert und in der \ac{SAT} gespeichert, ebenso
@@ -275,8 +275,8 @@ werden als Layer-3-Switches bezeichnet. Diese Geräte sind in der Lage die
 Aufgaben eines Routers zu übernehmen.
 
 \subsubsection{VLAN}
-Durch VLANs, die innerhalb von Switches definiert werden, können physische Netze
-in mehrere logische Teilnetze gegliedert werden. Layer-3-Regeln bleiben
+Durch \acp{VLAN}, die innerhalb von Switches definiert werden, können physische
+Netze in mehrere logische Teilnetze gegliedert werden. Layer-3-Regeln bleiben
 unberührt.
 VLANs erleichtern die Administration eines Netzwerks und dienen der Sicherheit.
 \newline
@@ -287,11 +287,11 @@ Ethernet-Frame.
 \label{vlantag}
 Beim VLAN-Tag handelt es sich um ein Informationsfeld im Ethernet-Header,
 welches 4 Byte Daten zur Verarbeitung von VLAN-Informationen transportiert. Es
-besteht aus 3 Bit ``User\_priority''. Weiterhin wird 1 Bit zu
+besteht unter anderem aus 3 Bit ``User\_priority''. Weiterhin wird 1 Bit zu
 Kompatibilitätszwecken genutzt, um unterschiedliche Bitreihenfolgen bei
 \acs{FDDI} \acs{MAC} verarbeiten zu können. Darauf folgen 12 Bit VLAN-ID,
 welche zur Adressierung der VLAN genutzt werden können und somit 4096 mögliche Kombinationen
-zulässt.\cite{vlan}
+zulassen.\cite{vlan}
 
 
 \subsubsection{Zuordnung eines Teilnehmers}
@@ -331,9 +331,7 @@ Schleifenfreiheit der Netzwerktoplogie gewährleisten soll.\footnote{IEEE 802.1D}
 
 \paragraph{Funktionsweise}\mbox{}\\
 Man unterscheidet folgende Port-Zustände bei einem Switch: Disabled, Blocking,
-Listening, Learning, Forwarding. Dies beugt einer Schleifenbildung vor, die
-bspw. bei einem Übergang von einem blockierten in eines weiterleitenden Zustand,
-auftretetn könnte. Die Zustandsänderung wird von drei Timern getriggert:
+Listening, Learning, Forwarding. Die Zustandsänderung wird von drei Timern getriggert:
 \begin{itemize}
   \item Hello-Timer: Zeitspanne zwischen \acp{BPDU} (2s)
   \item Forward-Delay: Zeit für die Zustände Learning und Listening (je 15s)
@@ -346,14 +344,14 @@ statt.
 \newline
 Im nächsten Schritt wird eine Root-Bridge festgelegt, welche als ``Wurzel'' des
 aufgespannten Baumes fungiert. Dazu generiert jeder Switch \acp{BPDU} und sendet
-die über alle Ports. \acs{BPDU}s werden zum Austausch von konfigurationsnachrihcten
-verwendet und alle zwei Sekunden gesendet. Diese werden von jedem Switch
-aktualisiert und weitergeleitet.
+diese über alle Ports. \acs{BPDU}s werden zum Austausch von
+Konfigurationsnachrichten verwendet und alle zwei Sekunden gesendet. Diese
+werden von jedem Switch aktualisiert und weitergeleitet.
 \newline
 Die Auswahl einer Root-Bridge geschieht mit Hilfe der \acp{BID}. Die BID
 ist 8 Bit lang und setzt sich aus 2 Bit Bridge Priority und 6 Bit MAC-Adresse
 zusammen. Root-Bridge wird die Bridge mit der niedrigsten Priorität. Nach
-Festlegund der Root-Bridge sendet nur noch diese weiterhin BPDUs.
+Festlegung der Root-Bridge sendet nur noch diese weiterhin BPDUs.
 \newline
 \newline
 Ausgehend von der Root-Bridge werden Pfade festgelegt, über die die anderen
@@ -400,7 +398,7 @@ generiert, wenn BPDUs am Root-Port empfangen werden. Bei RSTP fungieren die
 Hello-Messages als Keep-Alive-Mechanismus. Wenn drei BPDUs in Folge fehlen,
 verfällt ein Port-Zustand.\cite{folien2}
 \newline
-Um eine schnelle Umschaltung gewährleiten uz können, werden Typen für die
+Um eine schnelle Umschaltung gewährleiten zu können, werden Typen für die
 Switch-Ports konfiguriert:\cite{rstp}
 \begin{itemize}
   \item Edge-Ports
@@ -451,7 +449,7 @@ Durch \textit{show vlan} lässt sich die vorgenommene Konfiguration überprüfen:
 
 [...]
 \end{lstlisting}
-Alle Ports sind zu diesem Zeitpunkt noch dem Defaukt-VLAN 1 zugeordnet.
+Alle Ports sind zu diesem Zeitpunkt noch dem Default-VLAN 1 zugeordnet.
 \subsubsection{Zuweisung von Switchports zu den VLANs}
 Die Ports können den VLANs entweder einzeln oder mittels Range-Operator
 zugeordnet werden. Die Ports 0/1 bis 0/4 werden VLAN 10 zugeordnet. 0/5 bis 0/8
@@ -520,7 +518,7 @@ importieren. Ein Neustart zeigt, dass die Konfiguration erfolgreich war.
 \subsection{Trunk Konfiguration}
 Die beiden Switchs werden nun verbunden. Um eine Portverschwenudng zu vermeiden
 wird ein Trunk konfiguriert. Dafür werden bei beiden Geräten die Ports Fa0/12
-verwendet. Die Konfiguration geschieht bei jeweils über das CLI der
+verwendet. Die Konfiguration geschieht jeweils über das CLI der
 Switchs.\footnote{siehe Versuchsanleitung S.19}
 
 \subsubsection{Konfiguration überprüfen}
@@ -546,11 +544,11 @@ intern kommunizieren und nicht darüber hinaus.
 \subsection{InterVLAN Routing}
 InterVlan Routing ist erforderlich, wenn die Hosts an einem Switch
 unterschiedlichen IP-Netzen angehören. Es ist notwendig verschiedene
-Adressbereiche zu den VLANs zu defiieren.\cite{folien}
+Adressbereiche zu den VLANs zu definieren.\cite{folien}
 \newline
 Wenn unterschiedliche VLANs miteinander kommunizieren wollen, muss
 eine Verbindung der VLANs zu einem Router bestehen. Dies wird durch eine
-Verbinung vom Switch zum Router realisiert.
+Verbindung vom Switch zum Router realisiert.
 
 \subsubsection{Konfiguration des Router}
 Durch die Lockerung der Firmenpolitik sollen die Abteilungen auch untereinander
