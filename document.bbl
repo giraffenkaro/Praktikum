@@ -17,6 +17,27 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{cisco4}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=CSI}{%
+         family={Cisco\bibnamedelima Systems},
+         familyi={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Inc.},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CSI1}
+    \strng{fullhash}{CSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+  \field{howpublished}{\url{https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960x/software/15-0_2_EX/security/configuration_guide/b_sec_152ex_2960-x_cg/b_sec_152ex_2960-x_cg_chapter_010010.html}}
+    \field{title}{{Catalyst 2960-X Switch Security Configuration Guide, Cisco
+  IOS Release 15.0(2)EX}}
+    \field{year}{2018}
+  \endentry
+
   \entry{cisco1}{misc}{}
     \name{author}{1}{}{%
       {{hash=CSI}{%

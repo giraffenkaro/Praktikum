@@ -27,7 +27,7 @@ CustomerRouter(config)#enable secret class
 CustomerRouter(config)#exit
 \end{lstlisting}
 
-\subsection{Konfiguration des Switch}
+\subsection{Konfiguration des Switch}\label{password}
 Die Konfiguration des Switches erfolgt analog zu \ref{routerconfig}. Das
 Passwort für den Priviledge EXEC Mode lautet ``cisco123''. Das gleiche Passwort
 wird auch für die Konsole und für die \acs{VTY}-Ports (Telnet Ports)
@@ -148,7 +148,7 @@ FastEthernet0/1 is up, line protocol is up (connected)
   
   [...]
 \end{lstlisting}
-\subsubsection{Statische MAC-Adresse}
+\subsubsection{Statische MAC-Adresse}\label{static}
 Die aus \ref{adressen} bekannte MAC-Adresse von Host 2 wird nun statisch der
 Tabelle des Switches hinzugefügt:
 
@@ -205,9 +205,51 @@ FastEthernet0/5 is up, line protocol is up (connected)
   
   [...]
 \end{lstlisting}
+\clearpage
 
 \subsection{Reflection}
-%Fragen beantworten
+\begin{enumerate}
+  	\item Welches Passwort muss eingegeben werden, um vom User Mode in den
+  	Priviledges EXEC Mode des Switches zu wechseln?
+  	\begin{itemize}
+    	\item Das zuvor konfigurierte Passwort ``cisco123''. (siehe \ref{password})
+  	\end{itemize}
+	\item Welches Symbol stellt einen erfolgreichen Ping bei der Cisco IOS Software
+	dar?
+	\begin{itemize}
+	  \item Das Symbol für einen erolfgreichen Ping ist !.
+	  \begin{lstlisting}
+CustomerSwitch#ping 192.168.1.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.1.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 31/31/32 ms
+	  \end{lstlisting}
+	\end{itemize}
+	\item Welche Vorteile bietet Port Security?
+	\begin{itemize}
+	  \item Das Anlegen der statischen Route in \ref{static} schützt vor unbefugtem
+	  Zugriff. Am Port Fa0/18 darf nur die MAC-Adresse 0090.21A7.1539 (Host 2)
+	  senden. Sollte ein anderer Host diesen Port verwenden, wird dies erkannt.
+	\end{itemize}
+	\item Welche andere portbasierte Sicherheitsmaßnahmen sind möglich?
+	\begin{itemize}
+	  \item Port Blocking: Standardmäßig sendet ein Switch Pakete mit einer
+	  unbekannten Zieladresse an alle Ports. Um dies zu vermeiden ist es möglich,
+	  Ports zu blockieren. Durch \textit{switchport block multicast} bzw.
+	  \textit{switchport block multicast} wird ein Weiterleiten
+	  verhindert.\cite{cisco4}
+	  \item Dynamic Secure MAC Addresses: Diese Adressen werden zwar in der
+	  MAC-Adressen-Tabelle gespeichert, beim Neustart allerding gelöscht.
+	  \item Sticky Secure MAC Addresses: Diese Adressen können entweder
+	  konfiguriert oder dynamisch vom Switch erlernt werden. Eine dynamisch
+	  erlernte Adresse bleibt auch nach Neustart weiterhin in der
+	  Tabelle.\cite{cisco4}
+	  \item Aging-Time: Die Aging-Time kann manuell geändert werden, um Adressen
+	  aus der Tabelle nach Ablauf eines Timers zu entfernen.\cite{cisco4}
+	\end{itemize}
+\end{enumerate}
 
 \clearpage
 
