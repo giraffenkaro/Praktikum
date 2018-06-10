@@ -635,4 +635,21 @@ Der Echo Reply gelangt auf dem gleichen Weg zurück.
 \clearpage
 \paragraph{Analyse der OSI-Layer 2 und 3}\mbox{}\\
 
-Zum Zeitpunkt 0.000 
+Zum Zeitpunkt 0.001 empfängt PC1 auf Layer 1 einen Frame an der Schnittstelle
+Fa0/1. Layer 2 enthält bei PC1 einen Ethernet Header mit Quell- und
+Ziel-Adresse. Beim Switch ist auf Layer 2 ein Dot1q Header vorhanden.
+
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/ethernet.PNG}
+  \caption{Layer 2 zum Zeitpunkt 0.001 bei PC1}
+  \label{fig:ethernet}
+\end{figure}
+
+
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/dot1q.PNG}
+  \caption{Layer 2 zum Zeitpunkt 0.001 bei WTHswitch1}
+  \label{fig:dot1q}
+\end{figure}
