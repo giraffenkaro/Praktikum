@@ -190,7 +190,7 @@ Diese Einstellung liegt bei den Ports Fa0/5, Fa0/11 und Fa0/18 vor.
 
 \subsubsection{Änderungen am Port Fa0/5}
 Über das \acs{CLI} des Switchs wird nun die Geschwindikeit auf 10Mb/s bei
-Half-Duplex geändert.\footnote{siehe Versuchsanleitung}
+Half-Duplex geändert.\footnote{siehe Versuchsanleitung S.8}
 \newline
 Die erneute Ausgabe von \textit{show interfaces} zeigt, dass die Änderung
 erfolgreich war:
@@ -600,6 +600,8 @@ nimmt:
 	\hline
 	\textbf{Zeit} & \textbf{Quelle} & \textbf{Ziel} \\
 	\hline
+	0.000 & --- & PC1 \\
+	\hline
 	0.001 & PC1 & WTHswitch1 \\
 	\hline
 	0.002 & WTHswitch1 & WTHrouter1 \\
@@ -624,13 +626,13 @@ nimmt:
 \caption{Weg eines Pings von PC1 zu PC4}
 \label{pingroute}
 \end{table}
-PC 1 sendet Echo Request an WTHswitch1, welcher diese an WTHrouter1
+PC 1 sendet ein Echo Request an WTHswitch1, welcher dieser an WTHrouter1
 weiterleitet. Von dort wird Anfrage zurück an den WTHswitch 1 geleitet.
-Im Anschluss wird die Anfrage sowohl an WTHswitch2 weitergeleitet. WTHswitch 2
+Im Anschluss wird die Anfrage an WTHswitch2 weitergeleitet. WTHswitch 2
 erreicht im nächsten Schritt sein Ziel.
 \newline
 Der Echo Reply gelangt auf dem gleichen Weg zurück.
 \clearpage
 \paragraph{Analyse der OSI-Layer 2 und 3}\mbox{}\\
 
-
+Zum Zeitpunkt 0.000 
