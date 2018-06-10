@@ -657,3 +657,10 @@ Ziel-Adresse. Beim Switch ist auf Layer 2 ein Dot1q Header vorhanden.
 Das \ac{TCI}-Feld des Dot1q Headers beinhaltet 0x000A, was dem VLAN 10
 entspricht. Der \ac{TPID} ist 0x8100, ein Standardwert zur Kennzeichnung dieses
 Frames.
+\newline
+\newline
+Der Dot1q Header bleibt bestehen bis die Anfrage bei WTHSwitch2 ankommt. Dieser
+entfernt den VLAN-Tag, da der Port des Ziels sich an diesem Gerät befindet.
+\newline
+Bei der Antwort, dem Echo Reply, fügt WTHswitch2 das VLAN-Tag wieder hinzu,
+welcher erst wieder vom WTHswitch1 entfernt wird.
