@@ -282,7 +282,7 @@ Verbindung zwischen den Switches herzustellen sind VLAN-Trunks eine Möglichkeit
 ressourcenschonend die Teilnetze zu verbinden. Dabei werden Ethernet-Frames mit
 unterschiedlichen VLAN-Tags über das selbe Kabel transportiert. 
 
-\subsubsection{Spanning Tree Protokoll}
+\subsubsection{Spanning Tree Protokoll}\label{stp}
 
 \acs{STP} bezeichnet ein Protokoll zur Pfadoptimierung, das die
 Schleifenfreiheit der Netzwerktoplogie gewährleisten soll.\footnote{IEEE 802.1D}
@@ -328,30 +328,46 @@ anderer Port zum Root Port. Bei Ausfall der Root-Bridge wird der ganze Baum neu
 organisiert und ein neuer Root festgelegt.
 Die initiale Konfiguration dauert ca. 50 Sekunden.\cite{folien}
 
+\clearpage
 
 \subsubsection{Rapid Spanning Tree Protokoll}
 \ac{RSTP} ist eine Weiterentwicklung des \acs{STP}. Es zeichnet sich durch eine
-deutlich geringere Organisationszeit der Switches aus (ca. 6 Sekunden).
+deutlich geringere Konfigurationszeit der Switches aus (ca. 6 Sekunden).
 
 \paragraph{Änderungen gegenüber STP}\mbox{}\\
 Mit \acs{RSTP} werden neue Port-Zustände und neue Port-Rollen eingeführt.
-Außerdem ändert sich das BPDU-Format und -Handling.
+\newline
+Die Zustände bschränken sich auf Discarding, Learning und Forwarding.
+Die zusätzlichen Port-Rollen sind:
+\begin{itemize}
+  \item Alternate: blockierte Ports, die ``nützlichere'' BPDUs anderer
+  Bridges auf dem gleichen Segment empfangen
+  \item Backup: blockierte Ports, die ``nützlichere'' BPDUs von der gleichen
+  Bridge auf dem gleichen Segment empfangen
+\end{itemize}
+Alternate- und Backup-Ports entsprechen dem Blocking-State bei STP (siehe
+\ref{stp}).\cite{rstp}\cite{folien2}
+\newline
+\newline
+Außerdem ändert sich das BPDU-Format und -Handling. Beim Format kommen die
+Felder Version und Version 1 Length hinzu. Ebenso ändert sich das Flag und wird
+um die Port-Rollen und -Zustände erweitert. 
+\newline
+Weiterhin werden nur dann BPDUs von Bridges, die nicht die Root-Bridge sind,
+generiert, wenn BPDUs am Root-Port empfangen werden. Bei RSTP fungieren die
+Hello-Messages als Keep-Alive-Mechanismus. Wenn drei BPDUs in Folge fehlen,
+verfällt ein Port-Zustand.\cite{folien2}
+\newline
+Um eine schnelle Umschaltung gewährleiten uz können, werden Typen für die
+Switch-Ports konfiguriert:\cite{rstp}
+\begin{itemize}
+  \item Edge-Ports
+  \item Point-to-Point-Ports
+  \item Shared Ports
+\end{itemize}
 
-% RSTP – Rapid STP, IEEE 802.1w
 
-% \begin{itemize}
-% 
-% \item Neue Rollen
-% \end{itemize}
-% Alternate Ports: blockierte Ports, die einem Netzsegment verbinden, das eine
-% andere Bridge günstiger erreichen kann. Sollte diese Bridge ausfallen, kann 
-% auf den Alternate Port umgeschaltet werden.
-% \newline
-% Backup Ports: sind ebenfalls blockiert und verbinden zu einem Segement, das 
-% ein anderer Port derselben Bridge günstiger erreicht. Von der Software der 
-% Bridge ist abhängig, ob sie den Backup-Port parralle verwendet, oder lediglich 
-% bei Ausfall des bevorzugten (designated) Ports.
-
+\clearpage
 \subsection{Basiskonfiguration}\label{sw1}
 Zunächst wird der Switch konfiguriert. Der Hostname wird zu WTHswitch1 geändert,
 das Konsolenpasswort ``cisco'' und das Passwort für den Priviledged EXEC Mode

@@ -37,6 +37,20 @@
   Guide, Release 12.2(58)SE}}
   \endentry
 
+  \entry{rstp}{manual}{}
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{IEEE 802.1d: Media Access Control (MAC) Bridges}
+    \list{location}{1}{%
+      {\url{https://de.slideshare.net/basschuck2411/8021-d-2004}}%
+    }
+    \field{year}{2004}
+  \endentry
+
   \entry{vlan}{manual}{}
     \list{organization}{1}{%
       {IEEE}%
@@ -95,6 +109,26 @@
     }
     \field{type}{Diplomarbeit}
     \field{year}{1998}
+  \endentry
+
+  \entry{folien2}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=WG}{%
+         family={Wessendorf},
+         familyi={W\bibinitperiod},
+         given={Guido},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WG1}
+    \strng{fullhash}{WG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+  \field{howpublished}{\url{https://www.uni-muenster.de/ZIV.GuidoWessendorf/vorlesung/STP/STP.pdf}}
+    \field{title}{{STP, RSTP und MSTP}}
+    \field{year}{2004}
   \endentry
 \enddatalist
 \endinput
