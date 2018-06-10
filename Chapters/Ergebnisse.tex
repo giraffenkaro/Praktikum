@@ -6,7 +6,7 @@
 \subsection{Konfiguration der Hosts}\label{hostconfig}
 Die Hosts werden nach den Vorgaben in \ref{config1} konfiguriert. Host 1 wird an
 den Port Fa0/11 angeschlossen, Host 2 an Fa0/18. Host 3 wird nicht
-verbunden.\footnote{siehe Versuchsanleitung}
+verbunden.\footnote{siehe Versuchsanleitung S.3}
 
 \subsection{Konfiguration des Router}\label{routerconfig}
 Der Router wird an den Port Fa0/5 des Switches angeschlossen und konfiguriert.
@@ -31,17 +31,44 @@ CustomerRouter(config)#exit
 Die Konfiguration des Switches erfolgt analog zu \ref{routerconfig}. Das
 Passwort für den Priviledge EXEC Mode lautet ``cisco123''. Das gleiche Passwort
 wird auch für die Konsole und für die \acs{VTY}-Ports (Telnet Ports)
-verwendet.\footnote{siehe Versuchsanleitung}
+verwendet.\footnote{siehe Versuchsanleitung S.3}
 
-\subsubsection{Konfiguration des Management-Interfaces von VLAN1}
-Um die Schnittslelle von VLAN 1 zu konfigurieren, wird im Configuration-Mode der
-Befehl ``\textit{interface vlan 1}'' genutzt. Dann wird die IP-Adresse und das
-Default-Gateway konfiguriert.
+\subsubsection{Konfiguration des VLAN}
+Um die Schnittslelle von \acs{VLAN} 1 zu konfigurieren, wird im
+Configuration-Mode der Befehl ``\textit{interface vlan 1}'' genutzt. Dann wird die IP-Adresse
+(192.168.1.5) und das Default-Gateway (192.168.1.1) konfiguriert.
 
 \subsubsection{Konfiguration überprüfen}
 Zunächst wird durch ``\textit{show running-config}'' die aktuelle Konfiguration
-ausgegeben. Nach einer Kontrolle wird die Konfiguration gesichert, durch das
-Kopieren der running-config in die startup-config.
+ausgegeben.\footnote{Zur Übersichtlichkeit werden die Ausgaben gekürzt und
+durch [\ldots] gekennzeichnet}
+\begin{lstlisting}
+CustomerSwitch#show running-config
+
+[...]
+
+interface Vlan1
+ ip address 192.168.1.5 255.255.255.0
+!
+ip default-gateway 192.168.1.1
+!
+!
+line con 0
+ password cisco123
+ login
+!
+line vty 0 4
+ password cisco123
+ login
+line vty 5 15
+ password cisco123
+ login
+!
+!
+end
+\end{lstlisting}
+Nach einer Kontrolle wird die Konfiguration durch das
+Kopieren der running-config in die startup-config gesichert.
 \newline
 \newline
 Um die Verbindung zu testen, werden Ping- und Telnet-Befehle genutzt.
@@ -53,8 +80,9 @@ Um die Verbindung zu testen, werden Ping- und Telnet-Befehle genutzt.
     \end{itemize}
 \end{itemize}
 Beides verlief erfolgreich.\footnote{siehe Anhang \ref{ping1}}
+
 \paragraph{Telnet-Session}\mbox{}\\
-Zunächst wird von Host 1 eine Telnet-Session zum Switch-Management VLAN 1
+Ausgehend von Host 1 eine Telnet-Session zum Switch-Management VLAN 1
 eröffnet:
 
 \begin{lstlisting}
@@ -63,8 +91,8 @@ Trying 192.168.1.5 ...Open
 \end{lstlisting}
 
 Nach Eingabe des zuvor konfigurierten Passworts (cisco123) ist der Zugriff auf
-den Switch möglich. Mit \textit{show version} erhält man Informationen über die
-Version der Software des Switches.
+den Switch möglich (User Access Verification). Mit \textit{show version} erhält
+man Informationen über die Version der Software des Switches.
 
 \begin{lstlisting}
 CustomerSwitch>show version
@@ -107,9 +135,19 @@ Vlan    Mac Address       Type        Ports
    1    0001.42a4.0002    DYNAMIC     Fa0/5
    1    0001.c75a.60c4    DYNAMIC     Fa0/11
 \end{lstlisting}
-Dem Switch sind nur zwei dynamische Adressen bekannt. Die erste entspricht der
-Adresse von Host 1 am Port Fa0/11.
-
+Dem Switch sind nur zwei dynamische Adressen bekannt. Die zweite Adresse der
+Tabelle entspricht der Adresse von Host 1 am Port Fa0/11.
+\newline
+\newline
+Die erste aufgelistete Adresse entspricht der MAC-Adresse des Routers:
+\begin{lstlisting}
+CustomerRouter#show interface FastEthernet0/1
+FastEthernet0/1 is up, line protocol is up (connected)
+  Hardware is Lance, address is 0001.42a4.0002 (bia 0001.42a4.0002)
+  Internet address is 192.168.1.1/24
+  
+  [...]
+\end{lstlisting}
 \subsubsection{Statische MAC-Adresse}
 Die aus \ref{adressen} bekannte MAC-Adresse von Host 2 wird nun statisch der
 Tabelle des Switches hinzugefügt:
@@ -177,66 +215,73 @@ FastEthernet0/5 is up, line protocol is up (connected)
 
 
 \subsection{Theorie}
+
 \subsubsection{Einsatz von Switches}
-Ein Switch ist ein Kopplungselement, das mehrere Hosts in einem Netzwerk 
-miteinander verbindet. In einem Ethernet-Netzwerk, das auf der Stern-Topologie
-basiert dient z.B. ein Switch als Verteiler für die Datenpakete.
+Ein Switch dient dazu mehrere Netzsegmente miteinander zu verbinden. Innerhalb
+eines Netzwerks sind Switches für Verteilung, Priorisierung und der Zuweisung
+von Datenpaketen (Frames) zu VLANs verantwortlich.\\Im Gegensatz zu Bridges verfügen
+Switches über eine Vielzahl von Ports. Alle Ports können unabhängig voneinander
+Senden und Empfangen. Für andere Netzwerkgeräte verhält sich ein Switch
+transparent.
+\newline
+Gewöhnliche Switches arbeiten auf Schicht 2 des OSI-Modells. Aus den erhaltenen
+Frames wird die MAC-Adresse extrahiert und in der \ac{SAT} gespeichert, ebenso
+wie der Port, an dem der Frame eingegangen ist.
+\newline
+Switches, die über Management-Funktionen verfügen,
+werden als Layer-3-Switches bezeichnet. Diese Geräte sind in der Lage die
+Aufgaben eines Routers zu übernehmen.
+
 \subsubsection{VLAN}
-Um den Begriff VLAN zu verstehen werden im folgenden zwei grundlegende Begriffe
-erklärt:
+Durch VLANs, die innerhalb von Switches definiert werden, können physische Netze
+in mehrere logische Teilnetze gegliedert werden. Layer-3-Regeln bleiben
+unberührt.
+VLANs erleichtern die Administration eines Netzwerks und dienen der Sicherheit.
 \newline
-\newline
-Broadcast(-domain):
-\newline
-Sendet ein Gerät einen Broadcast, erhalten ihn alle anderen Geräte der Broadcastdomain.
-\newline
-\newline
-LAN (Local Area Network):
-\newline
-Schließt alle Geräte der gleichen Broadcastdomain ein. LAN = Broadcastdomain.
-Wenn man diese beiden Begriffe verstanden hat lässt sich VLAN sehr leicht erklären.
-VLAN ermöglicht die Segmentierung des LAN in verschiedene Broadcastdomains durch
-Separation von Ports. Solch eine individuelle Broadcastdomain nennt man Virtuelle LAN.
-\newline
-\newline
-Vorteile:
-\begin{itemize}
-\item Broadcast nur in eigenen VLAN
-\item Gruppierung von Nutzern pro Organisationseinheit
-\item Isolation von sensiblen Daten
-\item Trennung von wichtigen zu unwichtigen Diensten
-\end{itemize}
+Die Gliederung erfolgt durch Setzen bzw. Auswerten des VLAN-Tags im
+Ethernet-Frame.
 
-Gründe für den Einsatz:
-\begin{itemize}
-\item Flexibleres Design bei der Gruppierung von Nutzern
-\item Segmentierung von Geräten in kleinere LANs zur Reduktion von Overhead
-\item Reduzierung der Größe des Spanning-Tree-Algorithmus
-\item Steigerung der Sicherung
-\item Trennung von Anwendungen -> QoS
-\end{itemize}
+\paragraph{Das VLAN-Tag}
+\label{vlantag}
+Beim VLAN-Tag handelt es sich um ein Informationsfeld im Ethernet-Header,
+welches 4 Byte Daten zur Verarbeitung von VLAN-Informationen transportiert. Es
+besteht aus 3 Bit ``User_priority''. Weiterhin wird 1 Bit zu
+Kompatibilitätszwecken genutzt, um unterschiedliche Bitreihenfolgen bei FDDI MAC
+verarbeiten zu können. Darauf folgen 12 Bit VLAN-ID, welche zur Adressierung der
+VLAN genutzt werden können und somit 4096 mögliche Kombinationen
+zulässt.\cite{vlan}
 
-Folien Vogt S.342 - 345
 
 \subsubsection{Zuordnung eines Teilnehmers}
+
+Portbasierte VLANs
+Tagged VLANs
+MAC-basiert
+IP-Basiert laut pauly - layer 3 vlan?
+
 \subsubsection{Trunking}
-Mit einer Trunk-Leitung lassen sich Switches untereinander verbinden. 
-Sie koppeln Netzwerke miteinander und ermöglichen den Aufbau von LANs über 
-mehrere Lokationen hinweg. Das lokale Netzwerk ist nicht mehr auf einen 
-einzelnen physikalischen Switch begrenzt, sondern erstreckt sich über
-mehrere Switches. Kommt VLAN-Trunking zum Einsatz, sind über einzelne 
-Trunks auch die Informationen zu verschiedenen virtuellen lokalen Netzwerken 
-übertragbar. Die Trunk-Verbindung kann aus einer einzigen Leitung oder aus einem Bündel von 
-Leitungen bestehen. Durch das Bündeln von Leitungen erhöht sich die Bandbreite 
-der Kopplung. Trunking nutzt ein zusätzliches Tag im Ethernetheader (VLAN Tagging)
-Das Tag enthält eine VLAN ID zur Differenzierung verschiedener VLAN.
+VLANs können sich über mehrere Switches hinweg erstrecken. Um eine
+Verbindung zwischen den Switches herzustellen sind VLAN-Trunks eine Möglichkeit
+ressourcenschonend die Teilnetze zu verbinden. Dabei werden Ethernet-Frames mit
+unterschiedlichen VLAN-Tags über das selbe Kabel transportiert.
+
+
+
+% . Kommt VLAN-Trunking zum Einsatz, sind über einzelne 
+% Trunks auch die Informationen zu verschiedenen virtuellen lokalen Netzwerken 
+% übertragbar. Die Trunk-Verbindung kann aus einer einzigen Leitung oder aus einem Bündel von 
+% Leitungen bestehen. Durch das Bündeln von Leitungen erhöht sich die Bandbreite 
+% der Kopplung. Trunking nutzt ein zusätzliches Tag im Ethernetheader (VLAN Tagging)
+% Das Tag enthält eine VLAN ID zur Differenzierung verschiedener VLAN.
+
+% http://www.ciscopress.com/articles/article.asp?p=29803&seqNum=3
 
 % https://www.ip-insider.de/was-ist-ein-vlan-trunk-a-623319/ %
 \subsubsection{Spanning Tree Protokoll}
 
-STP (IEEE 802.1D, veraltet) ist ein:
+\acs{STP} bezeichnet ein Protokoll zur Pfadoptimierung.\footnote{IEEE 802.1D}
+
 \begin{itemize}
-\item Protokoll zur Pfadoptimierung,
 \item Schaffung schleifenfreier Strukturen,
 \item Beliebige physikalische Topologie wird zu logischer Baumtopologi
 \end{itemize}
@@ -271,6 +316,7 @@ das Konsolenpasswort ``cisco'' und das Passwort für den Priviledged EXEC Mode
 ``class123'' wird konfiguriert. Zur Sicherung der vorgenommenen Einstellungen
 wird die running-config in die startup-config kopiert.
 
+\clearpage
 \subsection{VLAN Konfiguration}
 Die VLANs für die Abteilungen werden nach folgenden Vorgaben konfiguriert:
 \begin{table}[!htbp]
@@ -290,6 +336,7 @@ Die VLANs für die Abteilungen werden nach folgenden Vorgaben konfiguriert:
 \label{configv}
 \end{table}
 
+
 \subsubsection{Erstellen der VLANs}
 Die Erstellung erfolgt über das \acs{CLI} des Switchs. Mit \textit{vlan 10} im
 Configuration Mode und der anschließenden Eingabe des Namens ist das
@@ -304,7 +351,7 @@ Durch \textit{show vlan} lässt sich die vorgenommene Konfiguration überprüfen:
 
 [...]
 \end{lstlisting}
-Alle Ports sind zu diesem Zeitpunkt noch dem Standard-VLAN 1 zugeordnet.
+Alle Ports sind zu diesem Zeitpunkt noch dem Defaukt-VLAN 1 zugeordnet.
 \subsubsection{Zuweisung von Switchports zu den VLANs}
 Die Ports können den VLANs entweder einzeln oder mittels Range-Operator
 zugeordnet werden. Die Ports 0/1 bis 0/4 werden VLAN 10 zugeordnet. 0/5 bis 0/8
@@ -320,6 +367,8 @@ erfolgreich war:
 \end{lstlisting}
 Auch durch den Befehl \textit{show running-config} lässt sich die Konfiguration
 überprüfen.\footnote{siehe Anhang \ref{running-config}}
+\clearpage
+
 \subsubsection{Konfiguration überprüfen}
 Um die Konfiguration zu testen, werden vier Hosts an den Switch angeschlossen
 und wie folgt konfiguriert:
@@ -361,12 +410,13 @@ im selben VLAN befinden. Daraus folgt, dass die
 Konfiguration erfolgreich war.
 
 \subsection{Konfigruation des zweiten Switches}%TODO umbenennen
-Der zweite Switch wird äquivaelnt zum ersten Switch in \ref{sw1} konfiguriert.
+Der zweite Switch wird äquivalent zum ersten Switch in \ref{sw1} konfiguriert.
 Die Konfiguration unterscheidet sich lediglich beim Hostnamen: WTHswitch2. Da
 dieser Versuch mittels PacketTracer durchgeführt wird, lässt sich die
 Konfiguration des ersten Switches exportieren und beim zweiten Switch
 importieren. Ein Neustart zeigt, dass die Konfiguration erfolgreich war.
 
+\clearpage
 \subsection{Trunk Konfiguration}
 Die beiden Switchs werden nun verbunden. Um eine Portverschwenudng zu vermeiden
 wird ein Trunk konfiguriert. Dafür werden bei beiden Geräten die Ports Fa0/12
@@ -421,9 +471,27 @@ Die Standardgateways der Hosts sind zu kontrollieren:
 \end{itemize}
 
 \subsection{Analyse der Pakete}
-Um die Pakete zu analysieren ist Wireshark zu nutzen. In diesem Fall wird der
-Realtime-Modus des PacketTracers genutzt und ICMP-Pakete gefiltert.
-\newline
-Es wird ein Ping von PC1 zu PC4 gesendet und verfolgt:
-%TODO Weg aufzeichnen
 
+Zunächst ist mittels Ping-Befehlen zu verifizieren, dass alle Computer
+erreichbar sind, auch die, die sich nicht im gleichen VLAN befinden. Alle
+Befehle sind erfolgreich.\footnote{Unter \ref{pingstep8} sind die Ping-Befehle
+außerhalb des eigenen VLANs zu finden.}
+
+\subsubsection{Analyse eines Ping-Befehls}
+
+Der Weg, den ein Ping von PC1 zu PC4 nimmt, wird aufgezeichnet und analysiert.
+Hierzu ist Wireshark zu verwenden. Da dieser Laborversuch mit dem Cisco
+PacketTracer durchgeführt wurde, wird stattdessen der Simulation-Mode zur
+Aufzeichnung genutzt. 
+
+
+
+% Ping:
+% PC1 -> S1 -> R1
+% R1 -> S1
+% PC3 <- S1 -> S2
+% S2 -> PC4
+% 
+% Pong:
+% PC4 -> S2 -> S1 -> R1
+% R1 -> S1 -> PC1

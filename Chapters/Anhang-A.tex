@@ -381,3 +381,72 @@ Request timed out.
 Ping statistics for 192.168.2.10:
     Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
 \end{lstlisting}
+
+\section{Analyse der Pakete}
+
+\subsection{Ping-Befehle}\label{pingstep8}
+
+\subsubsection{PC1 zu PC3}
+\begin{lstlisting}
+C:\>ping 192.168.2.11
+
+Pinging 192.168.2.11 with 32 bytes of data:
+
+Reply from 192.168.2.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.2.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+\end{lstlisting}
+\subsubsection{PC3 zu PC1}
+\begin{lstlisting}
+C:\>ping 192.168.1.10
+
+Pinging 192.168.1.10 with 32 bytes of data:
+
+Reply from 192.168.1.10: bytes=32 time=1ms TTL=127
+Reply from 192.168.1.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.1.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.1.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.1.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+\end{lstlisting}
+\subsubsection{PC2 zu PC4}
+\begin{lstlisting}
+C:\>ping 192.168.2.10
+
+Pinging 192.168.2.10 with 32 bytes of data:
+
+Reply from 192.168.2.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.2.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.2.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+\end{lstlisting}
+\subsubsection{PC4 zu PC2}
+\begin{lstlisting}
+C:\>ping 192.168.1.11
+
+Pinging 192.168.1.11 with 32 bytes of data:
+
+Reply from 192.168.1.11: bytes=32 time=1ms TTL=127
+Reply from 192.168.1.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.1.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.1.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.1.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+\end{lstlisting}
