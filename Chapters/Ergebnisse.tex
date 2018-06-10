@@ -606,8 +606,6 @@ nimmt:
 	\hline
 	0.003 & WTHrouter1 & WTHswitch1 \\
 	\hline
-	0.004 & WTHswitch1 & PC3 \\
-	\hline
 	0.004 & WTHswitch1 & WTHswitch2 \\
 	\hline
 	0.005 & WTHswitch2 & PC4 \\
@@ -628,14 +626,10 @@ nimmt:
 \end{table}
 PC 1 sendet Echo Request an WTHswitch1, welcher diese an WTHrouter1
 weiterleitet. Von dort wird Anfrage zurück an den WTHswitch 1 geleitet.
-Auffällig ist, dass WTHswitch1 im Anschluss (Zeitpunkt 0.004) die Anfrage sowohl
-an PC3 als auch WTHswitch2 weiterleitet. Zu diesem Zeitpunkt ist dem Switch PC3 nicht
-bekannt, somit erhält auch dieser die Anfrage, die er im Anschluss verwirft.
+Im Anschluss wird die Anfrage sowohl an WTHswitch2 weitergeleitet. WTHswitch 2
+erreicht im nächsten Schritt sein Ziel.
 \newline
-WTHswitch 2 erreicht im nächsten Schritt sein Ziel.
-\newline
-Der Echo Reply gelangt auf dem gleichen Weg zurück, allerdings ohne eine
-Weiterleitung an P3.
+Der Echo Reply gelangt auf dem gleichen Weg zurück.
 \clearpage
 \paragraph{Analyse der OSI-Layer 2 und 3}\mbox{}\\
 
