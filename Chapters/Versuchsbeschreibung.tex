@@ -1,39 +1,33 @@
 \chapter{Beschreibung des Versuchs}
 
 Der Laborversuch beschäftigt sich mit einer Einführung in die Konfiguration von
-Cisco Switches mit dem Cisco \ac{CLI} und der Konfiguration von \acs{VLAN}s.
+IPv6 \acp{LAN}.
 
 \section{Versuchsaufbau}\label{Aufbau}
 
 \begin{figure}[ht]
   \centering
-     \includegraphics[width=0.6\linewidth]{Graphics/aufbau1.PNG}
-  \caption{Versuchsaufbau - Teil 1}
-  \label{fig:aufbau1}
+     \includegraphics[width=\linewidth]{Graphics/aufbau.PNG}
+  \caption{Versuchsaufbau}
+  \label{fig:aufbau}
 \end{figure}
 
-\begin{figure}[ht]
-  \centering
-     \includegraphics[width=0.8\linewidth]{Graphics/aufbaucomplete.PNG}
-  \caption{Versuchsaufbau - Teil 2}
-  \label{fig:aufbau2}
-\end{figure}
 
-% \subsection{Komponenten}
-% 
-% \begin{itemize}
-%   	\item 3 Computer
-%   	\item Cisco 2811 Router
-%   	\begin{itemize}
-%       	\item Verbindung zum Switch durch Straight-Through-Kabel
-% 	\end{itemize}
-%   	\item 1 Cisco 2960 Switch
-%   		\begin{itemize}
-%     	\item Verbindung zu Host 1 durch Straight-Through-Kabel und DB-9 zu
-% 		RJ45 Adapterkabel
-% 		\item Verbindung zu Host 2 durch Straight-Through-Kabel
-%    		\end{itemize}
-% \end{itemize}
+\subsection{Komponenten}
+
+\begin{itemize}
+  	\item 3 Computer
+  	\item 3 Cisco 2811 Router
+  	\begin{itemize}
+      	\item Verbindung zum jewiligen Switch durch Straight-Through-Kabel
+      	\item Verbindung zwischen Router 1 und Router 2 durch Serial-Kabel
+      	\item Verbindung zwischen Router 2 und Router 3 durch Serial-Kabel
+	\end{itemize}
+  	\item 3 Cisco 2960 Switches
+  		\begin{itemize}
+    	\item Verbindung zum jewiligen Host durch Straight-Through-Kabel
+   		\end{itemize}
+\end{itemize}
 
 \clearpage
 
@@ -42,60 +36,35 @@ Cisco Switches mit dem Cisco \ac{CLI} und der Konfiguration von \acs{VLAN}s.
 Aus organisatorischen Gründen wurde dieser Laborversuch mittels
 Cisco PacketTracer durchgeführt.
 
-\subsection{Teil 1}\label{teil1}
-
 \begin{table}[!htbp]
 \centering
 \small
-	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|X|X|X|}
+	\begin{tabularx}{1.05\textwidth}{|X|X|X|X|}
 	\hline
-	\textbf{Device} & \textbf{Hostname} & \textbf{Interface} & \textbf{IP-Address} &
-	\textbf{Subnet Mask} & \textbf{Default Gateway} & \textbf{Switch Port}\\
+	\textbf{Device} & \textbf{Interface} & \textbf{IPv6-Address/Prefix} & \textbf{Default Gateway} \\
 	\hline
-	S1 	& Customer-Switch  & VLAN 1 & 192.168.1.5 & 255.255.255.0 & 192.168.1.1 &
-	N/A \\
+	R1 & F0/0 & 2001:DB8:1:1::1/64 & N/A \\
 	\hline
-	R1 & Customer-Router & Fa0/1 & 192.168.1.1 & 255.255.255.0 & N/A & Fa0/5 \\
+	R2 & F0/0 & 2001:DB8:1:2::1/64 & N/A \\
 	\hline
-	H1 & H1 & NIC & 192.168.1.2 & 255.255.255.0 & 192.168.1.1 & Fa0/11 \\
+	R3 & F0/0 & 2001:DB8:1:3::1/64 & N/A \\
 	\hline
-	H2 & H2 & NIC & 192.168.1.4	& 255.255.255.0 & 192.168.1.1 & Fa0/18 \\
+	PC1 & NIC & 2001:DB8:1:1::F/64 & FE80::1 \\
 	\hline
-	H3 & H3 & NIC & 192.168.1.6 & 255.255.255.0 & 192.168.1.1 & None \\
+	PC2 & NIC & 2001:DB8:1:2::F/64 & FE80::2 \\
+	\hline
+	PC3 & NIC & 2001:DB8:1:3::F/64 & FE80::3 \\
 	\hline
 	\end{tabularx}
-\caption{Konfiguration für Teil 1}
+\caption{Konfiguration}
 \label{config1}
 \end{table}
 
 \underline{Weiteres Vorgehen:}
 \begin{itemize}
-  \item Initiale Switch-Konfiguration
-  \item Hosts konfigurieren und mit Switch verbinden
-  \item Router konfigurieren und mit Switch verbinden
-  \item Switch Management VLAN IP-Adresse konfigurieren
-  \item Überprüfung der Netzwerk-Verbindungen
-  \item Basic Port Security konfigurieren
-  \item Port Duplex und Geschwindikeit konfigurieren
+  \item TODO
 \end{itemize}
 
-\subsection{Teil 2}\label{teil2}
-
-Der zweite Teil beschäftigt sich mit einem Szenario in dem Unternehmen WTH.\\
-Zunächst ist ein Switch zu konfigurieren und die angeschlossenen PCs der
-Abteilungen ``Produktion'' und ``Verwaltung'' mittels VLANs zu trennen.
-\newline
-Im nächsten Schritt sollen aufgrund von Kapazitätserweiterungen im
-Nebengebäude neue Arbeitsplätze für beide Abteilungen geschaffen werden. Somit
-wird ein zusätzlicher Switch angeschafft. Nach der Konfiguration sollen die Abteilungen
-intern gebäudeübergreifend kommunizieren können.
-\newline
-Nach einer Lockerung der Firmenpolitik soll es auch möglich sein, dass die
-Abteilungen untereinander kommunizieren können. Mit einem Router soll das
-Routing zwischen den VLANs realisiert werden.
 
 \section{Versuchsziel}
-Der Laborversuch dient der Einführung in die Konfiguration von Cisco Switches,
-in diesem Fall dem Modell Cisco 2960.\\Außerdem sollen Sinn und Zweck von VLANs
-veranschaulicht werden, besonders durch den zweiten Teil, der sich mit einem
-fiktiven Szenario der Firma WTH beschäftigt.
+
