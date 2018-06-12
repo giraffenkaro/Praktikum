@@ -1,7 +1,7 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
 \section{Konfiguration der Router}
-
+Die folgenden Schritte sind bei allen Routern durchzuführen.
 \subsection{Basiskonfiguration}
 Zunächst ist der Hostname zu R1 zu ändern. Anschließend werden die Passwörter
 konfiguriert und ``logging synchronous'' aktiviert.
@@ -55,9 +55,18 @@ R1(config-if)#no shutdown
 R1(config-if)#exit
 R1(config)#exit
 \end{lstlisting}
+
 \section{Konfiguration der Hosts}
+Den Hosts wird das jeweilige Default Gateway (Link-Local-Adresse) und die
+entsprechende statische IPv6-Adresse gemäß \ref{config1} zugewiesen. 
+%TODO erklären?
 
 \section{Überprüfung der Konfiguration}
+
+\subsection{Überprüfung mittels Ping-Befehlen}
+Zunächst wird mittels Eingabeaufforderung überprüft, ob die Konfiguration der
+Hosts korrekt ist.\footnote{siehe Anhang \ref{ipconfig}}
+
 
 \section{Konfiguration von IPv6-Routing}
 \subsection{Statische Routen}
