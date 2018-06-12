@@ -1,6 +1,7 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
 \section{Konfiguration der Router}
+
 \subsection{Basiskonfiguration}
 Zunächst ist der Hostname zu R1 zu ändern. Anschließend werden die Passwörter
 konfiguriert und ``logging synchronous'' aktiviert.
@@ -21,15 +22,39 @@ R1(config)#exit
 R1(config)#line console 0
 R1(config-line)#logging synchronous
 \end{lstlisting}
-Für die Konsole wird das Passwort ``cisco'', für den Priviledged EXEX Mode
+Für die Konsole wird das Passwort ``cisco'', für den Priviledged EXEC Mode
 ``class'', vergeben. Durch ``logging synchronous'' wird sichergestellt, dass
 keine Systemnachrichten die Befehlseingabe unterbrechen.
 \newline
+Um die Weiterleitung von IPv6-Paketen zu ermöglichen, muss im \acs{CLI} des
+Routers das Kommando \textit{ipv6 unicast-routing} ausgeführt werden.
 \newline
 Router 2 und Router 3 werden äuivalent konfiguriert.
-\subsection{Fast-Ethernet-Schnittstelle}
-\subsection{Serial-Schnittstelle}
 
+\subsection{Fast-Ethernet-Schnittstelle}\label{FE}
+Im Configuration Mode wird die Fast-Ethernet-Schnittstelle 0/0 konfiguriert und
+die entsprechende IPv6-Adresse, sowie die Link-Local-Adresse, aus \ref{config1}
+zugewiesen:
+\begin{lstlisting}
+R1(config)#interface FastEthernet 0/0
+R1(config-if)#description R1 LAN Default Gateway
+R1(config-if)#R1(config-if)# ipv6 address 2001:DB8:1:1::1/64
+R1(config-if)# ipv6 address FE80::1 link-local
+R1(config-if)#no shutdown
+R1(config-if)#exit
+R1(config)#exit
+\end{lstlisting}
+\subsection{Serial-Schnittstelle}
+Analog zu \ref{FE} wird die Serial-Schnittstelle 0/0 konfiguriert:
+\begin{lstlisting}
+R1(config)#interface serial 0/0/0
+R1(config-if)#description WAN link to R2
+R1(config-if)#ipv6 address 2001:DB8:1:A001::1/64
+R1(config-if)#clock rate 64000
+R1(config-if)#no shutdown
+R1(config-if)#exit
+R1(config)#exit
+\end{lstlisting}
 \section{Konfiguration der Hosts}
 
 \section{Überprüfung der Konfiguration}
