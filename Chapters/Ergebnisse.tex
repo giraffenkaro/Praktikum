@@ -66,8 +66,54 @@ entsprechende statische IPv6-Adresse gemäß \ref{config1} zugewiesen.
 \subsection{Überprüfung mittels Ping-Befehlen}
 Zunächst wird mittels Eingabeaufforderung überprüft, ob die Konfiguration der
 Hosts korrekt ist.\footnote{siehe Anhang \ref{ipconfig}}
+\newline
+Danach werden Ping-Befehle ausgeführt um die Konfiguration zu testen:
+\begin{itemize}
+  \item PC1 zu R1
+  \item PC2 zu R2
+  \item PC3 zu R3
+\end{itemize}
+Die Befehle verlaufen alle erfolgreich.\footnote{siehe Anhang \ref{pingrouter}}
+
+\subsection{IPv6 Einstellungen}
+Durch \textit{show ipv6 interface brief} lässt sich der Status der Interfaces
+überprüfen:
+\begin{lstlisting}
+R1#sh ipv6 interface brief
+FastEthernet0/0            [up/up]
+    FE80::1
+    2001:DB8:1:1::1
+FastEthernet0/1            [administratively down/down]
+Serial0/0/0                [up/up]
+    FE80::290:2BFF:FE95:C001
+    2001:DB8:1:A001::1
+Serial0/0/1                [administratively down/down]
+Vlan1                      [administratively down/down]
+\end{lstlisting}
+
+Bei der Fast-Ethernet-Schnittstelle 0/0 werden zwei IPv6-Adressen angezeigt.
+%TODO Fragen
+
+\begin{lstlisting}
+R1>show ipv6 interface
+FastEthernet0/0 is up, line protocol is up
+  IPv6 is enabled, link-local address is FE80::1
+  No Virtual link-local address(es):
+  Global unicast address(es):
+    2001:DB8:1:1::1, subnet is 2001:DB8:1:1::/64
+  Joined group address(es):
+    FF02::1
+    FF02::2
+    FF02::1:FF00:1
+
+  [...]
+\end{lstlisting}
+%TODO Multicast Group Addresses
 
 
 \section{Konfiguration von IPv6-Routing}
+
 \subsection{Statische Routen}
+
+
 \subsection{Default Routen}

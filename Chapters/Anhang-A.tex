@@ -48,3 +48,77 @@ FastEthernet0 Connection:(default port)
    DNS Servers.....................: ::
    DHCPv6 Client DUID..............: 00-01-00-01-EB-00-D8-E9-00-0C-CF-0E-19-02
 \end{lstlisting}
+
+\subsection{Ping-Befehle}\label{pingrouter}
+\subsubsection{PC1 zu R1}
+\begin{lstlisting}
+PC>ping 2001:DB8:1:1::1
+
+Pinging 2001:DB8:1:1::1 with 32 bytes of data:
+
+Reply from 2001:DB8:1:1::1: bytes=32 time=125ms TTL=255
+Reply from 2001:DB8:1:1::1: bytes=32 time=62ms TTL=255
+Reply from 2001:DB8:1:1::1: bytes=32 time=62ms TTL=255
+Reply from 2001:DB8:1:1::1: bytes=32 time=63ms TTL=255
+
+Ping statistics for 2001:DB8:1:1::1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 62ms, Maximum = 125ms, Average = 78ms
+\end{lstlisting}
+\subsubsection{PC2 zu R2}
+\begin{lstlisting}
+PC>ping 2001:DB8:1:2::1
+
+Pinging 2001:DB8:1:2::1 with 32 bytes of data:
+
+Reply from 2001:DB8:1:2::1: bytes=32 time=125ms TTL=255
+Reply from 2001:DB8:1:2::1: bytes=32 time=62ms TTL=255
+Reply from 2001:DB8:1:2::1: bytes=32 time=62ms TTL=255
+Reply from 2001:DB8:1:2::1: bytes=32 time=31ms TTL=255
+
+Ping statistics for 2001:DB8:1:2::1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 31ms, Maximum = 125ms, Average = 70ms
+\end{lstlisting}
+\subsubsection{PC3 zu R3}
+\begin{lstlisting}
+PC>ping 2001:DB8:1:3::1
+
+Pinging 2001:DB8:1:3::1 with 32 bytes of data:
+
+Reply from 2001:DB8:1:3::1: bytes=32 time=96ms TTL=255
+Reply from 2001:DB8:1:3::1: bytes=32 time=63ms TTL=255
+Reply from 2001:DB8:1:3::1: bytes=32 time=63ms TTL=255
+Reply from 2001:DB8:1:3::1: bytes=32 time=62ms TTL=255
+
+Ping statistics for 2001:DB8:1:3::1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 62ms, Maximum = 96ms, Average = 71ms
+\end{lstlisting}
+
+\subsection{Routingtabelle}\label{routing}
+\begin{lstlisting}
+R1>show ipv6 route
+IPv6 Routing Table - 6 entries
+Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
+       U - Per-user Static route, M - MIPv6
+       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
+       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+       D - EIGRP, EX - EIGRP external
+S   ::/0 [1/0]
+     via ::, Serial0/0/0
+C   2001:DB8:1:1::/64 [0/0]
+     via ::, FastEthernet0/0
+L   2001:DB8:1:1::1/128 [0/0]
+     via ::, FastEthernet0/0
+C   2001:DB8:1:A001::/64 [0/0]
+     via ::, Serial0/0/0
+L   2001:DB8:1:A001::1/128 [0/0]
+     via ::, Serial0/0/0
+L   FF00::/8 [0/0]
+     via ::, Null0
+\end{lstlisting}
