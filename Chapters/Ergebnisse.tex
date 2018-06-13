@@ -114,6 +114,36 @@ FastEthernet0/0 is up, line protocol is up
 \section{Konfiguration von IPv6-Routing}
 
 \subsection{Statische Routen}
+Zun‰chst wird eine statische Route von Router 1 zu Router 2 konfiguriert,
+ausgehend von der Serial-Schnittstelle 0/0/0.
 
+\begin{lstlisting}
+R1(config)#ipv6 route 2001:DB8:1:2::1/64 Serial 0/0/0
+\end{lstlisting}
 
+Anschlieﬂend existiert ein entsprechender Eintrag in der Routingtabelle von
+Router 1:
+
+\begin{lstlisting}
+R1#sh ipv6 route
+IPv6 Routing Table - 6 entries
+Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
+       U - Per-user Static route, M - MIPv6
+       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
+       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
+       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
+       D - EIGRP, EX - EIGRP external
+C   2001:DB8:1:1::/64 [0/0]
+     via ::, FastEthernet0/0
+L   2001:DB8:1:1::1/128 [0/0]
+     via ::, FastEthernet0/0
+S   2001:DB8:1:2::/64 [1/0]
+     via ::, Serial0/0/0
+C   2001:DB8:1:A001::/64 [0/0]
+     via ::, Serial0/0/0
+L   2001:DB8:1:A001::1/128 [0/0]
+     via ::, Serial0/0/0
+L   FF00::/8 [0/0]
+     via ::, Null0
+\end{lstlisting}
 \subsection{Default Routen}
