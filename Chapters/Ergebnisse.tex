@@ -91,8 +91,9 @@ Serial0/0/1                [administratively down/down]
 Vlan1                      [administratively down/down]
 \end{lstlisting}
 
-Bei der Fast-Ethernet-Schnittstelle 0/0 werden zwei IPv6-Adressen angezeigt.
-%TODO Fragen
+Bei der Fast-Ethernet-Schnittstelle 0/0 werden zwei IPv6-Adressen angezeigt, die
+Link-Local-Adresse und die zuvor konfigurierte IP-Adresse der Schnittstelle.
+%TODO kind of IP-Addresses
 
 \begin{lstlisting}
 R1>show ipv6 interface
@@ -109,6 +110,15 @@ FastEthernet0/0 is up, line protocol is up
   [...]
 \end{lstlisting}
 %TODO Multicast Group Addresses
+Die in der Versuchsanleitung sind zwei weitere Multicast-Adressen
+genannt:\footnote{siehe Versuchsanleitung S.14}
+\begin{itemize}
+  \item FF02::1:FF00:1
+  \item FF02::1:FF0D:1A60
+\end{itemize}
+Es handelt sich um sog. ``Solicited-Node''-Multicast-Adressen.\cite{RFC4291}
+%TODO erklären
+
 
 
 \section{Konfiguration von IPv6-Routing}
@@ -180,3 +190,7 @@ L   2001:DB8:1:A001::1/128 [0/0]
 L   FF00::/8 [0/0]
      via ::, Null0
 \end{lstlisting}
+
+
+%TODO NDP
+%TODO RIP
