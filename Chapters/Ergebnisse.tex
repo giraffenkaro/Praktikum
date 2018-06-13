@@ -147,3 +147,11 @@ L   FF00::/8 [0/0]
      via ::, Null0
 \end{lstlisting}
 \subsection{Default Routen}
+Alle statischen Routen werden entfernt:
+\begin{lstlisting}
+R1(config)#no ipv6 route 2001:DB8:1:2::1/64 Serial 0/0/0
+\end{lstlisting}
+Danach wird eine Deafult-Route angelegt:
+\begin{lstlisting}
+R1(config)#ipv6 route ::/0 Serial 0/0/0
+\end{lstlisting}
