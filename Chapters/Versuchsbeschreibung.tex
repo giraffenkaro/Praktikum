@@ -45,9 +45,23 @@ Cisco PacketTracer durchgeführt.
 	\hline
 	R1 & F0/0 & 2001:DB8:1:1::1/64 & N/A \\
 	\hline
+	R1 & S0/0/0 (DCE) & 2001:DB8:1:A001::1/64 & N/A \\
+	\hline
+	R1 & Link-local & FE80::1 & N/A \\
+	\hline
 	R2 & F0/0 & 2001:DB8:1:2::1/64 & N/A \\
 	\hline
+	R2 & S0/0/0 & 2001:DB8:1:A001::2/64 & N/A \\
+	\hline
+	R2 & S0/0/1 (DCE) & 2001:DB8:1:A002::1/64 & N/A \\
+	\hline
+	R2 & Link-local & FE80::2 & N/A \\
+	\hline
 	R3 & F0/0 & 2001:DB8:1:3::1/64 & N/A \\
+	\hline
+	R3 & S0/0/1 & 2001:DB8:1:A002::2/64 & N/A \\
+	\hline
+	R3 & Link-local & FE80::3 & N/A \\
 	\hline
 	PC1 & NIC & 2001:DB8:1:1::F/64 & FE80::1 \\
 	\hline
@@ -68,4 +82,3 @@ Cisco PacketTracer durchgeführt.
 \end{itemize}
 
 \section{Versuchsziel}
-

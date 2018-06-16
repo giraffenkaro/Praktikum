@@ -110,13 +110,26 @@ FastEthernet0/0 is up, line protocol is up
   [...]
 \end{lstlisting}
 Bei Router 1 werden drei Multicast-Adressen angezeigt.
-\begin{itemize}
-  \item FE02::1
-  \item FE02::2
-  \item FF02::1:FF00:1
-\end{itemize}
+\newline
+Die folgende Abbildung zeigt das Format einer IPv6-Multicast-Adresse:
+\begin{figure}[ht]
+  \centering
+     \includegraphics[width=\linewidth]{Graphics/multicast_frame.PNG}
+  \caption{Format einer IPv6 Mulicast-Adresse}
+  \label{fig:multicast}
+\end{figure}
 
-\subsubsection{Solicited-Node-Adressen}
+Der Scope ist bei allen aufgeführten Adressen 2, d.h. es handelt sich um einen
+Link-Local Multicast-Scope.\cite[13]{RFC4291}
+\newline
+FF02::1 adressiert alle IPv6-Hosts. Diese Adresse ist vergleichbar mit der
+Broadcast-Adresse bei IPv6.
+\newline
+FE02::2 adressiert alle Router.
+\newline
+Die dritte aufgeführte Multicast-Adresse ist eine Solicited-Node-Adresse.
+%TODO erklären? welche adresse ist das??
+\subsubsection{Solicited-Node-Adressen}\label{solicited}
 Die in der Versuchsanleitung sind zwei weitere Multicast-Adressen
 genannt:\footnote{siehe Versuchsanleitung S.14}
 \begin{itemize}
