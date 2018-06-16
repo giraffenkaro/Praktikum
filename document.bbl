@@ -56,5 +56,47 @@
     \field{year}{2006}
     \warn{\item Invalid format of field 'month'}
   \endentry
+
+  \entry{RFC2461}{report}{}
+    \name{author}{3}{}{%
+      {{hash=NT}{%
+         family={Narten},
+         familyi={N\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=NE}{%
+         family={Nordmark},
+         familyi={N\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=SW}{%
+         family={Simpson},
+         familyi={S\bibinitperiod},
+         given={W.},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {RFC Editor}%
+    }
+    \strng{namehash}{NTNESW1}
+    \strng{fullhash}{NTNESW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{howpublished}{Internet Requests for Comments}
+    \field{issn}{2070-1721}
+    \field{number}{2461}
+    \field{title}{Neighbor Discovery for IP Version 6 (IPv6)}
+    \list{institution}{1}{%
+      {RFC Editor}%
+    }
+    \field{type}{RFC}
+    \field{year}{1998}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
 \enddatalist
 \endinput

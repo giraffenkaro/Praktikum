@@ -116,9 +116,16 @@ genannt:\footnote{siehe Versuchsanleitung S.14}
   \item FF02::1:FF00:1
   \item FF02::1:FF0D:1A60
 \end{itemize}
-Es handelt sich um sog. ``Solicited-Node''-Multicast-Adressen.\cite{RFC4291}
-%TODO erklären
-
+Es handelt sich um sog. ``Solicited-Node''-Adressen.\parencite[15]{RFC4291}
+\newline
+Solicited-Node-Adresse sind Multicast-Adressen, die aus Unicast- und
+Anycast-Adresse des PCs gebildet werden. Die niederwertigsten 24 Bit der
+Unicast-oder Anycast-Adresse werden dem 104 Bit langem Präfix
+(FF02:0:0:0:0:1:FF00::/104) angehängt. Dadurch ergibt sich folgender
+Wertebereich:\cite{RFC4291}\cite{RFC2461}
+\newline
+FF02:0:0:0:0:1:FF00:0000 bis
+FF02:0:0:0:0:1:FFFF:FFFF
 
 
 \section{Konfiguration von IPv6-Routing}
