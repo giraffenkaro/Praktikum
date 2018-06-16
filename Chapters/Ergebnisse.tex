@@ -109,7 +109,14 @@ FastEthernet0/0 is up, line protocol is up
 
   [...]
 \end{lstlisting}
-%TODO Multicast Group Addresses
+Bei Router 1 werden drei Multicast-Adressen angezeigt.
+\begin{itemize}
+  \item FE02::1
+  \item FE02::2
+  \item FF02::1:FF00:1
+\end{itemize}
+
+\subsubsection{Solicited-Node-Adressen}
 Die in der Versuchsanleitung sind zwei weitere Multicast-Adressen
 genannt:\footnote{siehe Versuchsanleitung S.14}
 \begin{itemize}
@@ -126,7 +133,8 @@ Wertebereich:\cite{RFC4291}\cite{RFC2461}
 \newline
 FF02:0:0:0:0:1:FF00:0000 bis
 FF02:0:0:0:0:1:FFFF:FFFF
-
+\newline
+Solicited-Node-Adressen werden beim \ac{NDP} verwendet.\cite{RFC2461}
 
 \section{Konfiguration von IPv6-Routing}
 
@@ -200,4 +208,5 @@ L   FF00::/8 [0/0]
 
 
 %TODO NDP
+%FF02::1:FF00:F destination im ndp paket
 %TODO RIP
