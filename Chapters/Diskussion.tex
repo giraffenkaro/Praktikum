@@ -37,15 +37,18 @@ FF02::1:FF00:F. Diese entspricht der Solicited-Node Multicast-Adresse von PC3.
 Nach der darauf folgenden Neighbor-Advertisement-Nachricht von PC3 zu Router 3
 wird der Echo Request fortgesetzt und erricht PC3.
 \newline
-Es folgt ein weiteres NDP-Paket mit Message Type 135 von PC3 zu Router 3. Dieser
-antwortet wieder mit einem NDP-Paket des Typs 136.
+Es folgt ein weiteres NDP-Paket mit Message Type 135 von PC3 zu Router 3
+(Zieladresse: FF02::1:FF00:3).
+Dieser antwortet wieder mit einem NDP-Paket des Typs 136.
 \newline
-Im Anschluss beginnt die Echo Reply Nachricht von PC3. Bei Router 1 angekommen,
-wird erneut ein NDP-Paket versandt. Ziel der Neighbor-Solicitation-Nachricht ist
-PC1, welcher mit einer Neighbor-Advertisement-Nachricht antwortet.
+Im Anschluss beginnt die Echo Reply Nachricht (Type 129) von PC3. Bei Router 1
+angekommen, wird erneut ein NDP-Paket versandt. Ziel der Neighbor-Solicitation-Nachricht ist
+PC1 (Zieladresse: FF02::1:FF00:F), welcher mit einer
+Neighbor-Advertisement-Nachricht antwortet.
 \newline
 Im letzten Schritt wird der Echo Request von Router 1 zu PC1 weitergeleitet.
 \newline
 \newline
 Dieses Szenario veranschaulicht, wie NDP die Solicited-Node Multicast-Adressen
-nutzt.
+nutzt. Die ICMPv6-Nachrichten verhalten sich äquivalent zu ICMP-Nachrichten bei
+IPv4.
