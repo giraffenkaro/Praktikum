@@ -93,10 +93,13 @@ Vlan1                      [administratively down/down]
 
 Bei der Fast-Ethernet-Schnittstelle 0/0 werden zwei IPv6-Adressen angezeigt, die
 Link-Local-Adresse und die zuvor konfigurierte IP-Adresse der Schnittstelle.
-%TODO kind of IP-Addresses
-
+\newline
+\newline
+Durch \textit{show ipv6 interface} erhält man mehr Informationen zu der
+Schnittstellen-Konfiguration. Der folgende Auszug bezieht sich auf die
+Fast-Ethernet-Schnittstelle 0/0:
 \begin{lstlisting}
-R1>show ipv6 interface
+R1#sh ipv6 interface 
 FastEthernet0/0 is up, line protocol is up
   IPv6 is enabled, link-local address is FE80::1
   No Virtual link-local address(es):
@@ -106,11 +109,30 @@ FastEthernet0/0 is up, line protocol is up
     FF02::1
     FF02::2
     FF02::1:FF00:1
-
-  [...]
+  MTU is 1500 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are enabled
+  ICMP unreachables are sent
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds
+  ND advertised reachable time is 0 milliseconds
+  ND advertised retransmit interval is 0 milliseconds
+  ND router advertisements are sent every 200 seconds
+  ND router advertisements live for 1800 seconds
+  ND advertised default router preference is Medium
+  Hosts use stateless autoconfig for addresses.
+[...]
 \end{lstlisting}
-Bei Router 1 werden drei Multicast-Adressen angezeigt.
-\newline
+Bei Router 1 werden drei Multicast-Adressen bei der
+Fast-Ethernet-Schnittstelle 0/0 angezeigt:
+\begin{itemize}
+  \item FF02::1
+  \item FF02::2
+  \item FF02::1:FF00:1
+\end{itemize}
+
+\clearpage
+
 Die folgende Abbildung zeigt das Format einer IPv6-Multicast-Adresse:
 \begin{figure}[ht]
   \centering
@@ -127,12 +149,12 @@ Diese Adresse ist vergleichbar mit der Broadcast-Adresse bei IPv4.
 \newline
 FE02::2 bezeichnet man als ``All-Routers'' Multicast-Adresse.\cite[15]{RFC4291}
 \newline
-Die dritte aufgeführte Multicast-Adresse ist eine ``Solicited-Node'
-Multicast-Adresse.\cite[15]{RFC4291}
-\clearpage
+Die dritte aufgeführte Multicast-Adresse FF02::1:FF00:1 ist eine
+``Solicited-Node' Multicast-Adresse.\cite[15]{RFC4291}
+
 \subsection{Solicited-Node-Adressen}\label{solicited}
-Die in der Versuchsanleitung sind zwei weitere Multicast-Adressen
-genannt:\footnote{siehe Versuchsanleitung S.14}
+In der Versuchsanleitung sind zwei weitere Multicast-Adressen
+gegeben:\footnote{siehe Versuchsanleitung S.14}
 \begin{itemize}
   \item FF02::1:FF00:1
   \item FF02::1:FF0D:1A60
@@ -141,7 +163,7 @@ Es handelt sich um sog. ``Solicited-Node''-Adressen.\parencite[15]{RFC4291}
 \newline
 Solicited-Node-Adresse sind Multicast-Adressen, die aus Unicast- und
 Anycast-Adresse des PCs gebildet werden. Die niederwertigsten 24 Bit der
-Unicast-oder Anycast-Adresse werden dem 104 Bit langem Präfix
+Unicast-oder Anycast-Adresse werden dem 104 Bit langen Präfix
 (FF02:0:0:0:0:1:FF00::/104) angehängt. Dadurch ergibt sich folgender
 Wertebereich:\cite{RFC4291}\cite{RFC2461}
 \newline
