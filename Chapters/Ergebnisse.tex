@@ -57,9 +57,8 @@ R1(config)#exit
 \end{lstlisting}
 
 \section{Konfiguration der Hosts}
-Den Hosts wird das jeweilige Default Gateway (Link-Local-Adresse) und die
-entsprechende statische IPv6-Adresse gemäß \ref{config1} zugewiesen. 
-%TODO erklären?
+Den Hosts wird das jeweilige Default Gateway (Link-Local-Adresse des Routers)
+und die entsprechende statische IPv6-Adresse gemäß \ref{config1} zugewiesen. 
 
 \section{Netzwerk-Konfiguration überprüfen}
 
@@ -140,7 +139,8 @@ Die folgende Abbildung zeigt das Format einer IPv6-Multicast-Adresse:
   \caption{Format einer IPv6 Mulicast-Adresse}
   \label{fig:multicast}
 \end{figure}
-
+Eine Multicast-Adresse beginnt immer mit FF. Daruf folgt ein 4 Bit langes Flag.
+Die ersten zwei Bit des Flags müssen 0 sein.
 Der Scope ist bei allen aufgeführten Adressen 2, d.h. es handelt sich um einen
 Link-Local Multicast-Scope.\cite[13]{RFC4291}
 \newline
@@ -227,7 +227,7 @@ um sicherzustellen, dass alle Geräte im Netzwerk erreichbar sind:
   \end{lstlisting}
 \end{itemize}
 \subsubsection{Konfiguration überprüfen}
-Mittels Ping-Befehlen wird überprüft, ob die Konfiguration der statischen routen
+Mittels Ping-Befehlen wird überprüft, ob die Konfiguration der statischen Routen
 erfolgreich war und die Geräte erreichbar sind:
 \begin{itemize}
   \item PC1 zu PC3
