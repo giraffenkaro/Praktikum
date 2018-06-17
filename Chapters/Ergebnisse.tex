@@ -61,7 +61,7 @@ Den Hosts wird das jeweilige Default Gateway (Link-Local-Adresse) und die
 entsprechende statische IPv6-Adresse gemäß \ref{config1} zugewiesen. 
 %TODO erklären?
 
-\section{Überprüfung der Konfiguration}
+\section{Netzwerk-Konfiguration überprüfen}
 
 \subsection{Überprüfung mittels Ping-Befehlen}
 Zunächst wird mittels Eingabeaufforderung überprüft, ob die Konfiguration der
@@ -74,8 +74,8 @@ Danach werden Ping-Befehle ausgeführt um die Konfiguration zu testen:
   \item PC3 zu R3
 \end{itemize}
 Die Befehle verlaufen alle erfolgreich.\footnote{siehe Anhang \ref{pingrouter}}
-
-\subsection{IPv6 Einstellungen}
+\clearpage
+\section{Schnittstellen-Konfiguration überprüfen}\label{multi}
 Durch \textit{show ipv6 interface brief} lässt sich der Status der Interfaces
 überprüfen:
 \begin{lstlisting}
@@ -122,14 +122,15 @@ Die folgende Abbildung zeigt das Format einer IPv6-Multicast-Adresse:
 Der Scope ist bei allen aufgeführten Adressen 2, d.h. es handelt sich um einen
 Link-Local Multicast-Scope.\cite[13]{RFC4291}
 \newline
-FF02::1 adressiert alle IPv6-Hosts. Diese Adresse ist vergleichbar mit der
-Broadcast-Adresse bei IPv6.
+FF02::1 ist eine ``All-Nodes'' Multicast-Adresse.\cite[15]{RFC4291}
+Diese Adresse ist vergleichbar mit der Broadcast-Adresse bei IPv4.
 \newline
-FE02::2 adressiert alle Router.
+FE02::2 bezeichnet man als ``All-Routers'' Multicast-Adresse.\cite[15]{RFC4291}
 \newline
-Die dritte aufgeführte Multicast-Adresse ist eine Solicited-Node-Adresse.
-%TODO erklären? welche adresse ist das??
-\subsubsection{Solicited-Node-Adressen}\label{solicited}
+Die dritte aufgeführte Multicast-Adresse ist eine ``Solicited-Node'
+Multicast-Adresse.\cite[15]{RFC4291}
+\clearpage
+\subsection{Solicited-Node-Adressen}\label{solicited}
 Die in der Versuchsanleitung sind zwei weitere Multicast-Adressen
 genannt:\footnote{siehe Versuchsanleitung S.14}
 \begin{itemize}
@@ -148,12 +149,15 @@ FF02:0:0:0:0:1:FF00:0000 bis
 FF02:0:0:0:0:1:FFFF:FFFF
 \newline
 Solicited-Node-Adressen werden beim \ac{NDP} verwendet.\cite{RFC2461}
-
+\newline
+Das \acs{NDP} ist vergleichbar mit dem \ac{ARP} bei IPv4. Es dient unter anderem
+der Adressauflösung.
+\clearpage
 \section{Konfiguration von IPv6-Routing}
 
 \subsection{Statische Routen}
-Zunächst wird eine statische Route von Router 1 zu Router 2 konfiguriert,
-ausgehend von der Serial-Schnittstelle 0/0/0.
+Zunächst wird eine statische Route von Router 1 zum Netzwerk von Router 2
+konfiguriert, ausgehend von der Serial-Schnittstelle 0/0/0.
 
 \begin{lstlisting}
 R1(config)#ipv6 route 2001:DB8:1:2::1/64 Serial 0/0/0
@@ -164,32 +168,58 @@ Router 1:
 
 \begin{lstlisting}
 R1#sh ipv6 route
-IPv6 Routing Table - 6 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route, M - MIPv6
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-       D - EIGRP, EX - EIGRP external
-C   2001:DB8:1:1::/64 [0/0]
-     via ::, FastEthernet0/0
-L   2001:DB8:1:1::1/128 [0/0]
-     via ::, FastEthernet0/0
+[...]
 S   2001:DB8:1:2::/64 [1/0]
      via ::, Serial0/0/0
-C   2001:DB8:1:A001::/64 [0/0]
-     via ::, Serial0/0/0
-L   2001:DB8:1:A001::1/128 [0/0]
-     via ::, Serial0/0/0
-L   FF00::/8 [0/0]
-     via ::, Null0
+[...]
 \end{lstlisting}
+
+Danach wird ein Ping von R1 zu R2 gesendet. Dieser Versuch scheitert, da noch
+keine Route von R2 zu R1 bekannt ist.
+\newline
+\newline
+Aus diesem Grund wird im Anschluss eine statsche Route von R2 zu R1
+konfiguriert:
+\begin{lstlisting}
+R2(config)#ipv6 route 2001:DB8:1:1::1/64 serial 0/0/0
+\end{lstlisting}
+
+Im Anschluss werden die fehlenden statischen Routen eingerichtet,
+um sicherzustellen, dass alle Geräte im Netzwerk erreichbar sind:
+\begin{itemize}
+  \item R1 zu R3
+  \begin{lstlisting}
+  R1(config)#ipv6 route 2001:DB8:1:3::1/64 serial 0/0/0
+  \end{lstlisting}
+  \item R3 zu R1
+  \begin{lstlisting}
+  R3(config)#ipv6 route 2001:DB8:1:1::1/64 serial 0/0/0
+  \end{lstlisting}
+    \item R2 zu R3
+  \begin{lstlisting}
+  R2(config)#ipv6 route 2001:DB8:1:3::1/64 serial 0/0/1
+  \end{lstlisting}
+  \item R3 zu R2
+   \begin{lstlisting}
+  R3(config)#ipv6 route 2001:DB8:1:2::1/64 serial 0/0/0
+  \end{lstlisting}
+\end{itemize}
+\subsubsection{Konfiguration überprüfen}
+Mittels Ping-Befehlen wird überprüft, ob die Konfiguration der statischen routen
+erfolgreich war und die Geräte erreichbar sind:
+\begin{itemize}
+  \item PC1 zu PC3
+  \item PC3 zu PC2
+\end{itemize}
+Beide Versuche sind erfolgreich.\footnote{siehe Anhang \ref{pingstatic}}
+\clearpage
 \subsection{Default Routen}
-Alle statischen Routen werden entfernt:
+Alle statischen Routen werden aus dr Routingtabelle von R1 entfernt:
 \begin{lstlisting}
 R1(config)#no ipv6 route 2001:DB8:1:2::1/64 Serial 0/0/0
+R1(config)#no ipv6 route 2001:DB8:1:3::1/64 serial 0/0/0
 \end{lstlisting}
-Danach wird eine Deafult-Route angelegt:
+Danach wird eine Default-Route angelegt:
 \begin{lstlisting}
 R1(config)#ipv6 route ::/0 Serial 0/0/0
 \end{lstlisting}
@@ -198,28 +228,24 @@ Die Routingtabelle von Router 1 enthält anschließend die neu konfigurierte
 Route:
 \begin{lstlisting}
 R1#show ipv6 route
-IPv6 Routing Table - 6 entries
-Codes: C - Connected, L - Local, S - Static, R - RIP, B - BGP
-       U - Per-user Static route, M - MIPv6
-       I1 - ISIS L1, I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary
-       O - OSPF intra, OI - OSPF inter, OE1 - OSPF ext 1, OE2 - OSPF ext 2
-       ON1 - OSPF NSSA ext 1, ON2 - OSPF NSSA ext 2
-       D - EIGRP, EX - EIGRP external
+[...]
 S   ::/0 [1/0]
      via ::, Serial0/0/0
-C   2001:DB8:1:1::/64 [0/0]
-     via ::, FastEthernet0/0
-L   2001:DB8:1:1::1/128 [0/0]
-     via ::, FastEthernet0/0
-C   2001:DB8:1:A001::/64 [0/0]
-     via ::, Serial0/0/0
-L   2001:DB8:1:A001::1/128 [0/0]
-     via ::, Serial0/0/0
-L   FF00::/8 [0/0]
-     via ::, Null0
+[...]
 \end{lstlisting}
 
+Auch die konfigurierte Deafult-Route ist eine statische Route (gekennzeichnet
+mit S). Das ausgehende Interface bei Host 1 ist die Serial-Schnittstelle 0/0/0.
+\newline
+Wenn keine definierte Route für ein Paket existiert, wird das Paket über das
+Interface der Default-Route (hier S0/0/0) versandt.
 
-%TODO NDP
-%FF02::1:FF00:F destination im ndp paket
-%TODO RIP
+\subsubsection{Konfiguration überprüfen}
+Auch die Default Route wird mittels Ping-Befehl überprüft:
+\begin{itemize}
+  \item PC1 zu PC2
+  \item PC2 zu PC1
+  \item PC1 zu PC3
+  \item PC3 zu PC1
+\end{itemize}
+Alle Versuche sind erfolgreich.\footnote{siehe Anhang \ref{pingdefault}}

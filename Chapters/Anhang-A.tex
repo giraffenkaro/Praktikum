@@ -98,3 +98,103 @@ Ping statistics for 2001:DB8:1:3::1:
 Approximate round trip times in milli-seconds:
     Minimum = 62ms, Maximum = 96ms, Average = 71ms
 \end{lstlisting}
+\section{Überprüfung der statischen Routen}\label{pingstatic}
+\subsection{PC1 zu PC3}
+\begin{lstlisting}
+PC1 - PC3
+
+PC>ping 2001:DB8:1:3::F
+
+Pinging 2001:DB8:1:3::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:3::F: bytes=32 time=188ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=157ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=172ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=188ms TTL=125
+
+Ping statistics for 2001:DB8:1:3::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 157ms, Maximum = 188ms, Average = 176ms
+\end{lstlisting}
+\subsection{PC3 zu PC2}
+\begin{lstlisting}
+PC>ping 2001:DB8:1:2::F
+
+Pinging 2001:DB8:1:2::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:2::F: bytes=32 time=204ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=156ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=141ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=141ms TTL=126
+
+Ping statistics for 2001:DB8:1:2::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 141ms, Maximum = 204ms, Average = 160ms
+\end{lstlisting}
+\section{Überprüfung der Default Route}\label{pingdefault}
+\subsection{PC1 zu PC2}
+\begin{lstlisting}
+C:\>ping 2001:DB8:1:2::F
+
+Pinging 2001:DB8:1:2::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:2::F: bytes=32 time=2ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=2ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=2ms TTL=126
+Reply from 2001:DB8:1:2::F: bytes=32 time=1ms TTL=126
+
+Ping statistics for 2001:DB8:1:2::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+\end{lstlisting}
+\subsection{PC1 zu PC3}
+\begin{lstlisting}
+C:\>ping 2001:DB8:1:3::F
+
+Pinging 2001:DB8:1:3::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:3::F: bytes=32 time=7ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=2ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=3ms TTL=125
+Reply from 2001:DB8:1:3::F: bytes=32 time=4ms TTL=125
+
+Ping statistics for 2001:DB8:1:3::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 2ms, Maximum = 7ms, Average = 4ms
+\end{lstlisting}
+\subsection{PC2 zu PC1}
+\begin{lstlisting}
+C:\>ping 2001:DB8:1:1::F
+
+Pinging 2001:DB8:1:1::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:1::F: bytes=32 time=3ms TTL=126
+Reply from 2001:DB8:1:1::F: bytes=32 time=2ms TTL=126
+Reply from 2001:DB8:1:1::F: bytes=32 time=1ms TTL=126
+Reply from 2001:DB8:1:1::F: bytes=32 time=1ms TTL=126
+
+Ping statistics for 2001:DB8:1:1::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 3ms, Average = 1ms
+\end{lstlisting}
+\subsection{PC3 zu PC1}
+\begin{lstlisting}
+C:\>ping 2001:DB8:1:1::F
+
+Pinging 2001:DB8:1:1::F with 32 bytes of data:
+
+Reply from 2001:DB8:1:1::F: bytes=32 time=2ms TTL=125
+Reply from 2001:DB8:1:1::F: bytes=32 time=6ms TTL=125
+Reply from 2001:DB8:1:1::F: bytes=32 time=3ms TTL=125
+Reply from 2001:DB8:1:1::F: bytes=32 time=2ms TTL=125
+
+Ping statistics for 2001:DB8:1:1::F:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 2ms, Maximum = 6ms, Average = 3ms
+\end{lstlisting}
