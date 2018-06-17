@@ -133,13 +133,15 @@ Fast-Ethernet-Schnittstelle 0/0 angezeigt:
 
 \clearpage
 Um die Multicast-Adressen zu identifizieren, wird das allgemeine Format einer
-IPv6-Multicast-Adresse betrachtet:
-\begin{figure}[ht]
+IPv6-Multicast-Adresse betrachtet:\cite[12]{RFC4291}
+
+\begin{figure}[!htbp]
   \centering
      \includegraphics[width=\linewidth]{Graphics/multicast_frame.PNG}
   \caption{Format einer IPv6 Mulicast-Adresse}
   \label{fig:multicast}
 \end{figure}
+
 Eine Multicast-Adresse beginnt immer mit FF. Daruf folgt ein 4 Bit langes Flag.
 Die ersten zwei Bit des Flags müssen 0 sein.
 Der Scope ist bei allen aufgeführten Adressen 2, d.h. es handelt sich um einen
