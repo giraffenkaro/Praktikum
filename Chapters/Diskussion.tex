@@ -1,10 +1,6 @@
 \chapter{Diskussion der Messergebnisse}
 
-Durch den Laborversuch konnten erste Erfahrungen mit der Konfiguration
-von IPv6-\acsp{LAN} gesammelt werden. Darüber hinaus konnte das Wissen über die
-Konfiguration von Cisco-Hardware (Switches und Router) vertieft werden.
-\newline
-Besonders hervorzuheben sind die Multicast-Adressen die Teil des Versuchs sind.
+Besonders hervorzuheben sind die Multicast-Adressen, die Teil des Versuchs sind.
 Um mehr darüber zu erfahren und die Theorien aus \ref{multi} zu bestätigen,
 wird im Folgenden ein weiteres Szenario überprüft.
 
@@ -13,9 +9,9 @@ Solicited-Node Multicast-Adressen (siehe \ref{solicited}) waren bisher kein
 Gegenstand des Studiums.
 Zum Verständnis diente der \acs{RFC} 4291, \citetitle{RFC4291}. Darüber hinaus
 wurde zur Veranschaulichung der Simulation Mode des Packet Tracers genutzt.
-\clearpage
+
 \subsection{Beispielszenario}
-Ein Paket wird von PC1 zu PC3 gesendet. Hierbei werden \acs{ICMP}v6- und
+Ein Ping wird von PC1 zu PC3 gesendet. Hierbei werden \acs{ICMP}v6- und
 \acs{NDP}-Pakete gefiltert. Im folgenden Sequenzdiagramm ist der Ablauf der
 Pakete dargestellt.
 
@@ -36,7 +32,7 @@ von Router 3 zu PC3 gesendet. Ziel dieser Nachricht ist die Adresse
 FF02::1:FF00:F. Diese entspricht der Solicited-Node Multicast-Adresse von PC3.
 \newline
 Nach der darauf folgenden Neighbor-Advertisement-Nachricht von PC3 zu Router 3
-wird der Echo Request fortgesetzt und erricht PC3.
+wird der Echo Request fortgesetzt und erreicht PC3.
 \newline
 Es folgt ein weiteres NDP-Paket mit Message Type 135 von PC3 zu Router 3
 (Zieladresse: FF02::1:FF00:3).
@@ -53,3 +49,8 @@ Im letzten Schritt wird der Echo Request von Router 1 zu PC1 weitergeleitet.
 Dieses Szenario veranschaulicht, wie NDP die Solicited-Node Multicast-Adressen
 nutzt. Die ICMPv6-Nachrichten verhalten sich äquivalent zu ICMP-Nachrichten bei
 IPv4.
+\section{Fazit}
+Durch den Laborversuch konnten erste Erfahrungen mit der Konfiguration
+von IPv6-\acsp{LAN} gesammelt werden. Darüber hinaus konnte das Wissen über die
+Konfiguration von Cisco-Hardware (Switches und Router) vertieft werden.
+\newline

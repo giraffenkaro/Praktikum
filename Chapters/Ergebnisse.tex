@@ -1,7 +1,8 @@
 \chapter{Beschreibung der verschiedenen Messungen und Ergebnisdarstellung}
 
 \section{Konfiguration der Router}
-Die folgenden Schritte sind bei allen Routern durchzuführen.
+Die folgenden Schritte sind bei allen Routern durchzuführen. Gezeigt wird
+beispielhaft die Vorgehensweise für Router 1.
 \subsection{Basiskonfiguration}
 Zunächst ist der Hostname zu R1 zu ändern. Anschließend werden die Passwörter
 konfiguriert und ``logging synchronous'' aktiviert.
@@ -32,8 +33,8 @@ Routers das Kommando \textit{ipv6 unicast-routing} ausgeführt werden.
 Router 2 und Router 3 werden äuivalent konfiguriert.
 
 \subsection{Fast-Ethernet-Schnittstelle}\label{FE}
-Im Configuration Mode wird die Fast-Ethernet-Schnittstelle 0/0 konfiguriert und
-die entsprechende IPv6-Adresse, sowie die Link-Local-Adresse, aus \ref{config1}
+Im Configuration Mode wird die Fast-Ethernet-Schnittstelle 0/0 konfiguriert
+und die entsprechende IPv6-Adresse, sowie die Link-Local-Adresse, aus \ref{config1}
 zugewiesen:
 \begin{lstlisting}
 R1(config)#interface FastEthernet 0/0
@@ -45,7 +46,7 @@ R1(config-if)#exit
 R1(config)#exit
 \end{lstlisting}
 \subsection{Serial-Schnittstelle}
-Analog zu \ref{FE} wird die Serial-Schnittstelle 0/0 konfiguriert:
+Analog zu \ref{FE} wird die Serial-Schnittstelle 0/0/0 konfiguriert:
 \begin{lstlisting}
 R1(config)#interface serial 0/0/0
 R1(config-if)#description WAN link to R2
@@ -131,8 +132,8 @@ Fast-Ethernet-Schnittstelle 0/0 angezeigt:
 \end{itemize}
 
 \clearpage
-
-Die folgende Abbildung zeigt das Format einer IPv6-Multicast-Adresse:
+Um die Multicast-Adressen zu identifizieren, wird das allgemeine Format einer
+IPv6-Multicast-Adresse betrachtet:
 \begin{figure}[ht]
   \centering
      \includegraphics[width=\linewidth]{Graphics/multicast_frame.PNG}
