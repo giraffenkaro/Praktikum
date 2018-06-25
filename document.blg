@@ -2,9 +2,14 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: document.aux
 The style file: biblatex.bst
 A level-1 auxiliary file: FrontBackmatter/Titlepage.aux
 A level-1 auxiliary file: FrontBackmatter/Contents.aux
-A level-1 auxiliary file: Chapters/Versuchsbeschreibung.aux
-A level-1 auxiliary file: Chapters/Ergebnisse.aux
-A level-1 auxiliary file: Chapters/Diskussion.aux
+A level-1 auxiliary file: Chapters/VisionsDokument.aux
+A level-1 auxiliary file: Chapters/Meilensteine.aux
+A level-1 auxiliary file: Chapters/Liquid.aux
+A level-1 auxiliary file: Chapters/Struktur.aux
+A level-1 auxiliary file: Chapters/Gantt.aux
+A level-1 auxiliary file: Chapters/Typ.aux
+A level-1 auxiliary file: Chapters/Leistung.aux
+A level-1 auxiliary file: Chapters/Rueckblick.aux
 A level-1 auxiliary file: FrontBackmatter/Bibliography.aux
 A level-1 auxiliary file: FrontBackmatter/ListOfs.aux
 A level-1 auxiliary file: FrontBackmatter/Abbreviations.aux
